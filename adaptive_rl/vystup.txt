@@ -1,0 +1,160 @@
+./alphazero.py:import torch
+./alphazero.py:import torch.nn as nn
+./alphazero.py:import torch.nn.functional as F
+./alphazero.py:import torch.multiprocessing as mp
+./alphazero.py:    #torch.cuda.set_device(1)
+./alphazero.py:    #mem_states = torch.zeros((agent.actions, agent.games_in_iteration, 4, agent.env.size, agent.env.size), dtype = torch.int16, device = agent.device)
+./alphazero.py:    mem_states = torch.zeros((200, agent.games_in_iteration, 4, agent.env.size, agent.env.size),
+./alphazero.py:                             dtype=torch.int16, device=agent.device)
+./alphazero.py:    #mem_policies = torch.zeros((agent.actions, agent.games_in_iteration, agent.actions), device = agent.device)
+./alphazero.py:    mem_policies = torch.zeros((200, agent.games_in_iteration, agent.actions), device=agent.device)
+./alphazero.py:    game_indicies = torch.arange(agent.games_in_iteration)
+./alphazero.py:    moves = torch.FloatTensor(numpy.array([swap_moves(state[3])]))
+./alphazero.py:    states = torch.FloatTensor(numpy.array([change_state(state)]))
+./alphazero.py:        with torch.no_grad():
+./alphazero.py:        end_game_indices = torch.nonzero(terminals)
+./alphazero.py:            for t_index in torch.flip(end_game_indices, [0]):
+./alphazero.py:            non_terminals = torch.where(terminals == 0, agent.t_one, agent.t_zero)
+./alphazero.py:            game_indicies = torch.nonzero(non_terminals)
+./alphazero.py:            new_mem_states = torch.zeros((agent.actions, dim0, 4, agent.env.size, agent.env.size), device = agent.device, dtype = torch.int16)
+./alphazero.py:            new_mem_policies = torch.zeros((agent.actions, dim0, agent.actions), device = agent.device)
+./alphazero.py:    #torch.cuda.set_device(1)
+./alphazero.py:        model2.load_state_dict(torch.load('models/' + agent.name + '_' + str(index.item()) + '.pt'))
+./alphazero.py:                with torch.no_grad():
+./alphazero.py:    #torch.cuda.set_device(1)
+./alphazero.py:        with torch.no_grad():
+./alphazero.py:        end_game_indices = torch.nonzero(terminals)
+./alphazero.py:            for t_index in torch.flip(end_game_indices, [0]):
+./alphazero.py:            non_terminals = torch.where(terminals == 0, agent.t_one, agent.t_zero)
+./alphazero.py:            game_indicies = torch.nonzero(non_terminals)
+./alphazero.py:        #torch.cuda.set_device(1)
+./alphazero.py:        self.t_one = torch.tensor([1])
+./alphazero.py:        self.t_zero = torch.tensor([0])
+./alphazero.py:        mcts_states = torch.zeros((self.games_in_iteration, 4, self.env.size, self.env.size), device = self.device, dtype = torch.int16)
+./alphazero.py:        mcts_actions = torch.zeros((self.games_in_iteration, 1), device = self.device, dtype = torch.long)
+./alphazero.py:        mcts_indices = torch.zeros((self.games_in_iteration), dtype = torch.long)
+./alphazero.py:        noise = torch.from_numpy(np.random.dirichlet(np.ones(int(moves_length.item())) * self.dirichlet_alpha, length))
+./alphazero.py:        values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
+./alphazero.py:                values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
+./alphazero.py:        policies = torch.stack(policy_list)
+./alphazero.py:            actions = torch.argmax(policies, dim = 1).view(-1, 1)
+./arena.py:import torch
+./arena.py:import torch.nn as nn
+./arena.py:import torch.nn.init as init
+./arena.py:import torch.nn.functional as F
+./arena.py:import torch.optim as optim
+./arena.py:from torch.multiprocessing import Manager, Process, set_start_method
+./arena.py:    torch.cuda.set_device(1)
+./arena.py:    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+./arena.py:    indices = torch.tensor(range(games_count))
+./arena.py:        net.load_state_dict(torch.load('models/' + name + '_' + str(game) + '.pt'))
+./game.py:import torch
+./game.py:import torch.nn as nn
+./game.py:import torch.nn.init as init
+./game.py:import torch.nn.functional as F
+./game.py:import torch.optim as optim
+./game.py:    torch.cuda.set_device(1)
+./game.py:    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+./game.py:    net.load_state_dict(torch.load('models/' + name + '_363.pt'))
+./game.py:                action = torch.tensor([[input_y * height + input_x]]).to(device).long()
+./game_a.py:import torch
+./game_a.py:import torch.nn as nn
+./game_a.py:import torch.nn.init as init
+./game_a.py:import torch.nn.functional as F
+./game_a.py:import torch.optim as optim
+./game_a.py:    torch.cuda.set_device(1)
+./game_a.py:    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+./game_a.py:    net.load_state_dict(torch.load('models/' + name + '_363.pt'))
+./game_a.py:	    		action = torch.tensor([[input_y * height + input_x]]).to(device).long()
+./main.py:import torch
+./main.py:import torch.nn as nn
+./main.py:import torch.nn.init as init
+./main.py:import torch.nn.functional as F
+./main.py:import torch.optim as optim
+./main.py:from torch.multiprocessing import Manager, Process, set_start_method
+./main.py:    #torch.cuda.set_device(1)
+./main.py:    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+./main.py:        torch.cuda.empty_cache()
+./main.py:            torch.save(current_model.state_dict(), 'models/' + name + '_' + str(model_index) + '.pt')
+./main.py:        torch.cuda.empty_cache()
+./mcts.py:import torch
+./mcts.py:        self.moves = torch.nonzero(moves)
+./mcts.py:        self.N = torch.zeros(length, dtype = torch.int32)
+./mcts.py:        self.Q = torch.zeros(length)
+./mcts.py:        all_probs = torch.zeros(size)
+./mcts.py:        game_indicies = torch.nonzero(self.root.N == 0)
+./mcts.py:                index = torch.argmax(u).item()
+./mcts.py:                index = torch.argmax(node.P).item()
+./mcts_a.py:import torch
+./mcts_a.py:        self.moves = torch.nonzero(moves)
+./mcts_a.py:        self.N = torch.zeros(size, dtype = torch.int32)
+./mcts_a.py:        self.Q = torch.zeros(size)
+./mcts_a.py:        self.L = torch.zeros(size)
+./mcts_a.py:        all_probs = torch.zeros(size)
+./mcts_a.py:        game_indicies = torch.nonzero(self.root.N == 0)
+./mcts_a.py:                    index = torch.argmax(u).item()
+./mcts_a.py:                    index = torch.argmax(node.P).item()
+./mcts_a.py:                    index = torch.argmax(u).item()
+./mcts_a.py:                    index = torch.argmax(node.P).item()
+Binary file ./models/azt_a2_100.pt matches
+Binary file ./models/azt_a2_110.pt matches
+Binary file ./models/azt_a2_120.pt matches
+Binary file ./models/azt_a2_130.pt matches
+Binary file ./models/azt_a2_140.pt matches
+Binary file ./models/azt_a2_143.pt matches
+Binary file ./models/azt_a6_6_7_100.pt matches
+Binary file ./models/azt_a6_6_7_200.pt matches
+Binary file ./models/azt_a6_6_7_300.pt matches
+Binary file ./models/azt_a6_6_7_360.pt matches
+Binary file ./models/azt_a6_6_7_363.pt matches
+./net.py:import torch
+./net.py:import torch.nn as nn
+./net.py:import torch.nn.init as init
+./net.py:import torch.nn.functional as F
+./replay_buffer.py:import torch
+./replay_buffer.py:        self.states = torch.zeros((size, 4, height, width), dtype = torch.int16)
+./replay_buffer.py:        self.policies = torch.zeros((size, height * width+1))
+./replay_buffer.py:        self.values = torch.zeros((size, 1), dtype = torch.long)
+./replay_buffer.py:        self.moves_left = torch.zeros((size, 1), dtype = torch.long)
+./replay_buffer.py:        values = torch.ones((length, 1), dtype = torch.long)
+./replay_buffer.py:        moves = torch.arange(length).long().flip(0).view(-1, 1)
+./replay_buffer.py:            indices_even = torch.arange(0, length, 2)
+./replay_buffer.py:            indices_odd = torch.arange(1, length, 2)
+./replay_buffer.py:        rotated = torch.cat((torch.flip(policies_temp, [3]).view(-1, 1, self.height*self.width), policies[:, :, self.height*self.width:]), 2)
+./replay_buffer.py:        self.add(length, torch.flip(states, [3]), rotated.view(-1, self.actions), values, moves)
+./replay_buffer.py:            states, policies_temp = torch.rot90(states, 1, [2, 3]), torch.rot90(policies_temp, 1, [2, 3])
+./replay_buffer.py:            self.add(length, states, torch.cat((policies_temp.reshape(-1,1, self.height * self.width), policies[:, :, self.height*self.width:]), 2).view(-1, self.actions), values, moves)
+./replay_buffer.py:            self.add(length, torch.flip(states, [3]), torch.cat((torch.flip(policies_temp, [3]).reshape(-1, 1, self.height * self.width), policies[:, :, self.height*self.width:]), 2).view(-1, self.actions), values, moves)
+./test.py:import torch
+./test.py:print(torch.from_numpy(np.random.dirichlet(np.ones(10) * 0.01, 5)))
+./test.py:        torch.save(self.model.state_dict(), 'models/' + agent.name + '_' + str(current_index) + '.pt')
+./test.py:        model2.load_state_dict(torch.load('models/' + agent.name + '_' + str(current_index - 1) + '.pt'))
+./test.py:    torch.save(self.model.state_dict(), 'models/' + agent.name + '_' + str(current_index) + '.pt')
+./tictactoe_gpu.py:import torch
+./tictactoe_gpu.py:                    t = torch.zeros((self.height, self.width), dtype = torch.int16)
+./tictactoe_gpu.py:                    t = torch.zeros((self.height, self.width), dtype = torch.int16)
+./tictactoe_gpu.py:                    t = torch.zeros((self.height, self.width), dtype = torch.int16)
+./tictactoe_gpu.py:                    t = torch.zeros((self.height, self.width), dtype = torch.int16)
+./tictactoe_gpu.py:        self.check_kernels = torch.stack(possible_win).view(1, -1, self.height, self.width)
+./tictactoe_gpu.py:        self.t_one = torch.tensor([1])
+./tictactoe_gpu.py:        self.t_zero = torch.tensor([0])
+./tictactoe_gpu.py:        return torch.zeros((count, 2, self.height, self.width), dtype=torch.int16, device = self.device), torch.ones((count, self.max_moves), device = self.device, dtype = torch.long) #Bx1x5x5, Bx25
+./tictactoe_gpu.py:        order = torch.arange(count, device = self.device)
+./tictactoe_gpu.py:        indices = torch.arange(self.max_moves, device = self.device).repeat(rep)
+./tictactoe_gpu.py:            indices = torch.cat((indices, torch.arange(mod, device = self.device)), 0)
+./tictactoe_gpu.py:        states, moves = torch.zeros((count, 2, self.height, self.width), dtype=torch.int16, device = self.device).view(-1), torch.ones((count, self.max_moves), device = self.device, dtype = torch.long).view(-1) #Bx1x5x5, Bx25
+./tictactoe_gpu.py:        return torch.where(states_sum == 0, self.t_one, self.t_zero).view(-1, self.max_moves).long() #Bx5x5
+./tictactoe_gpu.py:        order = torch.arange(dim1, device = self.device)
+./tictactoe_gpu.py:        current_player = torch.where(states_current_player == 1, self.t_one, self.t_zero).repeat(1, self.check_kernels_length, 1, 1) #Bx28x5x5
+./tictactoe_gpu.py:        win_sum = torch.where(area_sum == self.win_count, self.t_one, self.t_zero).sum(1) #B
+./tictactoe_gpu.py:        no_moves = torch.where(moves_sum == 0, self.t_one, self.t_zero)
+./tictactoe_gpu.py:        terminals = torch.where(win_sum + no_moves > 0, self.t_one, self.t_zero)
+Binary file ./__pycache__/alphazero.cpython-37.pyc matches
+Binary file ./__pycache__/alphazero.cpython-38.pyc matches
+Binary file ./__pycache__/mcts.cpython-37.pyc matches
+Binary file ./__pycache__/mcts.cpython-38.pyc matches
+Binary file ./__pycache__/net.cpython-37.pyc matches
+Binary file ./__pycache__/net.cpython-38.pyc matches
+Binary file ./__pycache__/replay_buffer.cpython-37.pyc matches
+Binary file ./__pycache__/replay_buffer.cpython-38.pyc matches
+Binary file ./__pycache__/tictactoe_gpu.cpython-38.pyc matches

@@ -1,0 +1,3 @@
+nohup python3 -u main.py >outputs/output_10_arena.txt &
+
+nohup python3 -u arena.py >outputs/output_arena.txt &

@@ -1,0 +1,3645 @@
+device:  cuda
+selfplay 0
+index 102664
+policy loss:  0.25306422732770445 value loss:  4.836484737992286 left moves loss:  9.52515015522639
+update 0:15:07.724009
+arena
+model is updated  0
+win:  26 loss:  13 draw:  1
+0:16:22.772778
+selfplay 1
+index 192976
+policy loss:  0.12298326745629311 value loss:  0.7601412326097489 left moves loss:  2.5160329604148863
+update 0:13:04.132998
+arena
+model is updated  1
+win:  23 loss:  17 draw:  0
+0:14:11.355023
+selfplay 2
+index 285112
+policy loss:  0.12136341663698355 value loss:  0.7302305201689402 left moves loss:  2.438824649651845
+update 0:13:22.043884
+arena
+win:  21 loss:  19 draw:  0
+0:14:29.318211
+selfplay 3
+index 376784
+policy loss:  0.11967766794065635 value loss:  0.7169690314928691 left moves loss:  2.3988010358810423
+update 0:13:39.711327
+arena
+model is updated  2
+win:  30 loss:  9 draw:  1
+0:14:44.796211
+selfplay 4
+index 464824
+policy loss:  0.11825350537896157 value loss:  0.7142428157726923 left moves loss:  2.3941247852643333
+update 0:13:27.826766
+arena
+model is updated  3
+win:  25 loss:  15 draw:  0
+0:14:29.762673
+selfplay 5
+index 553464
+policy loss:  0.11675566643476486 value loss:  0.7154272377490998 left moves loss:  2.390961348215739
+update 0:13:33.779530
+arena
+win:  17 loss:  22 draw:  1
+0:14:40.450405
+selfplay 6
+index 641568
+policy loss:  0.1279696489373843 value loss:  0.7941330713033676 left moves loss:  3.0119423762957256
+update 0:13:13.359116
+arena
+win:  11 loss:  29 draw:  0
+0:14:12.967386
+selfplay 7
+index 731456
+policy loss:  0.1279812124868234 value loss:  0.7993312559525172 left moves loss:  2.9319023076693216
+update 0:12:56.756081
+arena
+win:  17 loss:  23 draw:  0
+0:14:01.684411
+selfplay 8
+index 819368
+policy loss:  0.12793579518795015 value loss:  0.800083005229632 left moves loss:  2.909482611020406
+update 0:13:16.093490
+arena
+win:  8 loss:  32 draw:  0
+0:14:19.192840
+selfplay 9
+index 905984
+policy loss:  0.12789126634597778 value loss:  0.8016033214330673 left moves loss:  2.9071495056152346
+update 0:11:47.180525
+arena
+win:  9 loss:  30 draw:  1
+0:12:57.936778
+selfplay 10
+index 994624
+policy loss:  0.12786947339773178 value loss:  0.8008534107605616 left moves loss:  2.906988466580709
+update 0:13:47.032952
+arena
+win:  13 loss:  27 draw:  0
+0:14:49.264683
+selfplay 11
+index 83240
+policy loss:  0.1277055731912454 value loss:  0.8039345488945643 left moves loss:  2.8998312099774677
+update 0:13:22.130489
+arena
+win:  15 loss:  24 draw:  1
+0:14:29.630823
+selfplay 12
+index 172824
+policy loss:  0.12768040344119072 value loss:  0.812295470237732 left moves loss:  2.897404939333598
+update 0:13:33.757400
+arena
+win:  16 loss:  23 draw:  1
+0:14:38.646365
+selfplay 13
+index 261792
+policy loss:  0.12764934619267782 value loss:  0.8180980706214904 left moves loss:  2.8988334623972576
+update 0:13:01.810196
+arena
+win:  11 loss:  28 draw:  1
+0:14:09.197595
+selfplay 14
+index 351928
+policy loss:  0.127598228653272 value loss:  0.8235986651976903 left moves loss:  2.903421039581299
+update 0:13:41.133193
+arena
+win:  12 loss:  25 draw:  3
+0:14:54.720235
+selfplay 15
+index 440000
+policy loss:  0.12757933512330055 value loss:  0.8266619251171747 left moves loss:  2.9076277446746825
+update 0:13:27.763128
+arena
+win:  8 loss:  32 draw:  0
+0:14:34.587681
+selfplay 16
+index 529696
+policy loss:  0.1275600300729275 value loss:  0.8271445089578628 left moves loss:  2.9065533979733784
+update 0:13:12.172825
+arena
+win:  13 loss:  27 draw:  0
+0:14:16.048150
+selfplay 17
+index 618640
+policy loss:  0.12755725180109342 value loss:  0.8262731832265854 left moves loss:  2.9062017091115315
+update 0:12:08.885563
+arena
+win:  12 loss:  28 draw:  0
+0:13:14.252276
+selfplay 18
+index 707568
+policy loss:  0.12755399728814762 value loss:  0.8281087201833724 left moves loss:  2.9047544797261557
+update 0:13:18.937676
+arena
+win:  12 loss:  28 draw:  0
+0:14:25.427770
+selfplay 19
+index 795568
+policy loss:  0.1275444111227989 value loss:  0.8269624372323354 left moves loss:  2.9039337762196857
+update 0:13:28.607031
+arena
+win:  11 loss:  29 draw:  0
+0:14:31.022232
+selfplay 20
+index 885720
+policy loss:  0.12754416634639104 value loss:  0.8265951643387477 left moves loss:  2.904613455136617
+update 0:13:38.490654
+arena
+win:  11 loss:  29 draw:  0
+0:14:45.433320
+selfplay 21
+index 972760
+policy loss:  0.12755250121156375 value loss:  0.8281245785951614 left moves loss:  2.906718462308248
+update 0:11:33.169766
+arena
+win:  14 loss:  26 draw:  0
+0:12:38.726126
+selfplay 22
+index 63448
+policy loss:  0.1275567489862442 value loss:  0.827883954445521 left moves loss:  2.907363038857778
+update 0:12:45.353829
+arena
+win:  17 loss:  23 draw:  0
+0:13:50.396532
+selfplay 23
+index 152800
+policy loss:  0.12755785937110584 value loss:  0.8272236601511638 left moves loss:  2.906025613149007
+update 0:13:32.973162
+arena
+win:  12 loss:  27 draw:  1
+0:14:41.934831
+selfplay 24
+index 242312
+policy loss:  0.1275561349093914 value loss:  0.8279260021448135 left moves loss:  2.9067302775382995
+update 0:13:29.847388
+arena
+win:  11 loss:  29 draw:  0
+0:14:33.619684
+selfplay 25
+index 331712
+policy loss:  0.12755057816704116 value loss:  0.8317348436514537 left moves loss:  2.907721676826477
+update 0:12:41.683750
+arena
+win:  13 loss:  27 draw:  0
+0:13:44.433521
+selfplay 26
+index 420472
+policy loss:  0.12754776095350584 value loss:  0.8316767360766729 left moves loss:  2.90715367158254
+update 0:13:25.466448
+arena
+win:  11 loss:  29 draw:  0
+0:14:25.830195
+selfplay 27
+index 510576
+policy loss:  0.12754958962400753 value loss:  0.8341715518633525 left moves loss:  2.907100703716278
+update 0:13:11.620538
+arena
+win:  18 loss:  22 draw:  0
+0:14:14.335975
+selfplay 28
+index 598608
+policy loss:  0.1275433586537838 value loss:  0.8347105924288432 left moves loss:  2.906415463288625
+update 0:13:14.259773
+arena
+win:  14 loss:  26 draw:  0
+0:14:15.093006
+selfplay 29
+index 686408
+policy loss:  0.1275351987282435 value loss:  0.8319452289740245 left moves loss:  2.9049635330835977
+update 0:12:33.090435
+arena
+win:  15 loss:  25 draw:  0
+0:13:41.292049
+selfplay 30
+index 775088
+policy loss:  0.12754151741663614 value loss:  0.8336637618144354 left moves loss:  2.906759394009908
+update 0:13:15.293466
+arena
+win:  16 loss:  24 draw:  0
+0:14:17.790330
+selfplay 31
+index 864024
+policy loss:  0.12753827154636382 value loss:  0.8317122038205464 left moves loss:  2.9058046849568684
+update 0:13:07.585524
+arena
+win:  12 loss:  27 draw:  1
+0:14:13.824688
+selfplay 32
+index 952544
+policy loss:  0.12754965240756672 value loss:  0.8341763810316721 left moves loss:  2.9069181291262307
+update 0:13:25.587455
+arena
+win:  15 loss:  25 draw:  0
+0:14:29.360170
+selfplay 33
+index 39312
+policy loss:  0.1275255556901296 value loss:  0.833407481511434 left moves loss:  2.903401718934377
+update 0:12:43.375311
+arena
+win:  8 loss:  31 draw:  1
+0:13:51.380518
+selfplay 34
+index 127848
+policy loss:  0.12751783847808837 value loss:  0.8301755195856094 left moves loss:  2.9036035831769307
+update 0:12:26.558966
+arena
+win:  13 loss:  27 draw:  0
+0:13:30.720928
+selfplay 35
+index 216992
+policy loss:  0.12577726418773333 value loss:  0.8138362489144008 left moves loss:  2.7607399853070578
+update 0:13:17.771186
+arena
+win:  18 loss:  22 draw:  0
+0:14:25.151593
+selfplay 36
+index 307440
+policy loss:  0.12444942772388458 value loss:  0.8072185794512431 left moves loss:  2.5671282037099203
+update 0:13:43.238319
+arena
+win:  13 loss:  27 draw:  0
+0:14:52.094137
+selfplay 37
+index 397920
+policy loss:  0.12391995432476202 value loss:  0.7879641338189443 left moves loss:  2.540525407791138
+update 0:13:37.132420
+arena
+win:  6 loss:  34 draw:  0
+0:14:39.669402
+selfplay 38
+index 486176
+policy loss:  0.12379052132368087 value loss:  0.7782949684063594 left moves loss:  2.524282240072886
+update 0:10:57.459315
+arena
+win:  14 loss:  26 draw:  0
+0:11:59.952764
+selfplay 39
+index 575144
+policy loss:  0.12356302008032799 value loss:  0.7676276689767838 left moves loss:  2.4994768953323363
+update 0:10:46.436109
+arena
+win:  15 loss:  24 draw:  1
+0:11:51.484950
+selfplay 40
+index 663528
+policy loss:  0.12296484852830569 value loss:  0.7621242306629816 left moves loss:  2.483342853387197
+update 0:10:53.648003
+arena
+win:  17 loss:  22 draw:  1
+0:11:59.375185
+selfplay 41
+index 750936
+policy loss:  0.12163272246718407 value loss:  0.7554563611745835 left moves loss:  2.4669083364804587
+update 0:10:54.682927
+arena
+win:  16 loss:  23 draw:  1
+0:12:04.217925
+selfplay 42
+index 840040
+policy loss:  0.11941061273217202 value loss:  0.7542444576819738 left moves loss:  2.4578037651379905
+update 0:10:54.775833
+arena
+win:  18 loss:  22 draw:  0
+0:11:59.417083
+selfplay 43
+index 929784
+policy loss:  0.1177191731830438 value loss:  0.7517299658060074 left moves loss:  2.449788742860158
+update 0:11:13.845229
+arena
+model is updated  4
+win:  25 loss:  15 draw:  0
+0:12:20.358176
+selfplay 44
+index 26536
+policy loss:  0.11626257717609406 value loss:  0.7632692625125249 left moves loss:  2.45654416402181
+update 0:11:41.555485
+arena
+win:  17 loss:  19 draw:  4
+0:12:55.986758
+selfplay 45
+index 124448
+policy loss:  0.11473825186491013 value loss:  0.7761099163691203 left moves loss:  2.4623157787323
+update 0:11:34.933632
+arena
+model is updated  5
+win:  24 loss:  11 draw:  5
+0:12:49.490666
+selfplay 46
+index 217448
+policy loss:  0.11303277450303237 value loss:  0.7751736386617025 left moves loss:  2.4531628052393595
+update 0:11:09.634239
+arena
+win:  18 loss:  20 draw:  2
+0:12:23.325567
+selfplay 47
+index 308184
+policy loss:  0.11117404565215111 value loss:  0.7737053281068802 left moves loss:  2.441936196486155
+update 0:11:12.724710
+arena
+model is updated  6
+win:  26 loss:  12 draw:  2
+0:12:19.414433
+selfplay 48
+index 405800
+policy loss:  0.10902949559191863 value loss:  0.78174784719944 left moves loss:  2.4371899406115216
+update 0:11:28.842968
+arena
+model is updated  7
+win:  20 loss:  14 draw:  6
+0:12:39.367588
+selfplay 49
+index 507016
+policy loss:  0.10719874535997709 value loss:  0.7942801352341969 left moves loss:  2.4297002498308817
+update 0:11:35.863964
+arena
+model is updated  8
+win:  23 loss:  13 draw:  4
+0:12:48.880212
+selfplay 50
+index 603768
+policy loss:  0.10545300404230754 value loss:  0.7979701034228007 left moves loss:  2.4134405438105264
+update 0:11:46.943493
+arena
+model is updated  9
+win:  19 loss:  14 draw:  7
+0:12:59.967850
+selfplay 51
+index 704880
+policy loss:  0.10371458746492862 value loss:  0.8041141080856323 left moves loss:  2.3937995926539104
+update 0:11:43.520342
+arena
+win:  17 loss:  14 draw:  9
+0:12:57.238801
+selfplay 52
+index 806520
+policy loss:  0.10194268251458803 value loss:  0.8092689786354701 left moves loss:  2.3635001476605733
+update 0:11:54.898160
+arena
+model is updated  10
+win:  20 loss:  13 draw:  7
+0:13:11.655826
+selfplay 53
+index 912872
+policy loss:  0.09990407988429069 value loss:  0.8194420256217321 left moves loss:  2.36523033618927
+update 0:12:22.299362
+arena
+win:  16 loss:  16 draw:  8
+0:13:38.668299
+selfplay 54
+index 20936
+policy loss:  0.09815835485855738 value loss:  0.8272091619173686 left moves loss:  2.313977938493093
+update 0:12:23.794463
+arena
+model is updated  11
+win:  16 loss:  13 draw:  11
+0:13:40.322607
+selfplay 55
+index 125944
+policy loss:  0.0964963336288929 value loss:  0.8256567152341207 left moves loss:  2.258324183622996
+update 0:12:09.497419
+arena
+model is updated  12
+win:  14 loss:  11 draw:  15
+0:13:38.515354
+selfplay 56
+index 230344
+policy loss:  0.09530043472846349 value loss:  0.8371924561262131 left moves loss:  2.247268102169037
+update 0:12:06.293157
+arena
+win:  10 loss:  13 draw:  17
+0:13:33.771148
+selfplay 57
+index 335088
+policy loss:  0.09431384555995465 value loss:  0.8408738988637924 left moves loss:  2.244669325351715
+update 0:12:02.811537
+arena
+win:  14 loss:  14 draw:  12
+0:13:23.376364
+selfplay 58
+index 441552
+policy loss:  0.09291577726602554 value loss:  0.8391175941626231 left moves loss:  2.2576633365948995
+update 0:12:17.704546
+arena
+win:  12 loss:  14 draw:  14
+0:13:41.943641
+selfplay 59
+index 547344
+policy loss:  0.09182557341953118 value loss:  0.834747917453448 left moves loss:  2.14708323319753
+update 0:12:31.020476
+arena
+model is updated  13
+win:  17 loss:  12 draw:  11
+0:13:51.158019
+selfplay 60
+index 649216
+policy loss:  0.09297234843174616 value loss:  0.8486553452412288 left moves loss:  2.275427006880442
+update 0:11:54.890290
+arena
+win:  12 loss:  12 draw:  16
+0:13:16.102654
+selfplay 61
+index 747688
+policy loss:  0.09120518247286478 value loss:  0.8359803213675817 left moves loss:  2.267174373467763
+update 0:11:53.332953
+arena
+win:  13 loss:  11 draw:  16
+0:13:20.162550
+selfplay 62
+index 847840
+policy loss:  0.09046016812324524 value loss:  0.8282310918966929 left moves loss:  2.1473681426048277
+update 0:11:54.468446
+arena
+model is updated  14
+win:  20 loss:  11 draw:  9
+0:13:13.286010
+selfplay 63
+index 947992
+policy loss:  0.09038848459720611 value loss:  0.8267874950170517 left moves loss:  2.1178665145238242
+update 0:11:56.489590
+arena
+win:  12 loss:  19 draw:  9
+0:13:12.490156
+selfplay 64
+index 46848
+policy loss:  0.09118125845988591 value loss:  0.8234714883565902 left moves loss:  2.297922383149465
+update 0:11:44.149583
+arena
+model is updated  15
+win:  14 loss:  11 draw:  15
+0:13:03.419615
+selfplay 65
+index 144616
+policy loss:  0.09015081765751044 value loss:  0.8189461092154185 left moves loss:  2.1595531209309895
+update 0:11:49.447265
+arena
+model is updated  16
+win:  19 loss:  10 draw:  11
+0:13:06.959402
+selfplay 66
+index 244536
+policy loss:  0.09000606993834177 value loss:  0.8173315252860387 left moves loss:  2.119641763369242
+update 0:11:58.812931
+arena
+model is updated  17
+win:  10 loss:  7 draw:  23
+0:13:23.493585
+selfplay 67
+index 346440
+policy loss:  0.08940358733137449 value loss:  0.8163962938388188 left moves loss:  2.0717355648676556
+update 0:11:59.485181
+arena
+win:  10 loss:  11 draw:  19
+0:13:31.608548
+selfplay 68
+index 447976
+policy loss:  0.09073578591148058 value loss:  0.8241791216532389 left moves loss:  2.2147887682914735
+update 0:11:57.673838
+arena
+win:  13 loss:  17 draw:  10
+0:13:12.535535
+selfplay 69
+index 551392
+policy loss:  0.08937358530859152 value loss:  0.8077941266695658 left moves loss:  2.111735804875692
+update 0:12:20.518845
+arena
+win:  13 loss:  13 draw:  14
+0:13:44.950748
+selfplay 70
+index 654440
+policy loss:  0.08877834285298983 value loss:  0.802184999982516 left moves loss:  2.0491963466008505
+update 0:12:09.271049
+arena
+model is updated  18
+win:  12 loss:  9 draw:  19
+0:13:40.765665
+selfplay 71
+index 752896
+policy loss:  0.0912971356511116 value loss:  0.8377654413382213 left moves loss:  2.37573544104894
+update 0:12:31.798985
+arena
+model is updated  19
+win:  16 loss:  8 draw:  16
+0:13:51.218216
+selfplay 72
+index 854656
+policy loss:  0.08843315047522386 value loss:  0.8039941467841466 left moves loss:  2.113427692254384
+update 0:12:00.929747
+arena
+win:  11 loss:  14 draw:  15
+0:13:23.987864
+selfplay 73
+index 956848
+policy loss:  0.08819431379437447 value loss:  0.8029246036211649 left moves loss:  2.0920666376749675
+update 0:12:19.504114
+arena
+win:  8 loss:  11 draw:  21
+0:13:42.808846
+selfplay 74
+index 59440
+policy loss:  0.08783893875777721 value loss:  0.7988046908378601 left moves loss:  2.0537865340709685
+update 0:12:09.398518
+arena
+model is updated  20
+win:  13 loss:  10 draw:  17
+0:13:31.046423
+selfplay 75
+index 161288
+policy loss:  0.086989101121823 value loss:  0.7912618507941563 left moves loss:  1.9862891240914662
+update 0:11:36.745099
+arena
+win:  10 loss:  14 draw:  16
+0:12:56.316506
+selfplay 76
+index 264048
+policy loss:  0.08666873417794704 value loss:  0.7873444414138794 left moves loss:  1.9644290709495544
+update 0:12:23.572051
+arena
+model is updated  21
+win:  15 loss:  11 draw:  14
+0:13:43.884563
+selfplay 77
+index 369360
+policy loss:  0.08637470173339049 value loss:  0.7835622545083364 left moves loss:  1.9446399354934691
+update 0:12:30.729709
+arena
+win:  9 loss:  8 draw:  23
+0:13:58.555617
+selfplay 78
+index 471736
+policy loss:  0.08614717106024425 value loss:  0.7815861543019612 left moves loss:  1.9400936969121296
+update 0:12:11.235871
+arena
+win:  10 loss:  14 draw:  16
+0:13:36.372483
+selfplay 79
+index 576112
+policy loss:  0.08589995346963405 value loss:  0.7812166160345078 left moves loss:  1.933015963633855
+update 0:12:18.038354
+arena
+win:  7 loss:  12 draw:  21
+0:13:41.533278
+selfplay 80
+index 679608
+policy loss:  0.08565410104890664 value loss:  0.7758904405434927 left moves loss:  1.9125582245985666
+update 0:12:00.912360
+arena
+model is updated  22
+win:  16 loss:  12 draw:  12
+0:13:19.816357
+selfplay 81
+index 782136
+policy loss:  0.0854198057204485 value loss:  0.7710014909505845 left moves loss:  1.8908540852864584
+update 0:12:03.888667
+arena
+win:  9 loss:  8 draw:  23
+0:13:34.383321
+selfplay 82
+index 884240
+policy loss:  0.08511160584787528 value loss:  0.7693390063444774 left moves loss:  1.8799115192890168
+update 0:11:54.462695
+arena
+win:  11 loss:  12 draw:  17
+0:13:14.113862
+selfplay 83
+index 987440
+policy loss:  0.08485529504716396 value loss:  0.7649759644269943 left moves loss:  1.8718378086884817
+update 0:12:06.467799
+arena
+win:  8 loss:  13 draw:  19
+0:13:31.925479
+selfplay 84
+index 88576
+policy loss:  0.08473441116511822 value loss:  0.7587666088342666 left moves loss:  1.8589164396127065
+update 0:11:48.872248
+arena
+win:  13 loss:  11 draw:  16
+0:13:14.410757
+selfplay 85
+index 188520
+policy loss:  0.08467601038515568 value loss:  0.7569353699684143 left moves loss:  1.8559647325674693
+update 0:11:57.348431
+arena
+win:  11 loss:  12 draw:  17
+0:13:24.228201
+selfplay 86
+index 290496
+policy loss:  0.0844601795822382 value loss:  0.7529706331094106 left moves loss:  1.8423700841267903
+update 0:13:46.354509
+arena
+win:  8 loss:  14 draw:  18
+0:15:11.673718
+selfplay 87
+index 392984
+policy loss:  0.08443717544277508 value loss:  0.7496786202987035 left moves loss:  1.839736445347468
+update 0:11:46.568256
+arena
+model is updated  23
+win:  17 loss:  8 draw:  15
+0:13:08.976442
+selfplay 88
+index 494384
+policy loss:  0.08436028947432836 value loss:  0.745343182682991 left moves loss:  1.8332428816954296
+update 0:11:59.332978
+arena
+win:  8 loss:  12 draw:  20
+0:13:24.282688
+selfplay 89
+index 598352
+policy loss:  0.08407509071131547 value loss:  0.7444642655054728 left moves loss:  1.824805512825648
+update 0:12:10.526712
+arena
+model is updated  24
+win:  17 loss:  12 draw:  11
+0:13:26.095901
+selfplay 90
+index 700552
+policy loss:  0.08387298549214998 value loss:  0.7412766675154369 left moves loss:  1.8135404642422994
+update 0:11:55.881418
+arena
+model is updated  25
+win:  14 loss:  7 draw:  19
+0:13:21.644107
+selfplay 91
+index 804040
+policy loss:  0.0838800182690223 value loss:  0.7409270385901133 left moves loss:  1.8099909778436025
+update 0:11:58.730517
+arena
+win:  11 loss:  9 draw:  20
+0:13:26.747013
+selfplay 92
+index 907328
+policy loss:  0.08378379416962464 value loss:  0.7389422867695491 left moves loss:  1.8041017397244772
+update 0:11:58.317857
+arena
+win:  13 loss:  15 draw:  12
+0:13:13.010465
+selfplay 93
+index 9216
+policy loss:  0.08371015300353368 value loss:  0.7399820997317632 left moves loss:  1.7989608414967855
+update 0:12:05.526629
+arena
+model is updated  26
+win:  16 loss:  7 draw:  17
+0:13:32.018581
+selfplay 94
+index 112552
+policy loss:  0.08352111374338468 value loss:  0.7388518031438192 left moves loss:  1.7946180593967438
+update 0:11:58.538925
+arena
+win:  13 loss:  13 draw:  14
+0:13:18.448511
+selfplay 95
+index 216632
+policy loss:  0.08324014390508334 value loss:  0.7356565076112748 left moves loss:  1.7811813016732534
+update 0:11:58.030790
+arena
+model is updated  27
+win:  13 loss:  9 draw:  18
+0:13:22.679362
+selfplay 96
+index 319552
+policy loss:  0.08296709251900514 value loss:  0.7333000765244166 left moves loss:  1.7754457732041677
+update 0:11:57.232711
+arena
+win:  9 loss:  10 draw:  21
+0:13:24.258382
+selfplay 97
+index 421176
+policy loss:  0.08286807768046855 value loss:  0.7329461840788524 left moves loss:  1.7759031621615091
+update 0:12:07.619012
+arena
+model is updated  28
+win:  13 loss:  10 draw:  17
+0:13:31.844719
+selfplay 98
+index 524904
+policy loss:  0.08252588525414467 value loss:  0.7311625812451045 left moves loss:  1.7619761069615683
+update 0:12:24.116010
+arena
+model is updated  29
+win:  12 loss:  5 draw:  23
+0:13:53.904364
+selfplay 99
+index 624784
+policy loss:  0.08266802626351516 value loss:  0.7303947655359904 left moves loss:  1.7685663362344106
+update 0:11:53.492214
+arena
+win:  11 loss:  11 draw:  18
+0:13:14.403734
+selfplay 100
+index 724160
+policy loss:  0.08273314001659553 value loss:  0.7261132192611695 left moves loss:  1.7671972000598908
+update 0:11:52.425694
+arena
+win:  12 loss:  13 draw:  15
+0:13:16.503349
+selfplay 101
+index 825816
+policy loss:  0.08277587120731672 value loss:  0.7214064121246337 left moves loss:  1.7576166089375813
+update 0:12:17.958669
+arena
+model is updated  30
+win:  13 loss:  8 draw:  19
+0:13:42.507890
+selfplay 102
+index 928824
+policy loss:  0.08272777579724788 value loss:  0.72446648756663 left moves loss:  1.7661395672957103
+update 0:12:13.896429
+arena
+win:  10 loss:  9 draw:  21
+0:13:41.455222
+selfplay 103
+index 30688
+policy loss:  0.08257997470597427 value loss:  0.7217478658755621 left moves loss:  1.7621417065461478
+update 0:11:51.954542
+arena
+win:  6 loss:  11 draw:  23
+0:13:18.834888
+selfplay 104
+index 132808
+policy loss:  0.08256789455811182 value loss:  0.725615438024203 left moves loss:  1.769036544561386
+update 0:11:54.920507
+arena
+win:  9 loss:  12 draw:  19
+0:13:20.508191
+selfplay 105
+index 234544
+policy loss:  0.08246071363488833 value loss:  0.7264329383770625 left moves loss:  1.7683961681524913
+update 0:12:18.152848
+arena
+model is updated  31
+win:  15 loss:  10 draw:  15
+0:13:44.449770
+selfplay 106
+index 338216
+policy loss:  0.08262684558828672 value loss:  0.7237653470039368 left moves loss:  1.7629051236311595
+update 0:12:10.108309
+arena
+win:  12 loss:  14 draw:  14
+0:13:27.976045
+selfplay 107
+index 440560
+policy loss:  0.08275702461600304 value loss:  0.7205517297983169 left moves loss:  1.7547590931256611
+update 0:11:46.531498
+arena
+win:  11 loss:  11 draw:  18
+0:13:14.373128
+selfplay 108
+index 540328
+policy loss:  0.08312492944300175 value loss:  0.719784655769666 left moves loss:  1.7627199840545655
+update 0:11:47.102689
+arena
+model is updated  32
+win:  10 loss:  7 draw:  23
+0:13:12.680877
+selfplay 109
+index 644848
+policy loss:  0.08275471662481626 value loss:  0.7190116453170776 left moves loss:  1.7495147820313772
+update 0:12:06.359282
+arena
+win:  5 loss:  12 draw:  23
+0:13:37.314660
+selfplay 110
+index 750744
+policy loss:  0.08227982168396314 value loss:  0.7198869933684667 left moves loss:  1.7327428968747456
+update 0:12:19.287928
+arena
+win:  9 loss:  10 draw:  21
+0:13:45.635086
+selfplay 111
+index 854880
+policy loss:  0.08192433096468449 value loss:  0.720565763314565 left moves loss:  1.7312922942638398
+update 0:12:24.944370
+arena
+win:  7 loss:  11 draw:  22
+0:13:55.847255
+selfplay 112
+index 961344
+policy loss:  0.0816712483515342 value loss:  0.7208993105093638 left moves loss:  1.7205977539221446
+update 0:12:07.085967
+arena
+win:  10 loss:  10 draw:  20
+0:13:31.965541
+selfplay 113
+index 69400
+policy loss:  0.08129429454604785 value loss:  0.721234260002772 left moves loss:  1.7118393115202586
+update 0:14:09.830771
+arena
+win:  12 loss:  11 draw:  17
+0:15:30.483649
+selfplay 114
+index 172136
+policy loss:  0.08112660514811675 value loss:  0.7196672288576762 left moves loss:  1.7067854940891265
+update 0:13:24.954026
+arena
+model is updated  33
+win:  10 loss:  8 draw:  22
+0:14:50.076432
+selfplay 115
+index 275792
+policy loss:  0.08092685431241989 value loss:  0.7189444178342819 left moves loss:  1.7001940512657165
+update 0:14:49.822108
+arena
+win:  9 loss:  12 draw:  19
+0:16:18.600962
+selfplay 116
+index 378176
+policy loss:  0.08063707182804744 value loss:  0.7189625879128774 left moves loss:  1.6973525452613831
+update 0:14:58.542231
+arena
+win:  12 loss:  12 draw:  16
+0:16:22.818850
+selfplay 117
+index 481392
+policy loss:  0.0803535166134437 value loss:  0.7195562543471654 left moves loss:  1.691299508412679
+update 0:15:09.790848
+arena
+win:  12 loss:  14 draw:  14
+0:16:31.008076
+selfplay 118
+index 587672
+policy loss:  0.08001672086616357 value loss:  0.7185275646050772 left moves loss:  1.6769643350442252
+update 0:15:02.646807
+arena
+model is updated  34
+win:  13 loss:  9 draw:  18
+0:16:28.697796
+selfplay 119
+index 690472
+policy loss:  0.08001488653322061 value loss:  0.7188962636391322 left moves loss:  1.6779674792289734
+update 0:13:23.268943
+arena
+win:  12 loss:  12 draw:  16
+0:14:45.642780
+selfplay 120
+index 795640
+policy loss:  0.07997887666026751 value loss:  0.7191350116332372 left moves loss:  1.6765863211949665
+update 0:15:02.179463
+arena
+win:  9 loss:  12 draw:  19
+0:16:30.228069
+selfplay 121
+index 899408
+policy loss:  0.07984826023379962 value loss:  0.7216749529043833 left moves loss:  1.678101411263148
+update 0:15:18.991698
+arena
+win:  8 loss:  13 draw:  19
+0:16:46.361883
+selfplay 122
+index 2360
+policy loss:  0.07994455379744371 value loss:  0.721015924612681 left moves loss:  1.6887131488323213
+update 0:14:59.530837
+arena
+win:  9 loss:  12 draw:  19
+0:16:28.975604
+selfplay 123
+index 103600
+policy loss:  0.07990281785527865 value loss:  0.7206042639414469 left moves loss:  1.685534620285034
+update 0:14:48.882173
+arena
+win:  12 loss:  14 draw:  14
+0:16:13.755293
+selfplay 124
+index 206384
+policy loss:  0.07974747329950332 value loss:  0.7231059362490971 left moves loss:  1.6833379236857096
+update 0:14:19.892931
+arena
+win:  4 loss:  14 draw:  22
+0:15:49.407206
+selfplay 125
+index 309432
+policy loss:  0.07973221103350321 value loss:  0.7255333876609802 left moves loss:  1.692111535469691
+update 0:14:52.170055
+arena
+win:  6 loss:  11 draw:  23
+0:16:22.244374
+selfplay 126
+index 413416
+policy loss:  0.0795712764809529 value loss:  0.7254838971296946 left moves loss:  1.6923939553896585
+update 0:14:54.493666
+arena
+model is updated  35
+win:  17 loss:  4 draw:  19
+0:16:21.437531
+selfplay 127
+index 518216
+policy loss:  0.07967487029731274 value loss:  0.7274329608678818 left moves loss:  1.6988889129956564
+update 0:15:01.164182
+arena
+win:  7 loss:  14 draw:  19
+0:16:31.133887
+selfplay 128
+index 620408
+policy loss:  0.07975095279514789 value loss:  0.7296019661426544 left moves loss:  1.7006275610129038
+update 0:14:38.479447
+arena
+win:  10 loss:  16 draw:  14
+0:15:59.293341
+selfplay 129
+index 724552
+policy loss:  0.08000657461583614 value loss:  0.7286900818347931 left moves loss:  1.7033438114325206
+update 0:14:46.249913
+arena
+win:  8 loss:  12 draw:  20
+0:16:10.405412
+selfplay 130
+index 826440
+policy loss:  0.0801563652853171 value loss:  0.7299419198433558 left moves loss:  1.7086940550804137
+update 0:14:57.686170
+arena
+win:  8 loss:  10 draw:  22
+0:16:24.821517
+selfplay 131
+index 930104
+policy loss:  0.08024572215974331 value loss:  0.7284801352024078 left moves loss:  1.7049026525020599
+update 0:15:13.476914
+arena
+win:  10 loss:  14 draw:  16
+0:16:35.801151
+selfplay 132
+index 31744
+policy loss:  0.08049518930415313 value loss:  0.7282216316461563 left moves loss:  1.7077836473782857
+update 0:14:35.229105
+arena
+win:  9 loss:  16 draw:  15
+0:15:57.847195
+selfplay 133
+index 134336
+policy loss:  0.0806199803451697 value loss:  0.7239097726345062 left moves loss:  1.7031571817398072
+update 0:15:13.013142
+arena
+model is updated  36
+win:  10 loss:  8 draw:  22
+0:16:41.539910
+selfplay 134
+index 240888
+policy loss:  0.0806631119052569 value loss:  0.7230559933185577 left moves loss:  1.696574684381485
+update 0:15:46.320748
+arena
+win:  8 loss:  8 draw:  24
+0:17:15.487152
+selfplay 135
+index 347224
+policy loss:  0.08065880755583445 value loss:  0.7188422278563181 left moves loss:  1.68783216436704
+update 0:15:30.955036
+arena
+win:  13 loss:  13 draw:  14
+0:16:51.894989
+selfplay 136
+index 454416
+policy loss:  0.08049516608317693 value loss:  0.7157558979590734 left moves loss:  1.6704621851444243
+update 0:15:41.072459
+arena
+model is updated  37
+win:  13 loss:  8 draw:  19
+0:17:05.311224
+selfplay 137
+index 556704
+policy loss:  0.0805272776633501 value loss:  0.7147361119588216 left moves loss:  1.6735025497277578
+update 0:13:13.052016
+arena
+win:  10 loss:  11 draw:  19
+0:14:39.370619
+selfplay 138
+index 658168
+policy loss:  0.08043933250010013 value loss:  0.7138726931810379 left moves loss:  1.6764168314139047
+update 0:14:58.704888
+arena
+win:  6 loss:  12 draw:  22
+0:16:27.506558
+selfplay 139
+index 759584
+policy loss:  0.08027603330711523 value loss:  0.7136009118954341 left moves loss:  1.6763921558856965
+update 0:14:16.320380
+arena
+win:  7 loss:  13 draw:  20
+0:15:41.662294
+selfplay 140
+index 860480
+policy loss:  0.08015275478363038 value loss:  0.7120774877071381 left moves loss:  1.675482885837555
+update 0:14:10.320881
+arena
+win:  11 loss:  13 draw:  16
+0:15:32.679987
+selfplay 141
+index 962048
+policy loss:  0.08017006173729896 value loss:  0.709135441382726 left moves loss:  1.6730407138665517
+update 0:14:14.583811
+arena
+win:  11 loss:  14 draw:  15
+0:15:40.324016
+selfplay 142
+index 63824
+policy loss:  0.07991586382190387 value loss:  0.7105987455447514 left moves loss:  1.6778963867823282
+update 0:13:54.136245
+arena
+model is updated  38
+win:  13 loss:  10 draw:  17
+0:15:16.651832
+selfplay 143
+index 164288
+policy loss:  0.07998136269549529 value loss:  0.7116317653656006 left moves loss:  1.6888478855292002
+update 0:14:21.887285
+arena
+win:  9 loss:  8 draw:  23
+0:15:52.468958
+selfplay 144
+index 264424
+policy loss:  0.08021468135217825 value loss:  0.7120980620384216 left moves loss:  1.7006855014959972
+update 0:14:43.306926
+arena
+model is updated  39
+win:  10 loss:  8 draw:  22
+0:16:11.569303
+selfplay 145
+index 365864
+policy loss:  0.08025671477119128 value loss:  0.7158490592241287 left moves loss:  1.714381039539973
+update 0:14:57.463310
+arena
+win:  5 loss:  19 draw:  16
+0:16:24.187120
+selfplay 146
+index 469264
+policy loss:  0.08032868591447671 value loss:  0.7163004197676976 left moves loss:  1.7234279131889343
+update 0:14:38.381975
+arena
+win:  7 loss:  15 draw:  18
+0:16:07.936128
+selfplay 147
+index 569528
+policy loss:  0.08029849010209243 value loss:  0.7181174041827519 left moves loss:  1.7194485847155254
+update 0:14:36.942713
+arena
+win:  6 loss:  16 draw:  18
+0:16:02.183293
+selfplay 148
+index 671600
+policy loss:  0.08024952900906404 value loss:  0.7202556085586548 left moves loss:  1.7209229000409445
+update 0:14:18.795459
+arena
+win:  9 loss:  9 draw:  22
+0:15:44.338751
+selfplay 149
+index 774480
+policy loss:  0.0801936499774456 value loss:  0.7218617957830429 left moves loss:  1.7191724157333375
+update 0:14:34.764344
+arena
+win:  6 loss:  11 draw:  23
+0:16:06.986841
+selfplay 150
+index 876960
+policy loss:  0.08012350218991439 value loss:  0.7213864701986313 left moves loss:  1.7135734256108601
+update 0:14:36.214288
+arena
+model is updated  40
+win:  15 loss:  5 draw:  20
+0:16:02.138989
+selfplay 151
+index 978864
+policy loss:  0.08019864556690057 value loss:  0.7198479215304057 left moves loss:  1.7114534719785055
+update 0:14:23.810613
+arena
+win:  11 loss:  10 draw:  19
+0:15:52.374020
+selfplay 152
+index 82448
+policy loss:  0.08026248909533024 value loss:  0.7166475814580917 left moves loss:  1.702072028319041
+update 0:14:57.824664
+arena
+win:  7 loss:  11 draw:  22
+0:16:27.266009
+selfplay 153
+index 186184
+policy loss:  0.0802202649662892 value loss:  0.7143117690086365 left moves loss:  1.6907820494969685
+update 0:14:53.922002
+arena
+model is updated  41
+win:  10 loss:  6 draw:  24
+0:16:20.602491
+selfplay 154
+index 290864
+policy loss:  0.08012855912248294 value loss:  0.7133881014585495 left moves loss:  1.68072336713473
+update 0:14:15.994145
+arena
+win:  7 loss:  11 draw:  22
+0:15:42.577527
+selfplay 155
+index 393496
+policy loss:  0.08017416852215926 value loss:  0.7079526935021082 left moves loss:  1.6696874046325683
+update 0:14:55.040733
+arena
+win:  9 loss:  8 draw:  23
+0:16:21.707648
+selfplay 156
+index 495608
+policy loss:  0.08044334394236406 value loss:  0.7067231033245722 left moves loss:  1.671216306289037
+update 0:14:44.698737
+arena
+model is updated  42
+win:  12 loss:  8 draw:  20
+0:16:07.688254
+selfplay 157
+index 599896
+policy loss:  0.0804387346158425 value loss:  0.7059549222389857 left moves loss:  1.6639302297433218
+update 0:14:31.162344
+arena
+win:  6 loss:  7 draw:  27
+0:16:00.028943
+selfplay 158
+index 704520
+policy loss:  0.08042749499281247 value loss:  0.7024540811777115 left moves loss:  1.6534235366185506
+update 0:13:20.396891
+arena
+model is updated  43
+win:  13 loss:  7 draw:  20
+0:14:46.453944
+selfplay 159
+index 809184
+policy loss:  0.08036361987392107 value loss:  0.6968066893021265 left moves loss:  1.6462912372748058
+update 0:15:17.941870
+arena
+win:  12 loss:  12 draw:  16
+0:16:38.702106
+selfplay 160
+index 912472
+policy loss:  0.08028669290244579 value loss:  0.7016369400421778 left moves loss:  1.6537567361195882
+update 0:15:04.471677
+arena
+win:  13 loss:  12 draw:  15
+0:16:27.203341
+selfplay 161
+index 16632
+policy loss:  0.08009006927410761 value loss:  0.6994795680046082 left moves loss:  1.6450754519303639
+update 0:14:59.662312
+arena
+model is updated  44
+win:  15 loss:  11 draw:  14
+0:16:23.833990
+selfplay 162
+index 119488
+policy loss:  0.08006592464943726 value loss:  0.7014882149298985 left moves loss:  1.6526326370239257
+update 0:14:49.271936
+arena
+win:  9 loss:  11 draw:  20
+0:16:12.475685
+selfplay 163
+index 224160
+policy loss:  0.0799759034315745 value loss:  0.7031076586246491 left moves loss:  1.6503706336021424
+update 0:15:20.593132
+arena
+win:  12 loss:  10 draw:  18
+0:16:48.812327
+selfplay 164
+index 327272
+policy loss:  0.0799158289283514 value loss:  0.7068325104316076 left moves loss:  1.6593547101815542
+update 0:15:15.729396
+arena
+model is updated  45
+win:  12 loss:  8 draw:  20
+0:16:42.857200
+selfplay 165
+index 432360
+policy loss:  0.07966728049019972 value loss:  0.7067062509059906 left moves loss:  1.6555164964993794
+update 0:15:05.970160
+arena
+model is updated  46
+win:  13 loss:  7 draw:  20
+0:16:37.160757
+selfplay 166
+index 533680
+policy loss:  0.0799120140572389 value loss:  0.7057942748069763 left moves loss:  1.660020763874054
+update 0:14:48.057403
+arena
+win:  11 loss:  15 draw:  14
+0:16:14.593077
+selfplay 167
+index 635136
+policy loss:  0.07982533089816571 value loss:  0.7030486263831457 left moves loss:  1.6565885961055755
+update 0:13:28.391019
+arena
+win:  10 loss:  12 draw:  18
+0:14:55.574914
+selfplay 168
+index 733080
+policy loss:  0.08009138946731885 value loss:  0.7073670156796773 left moves loss:  1.6711306567986806
+update 0:14:30.556932
+arena
+win:  13 loss:  14 draw:  13
+0:15:48.740368
+selfplay 169
+index 833400
+policy loss:  0.0802681169907252 value loss:  0.707562619249026 left moves loss:  1.6818175276120504
+update 0:14:31.168201
+arena
+win:  13 loss:  15 draw:  12
+0:15:48.974693
+selfplay 170
+index 932672
+policy loss:  0.08044509294132392 value loss:  0.7028930946191152 left moves loss:  1.6787045800685882
+update 0:14:26.006313
+arena
+win:  13 loss:  11 draw:  16
+0:15:48.229330
+selfplay 171
+index 33664
+policy loss:  0.08061123040815195 value loss:  0.7030167345205943 left moves loss:  1.6834931965668996
+update 0:14:40.729600
+arena
+win:  7 loss:  10 draw:  23
+0:16:12.459122
+selfplay 172
+index 135792
+policy loss:  0.08060035655895868 value loss:  0.7029753049214681 left moves loss:  1.6860676805178325
+update 0:14:36.717945
+arena
+win:  12 loss:  13 draw:  15
+0:16:02.592145
+selfplay 173
+index 237328
+policy loss:  0.08054028414189815 value loss:  0.7044502596060435 left moves loss:  1.6989288938045501
+update 0:13:41.210187
+arena
+win:  14 loss:  16 draw:  10
+0:15:02.637228
+selfplay 174
+index 339576
+policy loss:  0.08056558728218079 value loss:  0.7032088075081507 left moves loss:  1.6985154004891714
+update 0:14:25.994128
+arena
+model is updated  47
+win:  17 loss:  9 draw:  14
+0:15:46.539324
+selfplay 175
+index 440824
+policy loss:  0.08067324665685495 value loss:  0.7006888091564178 left moves loss:  1.701572626431783
+update 0:14:59.313645
+arena
+win:  4 loss:  13 draw:  23
+0:16:27.437260
+selfplay 176
+index 545120
+policy loss:  0.08054443741838137 value loss:  0.7023239757617314 left moves loss:  1.6981058096885682
+update 0:14:38.452783
+arena
+model is updated  48
+win:  12 loss:  7 draw:  21
+0:16:01.972558
+selfplay 177
+index 646440
+policy loss:  0.08064546689391136 value loss:  0.7002051973342895 left moves loss:  1.694669434229533
+update 0:14:31.967877
+arena
+model is updated  49
+win:  12 loss:  9 draw:  19
+0:15:56.898535
+selfplay 178
+index 748912
+policy loss:  0.08047328715523085 value loss:  0.701128804286321 left moves loss:  1.6864515189329783
+update 0:14:41.139387
+arena
+win:  11 loss:  11 draw:  18
+0:16:04.676553
+selfplay 179
+index 850768
+policy loss:  0.08057095296680927 value loss:  0.6978813495238622 left moves loss:  1.6779613443215688
+update 0:14:07.584852
+arena
+win:  8 loss:  9 draw:  23
+0:15:32.605354
+selfplay 180
+index 951464
+policy loss:  0.08049706049263478 value loss:  0.6966383016109466 left moves loss:  1.6771433015664419
+update 0:13:58.374384
+arena
+win:  4 loss:  16 draw:  20
+0:15:28.437058
+selfplay 181
+index 53232
+policy loss:  0.08078738103310266 value loss:  0.6959001956383387 left moves loss:  1.678974003791809
+update 0:14:34.588839
+arena
+model is updated  50
+win:  13 loss:  7 draw:  20
+0:15:58.549030
+selfplay 182
+index 154120
+policy loss:  0.08060635561744373 value loss:  0.7003067662318547 left moves loss:  1.6867471341292064
+update 0:13:25.688897
+arena
+win:  11 loss:  15 draw:  14
+0:14:45.372673
+selfplay 183
+index 256488
+policy loss:  0.08055098200837771 value loss:  0.7023945651451746 left moves loss:  1.6857993344465891
+update 0:14:45.954347
+arena
+model is updated  51
+win:  15 loss:  11 draw:  14
+0:16:06.675123
+selfplay 184
+index 358464
+policy loss:  0.0803609633942445 value loss:  0.7055383352438609 left moves loss:  1.6866076254844666
+update 0:14:37.413604
+arena
+model is updated  52
+win:  13 loss:  10 draw:  17
+0:16:02.070694
+selfplay 185
+index 463424
+policy loss:  0.08040072652200858 value loss:  0.7054480036099752 left moves loss:  1.684378292163213
+update 0:15:08.487465
+arena
+win:  10 loss:  10 draw:  20
+0:16:35.577745
+selfplay 186
+index 566048
+policy loss:  0.08019256435334682 value loss:  0.7030483639240265 left moves loss:  1.6776802730560303
+update 0:14:40.020361
+arena
+win:  11 loss:  9 draw:  20
+0:16:07.032787
+selfplay 187
+index 670104
+policy loss:  0.08019684297343095 value loss:  0.7001238236824672 left moves loss:  1.6762301886081696
+update 0:14:54.580592
+arena
+model is updated  53
+win:  13 loss:  8 draw:  19
+0:16:18.442217
+selfplay 188
+index 774120
+policy loss:  0.08011669471859932 value loss:  0.7003082962830861 left moves loss:  1.677805871963501
+update 0:14:57.672448
+arena
+win:  7 loss:  6 draw:  27
+0:16:29.662217
+selfplay 189
+index 878384
+policy loss:  0.07985673243800799 value loss:  0.7002153394619623 left moves loss:  1.6682960577805837
+update 0:14:38.708493
+arena
+win:  11 loss:  10 draw:  19
+0:16:05.986944
+selfplay 190
+index 984008
+policy loss:  0.07970954885085424 value loss:  0.7005041601260503 left moves loss:  1.6560511167844136
+update 0:15:04.455887
+arena
+model is updated  54
+win:  8 loss:  6 draw:  26
+0:16:36.643458
+selfplay 191
+index 88280
+policy loss:  0.07951142164568106 value loss:  0.6982714108626048 left moves loss:  1.644673772652944
+update 0:15:06.894129
+arena
+win:  8 loss:  7 draw:  25
+0:16:40.209992
+selfplay 192
+index 193768
+policy loss:  0.07951144769787788 value loss:  0.6979669165611267 left moves loss:  1.6340784931182861
+update 0:15:11.918637
+arena
+model is updated  55
+win:  14 loss:  7 draw:  19
+0:16:36.935513
+selfplay 193
+index 298928
+policy loss:  0.07956781923770904 value loss:  0.6934909478823343 left moves loss:  1.6238112469514212
+update 0:14:15.383077
+arena
+model is updated  56
+win:  11 loss:  6 draw:  23
+0:15:48.814851
+selfplay 194
+index 403888
+policy loss:  0.07941010718544324 value loss:  0.6927513706684113 left moves loss:  1.615257478952408
+update 0:14:43.607068
+arena
+model is updated  57
+win:  9 loss:  4 draw:  27
+0:16:10.722055
+selfplay 195
+index 506240
+policy loss:  0.07924541453520458 value loss:  0.6935323756933213 left moves loss:  1.619086217880249
+update 0:14:48.512420
+arena
+model is updated  58
+win:  8 loss:  5 draw:  27
+0:16:20.135984
+selfplay 196
+index 610232
+policy loss:  0.07885510213673115 value loss:  0.6975004531939825 left moves loss:  1.6199404776096344
+update 0:14:46.585330
+arena
+model is updated  59
+win:  11 loss:  4 draw:  25
+0:16:14.274771
+selfplay 197
+index 712536
+policy loss:  0.0784772682438294 value loss:  0.7026889340082805 left moves loss:  1.6247390441099803
+update 0:15:10.635993
+arena
+win:  6 loss:  7 draw:  27
+0:16:45.354342
+selfplay 198
+index 819392
+policy loss:  0.0780454154809316 value loss:  0.7061436780293783 left moves loss:  1.6107164553801219
+update 0:15:03.900854
+arena
+model is updated  60
+win:  9 loss:  6 draw:  25
+0:16:36.998633
+selfplay 199
+index 923744
+policy loss:  0.07796754253407319 value loss:  0.7050814008712769 left moves loss:  1.6100070504347483
+update 0:14:59.089614
+arena
+win:  6 loss:  6 draw:  28
+0:16:32.644472
+selfplay 200
+index 26256
+policy loss:  0.07797413200139999 value loss:  0.7035456071297328 left moves loss:  1.6098016234238943
+update 0:14:51.745965
+arena
+win:  5 loss:  6 draw:  29
+0:16:23.221670
+selfplay 201
+index 131704
+policy loss:  0.0777314837773641 value loss:  0.7016716512044271 left moves loss:  1.598126843770345
+update 0:14:42.499791
+arena
+model is updated  61
+win:  10 loss:  6 draw:  24
+0:16:12.692743
+selfplay 202
+index 238184
+policy loss:  0.07736502063771089 value loss:  0.7026754669348398 left moves loss:  1.5961061859130858
+update 0:14:54.888061
+arena
+win:  3 loss:  7 draw:  30
+0:16:25.371191
+selfplay 203
+index 344096
+policy loss:  0.07715727416177591 value loss:  0.6997176529963811 left moves loss:  1.5896255107720694
+update 0:15:13.627840
+arena
+win:  4 loss:  9 draw:  27
+0:16:43.417987
+selfplay 204
+index 450416
+policy loss:  0.07707934672633807 value loss:  0.7010090100765228 left moves loss:  1.590520296494166
+update 0:15:05.906111
+arena
+win:  2 loss:  5 draw:  33
+0:16:38.656709
+selfplay 205
+index 556456
+policy loss:  0.07711001423497994 value loss:  0.6965200606981913 left moves loss:  1.5814796729882559
+update 0:15:01.441480
+arena
+model is updated  62
+win:  9 loss:  6 draw:  25
+0:16:32.260038
+selfplay 206
+index 659720
+policy loss:  0.07719087541103363 value loss:  0.6969445465008418 left moves loss:  1.5833481975396475
+update 0:14:44.536670
+arena
+win:  1 loss:  17 draw:  22
+0:16:12.931108
+selfplay 207
+index 763592
+policy loss:  0.0772477329770724 value loss:  0.6958999518553416 left moves loss:  1.5843990770975749
+update 0:14:54.793300
+arena
+win:  7 loss:  12 draw:  21
+0:16:24.608931
+selfplay 208
+index 866864
+policy loss:  0.07722650575141111 value loss:  0.6959182796875636 left moves loss:  1.5916832780838013
+update 0:14:46.470075
+arena
+win:  11 loss:  9 draw:  20
+0:16:11.656027
+selfplay 209
+index 973608
+policy loss:  0.07705625643332799 value loss:  0.695656386812528 left moves loss:  1.5902052835623424
+update 0:14:38.848955
+arena
+win:  8 loss:  9 draw:  23
+0:16:08.708775
+selfplay 210
+index 77528
+policy loss:  0.07696567853291829 value loss:  0.698715905547142 left moves loss:  1.5961870117982229
+update 0:14:45.410015
+arena
+win:  8 loss:  7 draw:  25
+0:16:12.358315
+selfplay 211
+index 184760
+policy loss:  0.07701196019848187 value loss:  0.6993572767575582 left moves loss:  1.5980142343044281
+update 0:15:20.765950
+arena
+win:  8 loss:  9 draw:  23
+0:16:50.352087
+selfplay 212
+index 290136
+policy loss:  0.07698684419194857 value loss:  0.6958149760961533 left moves loss:  1.593785936832428
+update 0:15:12.701654
+arena
+model is updated  63
+win:  8 loss:  4 draw:  28
+0:16:41.096180
+selfplay 213
+index 392952
+policy loss:  0.07697687941292922 value loss:  0.6987672249476115 left moves loss:  1.6029885657628378
+update 0:15:16.282276
+arena
+win:  5 loss:  11 draw:  24
+0:16:48.464983
+selfplay 214
+index 493168
+policy loss:  0.0770200965553522 value loss:  0.6982949872811636 left moves loss:  1.613955959479014
+update 0:14:30.896600
+arena
+model is updated  64
+win:  10 loss:  8 draw:  22
+0:15:57.504412
+selfplay 215
+index 595200
+policy loss:  0.07686724121371905 value loss:  0.703185551961263 left moves loss:  1.6186241805553436
+update 0:14:49.316095
+arena
+model is updated  65
+win:  12 loss:  8 draw:  20
+0:16:14.373033
+selfplay 216
+index 698440
+policy loss:  0.07690637069443862 value loss:  0.7035686278343201 left moves loss:  1.614360278447469
+update 0:12:07.728594
+arena
+win:  8 loss:  11 draw:  21
+0:13:33.943273
+selfplay 217
+index 803728
+policy loss:  0.07690704226493836 value loss:  0.7024606613318125 left moves loss:  1.60909800807635
+update 0:11:54.839244
+arena
+model is updated  66
+win:  10 loss:  6 draw:  24
+0:13:22.565717
+selfplay 218
+index 907344
+policy loss:  0.07700853335360686 value loss:  0.707030553817749 left moves loss:  1.6197156914075215
+update 0:11:53.440233
+arena
+win:  10 loss:  12 draw:  18
+0:13:14.046185
+selfplay 219
+index 7896
+policy loss:  0.0769795826325814 value loss:  0.708031213482221 left moves loss:  1.6255375067392985
+update 0:11:44.643737
+arena
+win:  8 loss:  10 draw:  22
+0:13:10.021671
+selfplay 220
+index 112056
+policy loss:  0.07708571297427018 value loss:  0.7109322321414947 left moves loss:  1.6315692655245464
+update 0:12:00.117572
+arena
+win:  3 loss:  12 draw:  25
+0:13:29.566856
+selfplay 221
+index 215736
+policy loss:  0.07702974922955036 value loss:  0.7103367284933726 left moves loss:  1.6321398643652598
+update 0:12:00.531890
+arena
+win:  3 loss:  4 draw:  33
+0:13:33.626051
+selfplay 222
+index 319672
+policy loss:  0.07710164579252402 value loss:  0.7140767335891723 left moves loss:  1.6402220372358958
+update 0:12:06.104742
+arena
+win:  8 loss:  9 draw:  23
+0:13:34.719417
+selfplay 223
+index 423552
+policy loss:  0.07717962091167768 value loss:  0.714205159942309 left moves loss:  1.6364805102348328
+update 0:12:01.928288
+arena
+win:  10 loss:  10 draw:  20
+0:13:27.682385
+selfplay 224
+index 526472
+policy loss:  0.07727094908555349 value loss:  0.7128721644481023 left moves loss:  1.6314421387513478
+update 0:11:57.478599
+arena
+win:  7 loss:  7 draw:  26
+0:13:25.427773
+selfplay 225
+index 630848
+policy loss:  0.0773091038564841 value loss:  0.7109945180018743 left moves loss:  1.6344078266620636
+update 0:11:58.850164
+arena
+win:  8 loss:  7 draw:  25
+0:13:28.847142
+selfplay 226
+index 736712
+policy loss:  0.07707642642160256 value loss:  0.7105636690060297 left moves loss:  1.6315741113821665
+update 0:12:02.881226
+arena
+win:  8 loss:  12 draw:  20
+0:13:26.728815
+selfplay 227
+index 840720
+policy loss:  0.07704497049252192 value loss:  0.7098312622308731 left moves loss:  1.6294708474477133
+update 0:12:01.907568
+arena
+model is updated  67
+win:  13 loss:  9 draw:  18
+0:13:28.770655
+selfplay 228
+index 947016
+policy loss:  0.07693825711806615 value loss:  0.7066733845074972 left moves loss:  1.6138989595572153
+update 0:12:16.702934
+arena
+win:  7 loss:  10 draw:  23
+0:13:39.762050
+selfplay 229
+index 51568
+policy loss:  0.07694615247348945 value loss:  0.7050576436519623 left moves loss:  1.6057812356948853
+update 0:11:58.987822
+arena
+win:  7 loss:  8 draw:  25
+0:13:26.051999
+selfplay 230
+index 155304
+policy loss:  0.07697396223743756 value loss:  0.7049018474419911 left moves loss:  1.6133259153366089
+update 0:12:12.253928
+arena
+win:  7 loss:  6 draw:  27
+0:13:39.773693
+selfplay 231
+index 262536
+policy loss:  0.0770242045323054 value loss:  0.6982279920578003 left moves loss:  1.5933133069674175
+update 0:12:21.426687
+arena
+win:  7 loss:  6 draw:  27
+0:13:48.944300
+selfplay 232
+index 369832
+policy loss:  0.07704683475196361 value loss:  0.6971198292573293 left moves loss:  1.5905336912473043
+update 0:12:16.500815
+arena
+model is updated  68
+win:  12 loss:  5 draw:  23
+0:13:46.241421
+selfplay 233
+index 474960
+policy loss:  0.07676648763318857 value loss:  0.6942054529984792 left moves loss:  1.5782854350407918
+update 0:12:15.147440
+arena
+win:  9 loss:  9 draw:  22
+0:13:43.632639
+selfplay 234
+index 581144
+policy loss:  0.07670841937263807 value loss:  0.6954016000032425 left moves loss:  1.5744359942277273
+update 0:12:09.370626
+arena
+model is updated  69
+win:  9 loss:  7 draw:  24
+0:13:36.843100
+selfplay 235
+index 686664
+policy loss:  0.07658477731049061 value loss:  0.6921662912766139 left moves loss:  1.567462522983551
+update 0:12:16.686744
+arena
+model is updated  70
+win:  8 loss:  2 draw:  30
+0:13:49.895390
+selfplay 236
+index 796192
+policy loss:  0.07623081430792808 value loss:  0.6895137443145116 left moves loss:  1.5554553476969402
+update 0:12:41.402567
+arena
+win:  9 loss:  10 draw:  21
+0:14:12.432910
+selfplay 237
+index 902504
+policy loss:  0.0758500782897075 value loss:  0.6906927841901779 left moves loss:  1.5550434656937917
+update 0:12:25.541370
+arena
+model is updated  71
+win:  8 loss:  2 draw:  30
+0:13:58.395606
+selfplay 238
+index 9416
+policy loss:  0.07555603417257468 value loss:  0.6937923979759216 left moves loss:  1.5654104733467102
+update 0:12:11.415591
+arena
+model is updated  72
+win:  5 loss:  4 draw:  31
+0:13:43.214830
+selfplay 239
+index 114024
+policy loss:  0.07512633800506592 value loss:  0.6901151315371196 left moves loss:  1.5590821890036266
+update 0:11:55.572297
+arena
+model is updated  73
+win:  7 loss:  3 draw:  30
+0:13:29.486345
+selfplay 240
+index 218728
+policy loss:  0.07477857135236263 value loss:  0.6944923263788223 left moves loss:  1.5678727626800537
+update 0:12:07.922217
+arena
+win:  6 loss:  6 draw:  28
+0:13:39.371130
+selfplay 241
+index 325776
+policy loss:  0.07422599991162618 value loss:  0.6982908781369527 left moves loss:  1.5730934882164
+update 0:12:21.502823
+arena
+win:  6 loss:  8 draw:  26
+0:13:55.644268
+selfplay 242
+index 432960
+policy loss:  0.0738567628711462 value loss:  0.7005768607060114 left moves loss:  1.5758688906828562
+update 0:12:20.761077
+arena
+win:  4 loss:  9 draw:  27
+0:13:55.844305
+selfplay 243
+index 537232
+policy loss:  0.07357369494934876 value loss:  0.7038338987032572 left moves loss:  1.5873399802049002
+update 0:11:59.503832
+arena
+win:  2 loss:  9 draw:  29
+0:13:32.931391
+selfplay 244
+index 644512
+policy loss:  0.07317115187644958 value loss:  0.7024503135681153 left moves loss:  1.5790499718983968
+update 0:12:05.853001
+arena
+model is updated  74
+win:  7 loss:  5 draw:  28
+0:13:38.655804
+selfplay 245
+index 750136
+policy loss:  0.07319468878209591 value loss:  0.7038570425907771 left moves loss:  1.5838135294119517
+update 0:12:10.815311
+arena
+model is updated  75
+win:  5 loss:  3 draw:  32
+0:13:42.789676
+selfplay 246
+index 859728
+policy loss:  0.07286931519707043 value loss:  0.7012011031309764 left moves loss:  1.5785148974259695
+update 0:12:44.661813
+arena
+model is updated  76
+win:  4 loss:  1 draw:  35
+0:14:16.967642
+selfplay 247
+index 965304
+policy loss:  0.07289669456581274 value loss:  0.6971700358390808 left moves loss:  1.5708488670984904
+update 0:12:15.813959
+arena
+win:  1 loss:  4 draw:  35
+0:13:48.261117
+selfplay 248
+index 70160
+policy loss:  0.07301484415928523 value loss:  0.7003794799248377 left moves loss:  1.5777061045169831
+update 0:12:20.451369
+arena
+win:  1 loss:  1 draw:  38
+0:13:54.676717
+selfplay 249
+index 178080
+policy loss:  0.07301404523352782 value loss:  0.701559158762296 left moves loss:  1.5767387429873148
+update 0:12:39.008429
+arena
+win:  2 loss:  10 draw:  28
+0:14:13.337411
+selfplay 250
+index 285880
+policy loss:  0.0730820686618487 value loss:  0.6946336503823598 left moves loss:  1.5581710239251454
+update 0:12:22.070826
+arena
+win:  1 loss:  7 draw:  32
+0:13:55.557973
+selfplay 251
+index 395336
+policy loss:  0.07320153186718623 value loss:  0.6912485762437185 left moves loss:  1.5524625277519226
+update 0:12:26.392359
+arena
+win:  2 loss:  8 draw:  30
+0:14:00.378551
+selfplay 252
+index 501112
+policy loss:  0.0732442694157362 value loss:  0.6847573765118917 left moves loss:  1.5415553931395214
+update 0:12:01.698525
+arena
+model is updated  77
+win:  3 loss:  2 draw:  35
+0:13:34.291739
+selfplay 253
+index 613504
+policy loss:  0.07292896293103696 value loss:  0.6768847525119781 left moves loss:  1.5138824498653412
+update 0:12:52.955189
+arena
+model is updated  78
+win:  1 loss:  0 draw:  39
+0:14:27.021553
+selfplay 254
+index 723168
+policy loss:  0.07241039924323558 value loss:  0.6742167913913727 left moves loss:  1.503734000523885
+update 0:12:51.564106
+arena
+model is updated  79
+win:  3 loss:  1 draw:  36
+0:14:26.041485
+selfplay 255
+index 834312
+policy loss:  0.07201362885534764 value loss:  0.6738345501820246 left moves loss:  1.4908085942268372
+update 0:12:55.934897
+arena
+win:  0 loss:  4 draw:  36
+0:14:29.600693
+selfplay 256
+index 945264
+policy loss:  0.07140865971644719 value loss:  0.6713949173688889 left moves loss:  1.4746583127975463
+update 0:13:30.362309
+arena
+win:  3 loss:  8 draw:  29
+0:15:02.269555
+selfplay 257
+index 58832
+policy loss:  0.07067223337789376 value loss:  0.6693632449706396 left moves loss:  1.454015680551529
+update 0:12:45.895426
+arena
+win:  1 loss:  1 draw:  38
+0:14:20.352771
+selfplay 258
+index 172872
+policy loss:  0.06998767015834649 value loss:  0.6624639296531677 left moves loss:  1.429924187262853
+update 0:12:45.495678
+arena
+win:  3 loss:  3 draw:  34
+0:14:18.453849
+selfplay 259
+index 284680
+policy loss:  0.0693128247310718 value loss:  0.6615028091271719 left moves loss:  1.4189265628655752
+update 0:12:29.426758
+arena
+win:  1 loss:  3 draw:  36
+0:14:03.217341
+selfplay 260
+index 395952
+policy loss:  0.06871231632928053 value loss:  0.6605639334519704 left moves loss:  1.4092611948649088
+update 0:13:06.128879
+arena
+model is updated  80
+win:  2 loss:  1 draw:  37
+0:14:39.727174
+selfplay 261
+index 507720
+policy loss:  0.06799162415166696 value loss:  0.6592980382839838 left moves loss:  1.3919881157080332
+update 0:12:43.496701
+arena
+model is updated  81
+win:  6 loss:  1 draw:  33
+0:14:16.953405
+selfplay 262
+index 618464
+policy loss:  0.06801091628770034 value loss:  0.6666417584816615 left moves loss:  1.406448214451472
+update 0:12:56.122582
+arena
+win:  2 loss:  3 draw:  35
+0:14:28.500182
+selfplay 263
+index 732352
+policy loss:  0.06809995323419571 value loss:  0.6615669459104538 left moves loss:  1.3953901282946268
+update 0:12:46.349038
+arena
+win:  1 loss:  4 draw:  35
+0:14:19.447014
+selfplay 264
+index 846064
+policy loss:  0.06831014963487785 value loss:  0.659350025455157 left moves loss:  1.3902048027515412
+update 0:12:48.444585
+arena
+model is updated  82
+win:  3 loss:  1 draw:  36
+0:14:21.020863
+selfplay 265
+index 958960
+policy loss:  0.06851240356763204 value loss:  0.6583908392985662 left moves loss:  1.3877516015370688
+update 0:13:04.258254
+arena
+win:  4 loss:  7 draw:  29
+0:14:33.628414
+selfplay 266
+index 72680
+policy loss:  0.0686811621983846 value loss:  0.652099895477295 left moves loss:  1.3746612683931987
+update 0:13:05.860216
+arena
+win:  3 loss:  7 draw:  30
+0:14:36.653960
+selfplay 267
+index 188616
+policy loss:  0.06888817578554153 value loss:  0.6487796096007029 left moves loss:  1.363811274766922
+update 0:13:04.848837
+arena
+win:  1 loss:  5 draw:  34
+0:14:37.456553
+selfplay 268
+index 300280
+policy loss:  0.06906939749916395 value loss:  0.6476566590865453 left moves loss:  1.3667993958791096
+update 0:12:42.703925
+arena
+win:  2 loss:  4 draw:  34
+0:14:17.069446
+selfplay 269
+index 414936
+policy loss:  0.0691357672214508 value loss:  0.6413195369640986 left moves loss:  1.3520098674297332
+update 0:12:55.209412
+arena
+win:  1 loss:  6 draw:  33
+0:14:28.022037
+selfplay 270
+index 526696
+policy loss:  0.06927680780490239 value loss:  0.6387704535325368 left moves loss:  1.3488661245505016
+update 0:12:54.647197
+arena
+win:  5 loss:  5 draw:  30
+0:14:28.436143
+selfplay 271
+index 640896
+policy loss:  0.06919462842245896 value loss:  0.6344317422310511 left moves loss:  1.3387566614151
+update 0:13:04.060589
+arena
+model is updated  83
+win:  6 loss:  3 draw:  31
+0:14:37.062832
+selfplay 272
+index 755936
+policy loss:  0.0692619390040636 value loss:  0.6331226334969202 left moves loss:  1.3366542049249013
+update 0:12:45.394568
+arena
+win:  7 loss:  7 draw:  26
+0:14:20.049536
+selfplay 273
+index 867800
+policy loss:  0.06932917388776938 value loss:  0.6314435505867004 left moves loss:  1.336266789038976
+update 0:12:52.208790
+arena
+model is updated  84
+win:  4 loss:  1 draw:  35
+0:14:25.713151
+selfplay 274
+index 976976
+policy loss:  0.0695555047194163 value loss:  0.6317610989014307 left moves loss:  1.342466069459915
+update 0:13:04.795011
+arena
+win:  3 loss:  7 draw:  30
+0:14:34.601102
+selfplay 275
+index 90640
+policy loss:  0.06969980135560036 value loss:  0.6326664263010024 left moves loss:  1.34491739710172
+update 0:12:49.251472
+arena
+model is updated  85
+win:  5 loss:  3 draw:  32
+0:14:20.622340
+selfplay 276
+index 205352
+policy loss:  0.06982329847911993 value loss:  0.6344137239456177 left moves loss:  1.3527782837549844
+update 0:13:13.227505
+arena
+win:  3 loss:  5 draw:  32
+0:14:44.189252
+selfplay 277
+index 319056
+policy loss:  0.0698563864082098 value loss:  0.6299328507979711 left moves loss:  1.338654538790385
+update 0:12:51.432564
+arena
+win:  2 loss:  4 draw:  34
+0:14:24.470934
+selfplay 278
+index 434280
+policy loss:  0.06979836948215962 value loss:  0.6318722003698349 left moves loss:  1.3397733092308044
+update 0:12:53.989507
+arena
+model is updated  86
+win:  5 loss:  3 draw:  32
+0:14:27.903688
+selfplay 279
+index 543528
+policy loss:  0.06998230154315631 value loss:  0.6358280561367671 left moves loss:  1.3521833992004395
+update 0:12:26.889883
+arena
+win:  7 loss:  6 draw:  27
+0:14:02.191685
+selfplay 280
+index 653560
+policy loss:  0.07022206597030163 value loss:  0.6421360297997792 left moves loss:  1.3734941335519155
+update 0:12:22.836365
+arena
+model is updated  87
+win:  18 loss:  1 draw:  21
+0:13:45.204705
+selfplay 281
+index 762680
+policy loss:  0.07039560439685981 value loss:  0.6475497661034266 left moves loss:  1.3877916832764943
+update 0:12:26.343199
+arena
+win:  4 loss:  9 draw:  27
+0:13:53.854305
+selfplay 282
+index 872696
+policy loss:  0.07058078676462173 value loss:  0.6516028662522634 left moves loss:  1.3981020903587342
+update 0:12:32.163605
+arena
+model is updated  88
+win:  5 loss:  2 draw:  33
+0:14:02.376583
+selfplay 283
+index 989904
+policy loss:  0.07058111749589444 value loss:  0.6481637493769328 left moves loss:  1.3819952885309854
+update 0:13:00.747309
+arena
+model is updated  89
+win:  4 loss:  3 draw:  33
+0:14:33.088733
+selfplay 284
+index 100056
+policy loss:  0.07078707240521907 value loss:  0.6492647683620453 left moves loss:  1.3936897246042887
+update 0:12:38.595703
+arena
+model is updated  90
+win:  6 loss:  1 draw:  33
+0:14:09.020106
+selfplay 285
+index 213416
+policy loss:  0.07090553107360999 value loss:  0.6474324283997218 left moves loss:  1.3919815258185069
+update 0:12:37.031266
+arena
+win:  1 loss:  5 draw:  34
+0:14:09.740001
+selfplay 286
+index 328312
+policy loss:  0.07100533505280812 value loss:  0.6473813299338023 left moves loss:  1.3898517155647279
+update 0:12:44.825948
+arena
+win:  2 loss:  5 draw:  33
+0:14:15.987491
+selfplay 287
+index 442936
+policy loss:  0.07110620491206646 value loss:  0.6414744100968043 left moves loss:  1.3766085302829743
+update 0:12:47.253302
+arena
+win:  3 loss:  5 draw:  32
+0:14:21.336367
+selfplay 288
+index 557808
+policy loss:  0.0710695318877697 value loss:  0.6332716963688533 left moves loss:  1.3546519696712493
+update 0:12:44.523109
+arena
+win:  0 loss:  4 draw:  36
+0:14:17.312769
+selfplay 289
+index 671608
+policy loss:  0.07096804584066073 value loss:  0.6271402670939763 left moves loss:  1.335745889345805
+update 0:12:54.770889
+arena
+win:  0 loss:  6 draw:  34
+0:14:28.682374
+selfplay 290
+index 786912
+policy loss:  0.07092755494018396 value loss:  0.619283220966657 left moves loss:  1.3085636432965597
+update 0:13:06.839984
+arena
+win:  2 loss:  6 draw:  32
+0:14:36.969755
+selfplay 291
+index 902320
+policy loss:  0.07082018576562404 value loss:  0.6169382953643798 left moves loss:  1.3032722286383311
+update 0:13:12.832898
+arena
+win:  3 loss:  3 draw:  34
+0:14:46.030003
+selfplay 292
+index 17880
+policy loss:  0.07063142284750938 value loss:  0.6148366278409958 left moves loss:  1.2937076699733734
+update 0:12:51.897722
+arena
+win:  6 loss:  9 draw:  25
+0:14:19.824387
+selfplay 293
+index 134568
+policy loss:  0.07042573027312755 value loss:  0.6093274174133937 left moves loss:  1.2736125270525613
+update 0:12:56.251831
+arena
+win:  0 loss:  7 draw:  33
+0:14:28.724913
+selfplay 294
+index 249328
+policy loss:  0.07032892763614655 value loss:  0.6074278628826142 left moves loss:  1.2636682001749675
+update 0:13:26.432727
+arena
+win:  1 loss:  6 draw:  33
+0:14:59.122175
+selfplay 295
+index 363128
+policy loss:  0.07035228406389554 value loss:  0.6101693234841029 left moves loss:  1.2691413823763529
+update 0:12:55.238598
+arena
+win:  2 loss:  8 draw:  30
+0:14:25.734498
+selfplay 296
+index 478096
+policy loss:  0.07034698401888212 value loss:  0.6128957009315491 left moves loss:  1.2720813941955567
+update 0:12:55.807864
+arena
+win:  2 loss:  12 draw:  26
+0:14:25.315166
+selfplay 297
+index 594344
+policy loss:  0.07034332032004992 value loss:  0.6143240668376286 left moves loss:  1.2775199107329052
+update 0:13:02.453783
+arena
+win:  3 loss:  13 draw:  24
+0:14:31.871342
+selfplay 298
+index 709056
+policy loss:  0.0703575267146031 value loss:  0.6133484323819478 left moves loss:  1.278210493326187
+update 0:12:46.839945
+arena
+model is updated  91
+win:  4 loss:  1 draw:  35
+0:14:19.845863
+selfplay 299
+index 824760
+policy loss:  0.07039257414638996 value loss:  0.6136355568965276 left moves loss:  1.280043822924296
+update 0:13:12.518695
+arena
+win:  1 loss:  8 draw:  31
+0:14:43.832919
+selfplay 300
+index 937904
+policy loss:  0.07039928170541922 value loss:  0.6167837558190028 left moves loss:  1.287635946671168
+update 0:13:10.324414
+arena
+win:  1 loss:  4 draw:  35
+0:14:42.768376
+selfplay 301
+index 53664
+policy loss:  0.07040352612733841 value loss:  0.6133665265639623 left moves loss:  1.2796955092748006
+update 0:12:51.418546
+arena
+win:  4 loss:  5 draw:  31
+0:14:26.977380
+selfplay 302
+index 168544
+policy loss:  0.07040612322588762 value loss:  0.6186094743013382 left moves loss:  1.2897477440039318
+update 0:12:53.861242
+arena
+model is updated  92
+win:  3 loss:  1 draw:  36
+0:14:27.819723
+selfplay 303
+index 282328
+policy loss:  0.07050354232390722 value loss:  0.6213484307130178 left moves loss:  1.296145302851995
+update 0:12:44.591583
+arena
+model is updated  93
+win:  5 loss:  2 draw:  33
+0:14:18.295882
+selfplay 304
+index 398336
+policy loss:  0.07055412856241067 value loss:  0.6254692379633585 left moves loss:  1.3011923881371816
+update 0:15:15.836990
+arena
+win:  2 loss:  6 draw:  32
+0:16:50.470936
+selfplay 305
+index 513608
+policy loss:  0.07059016451239586 value loss:  0.6258150945107143 left moves loss:  1.3038954810301462
+update 0:15:07.475800
+arena
+win:  5 loss:  5 draw:  30
+0:16:37.104196
+selfplay 306
+index 627128
+policy loss:  0.07061916659275691 value loss:  0.6271142357587814 left moves loss:  1.3046216972668965
+update 0:15:52.299233
+arena
+win:  1 loss:  3 draw:  36
+0:17:26.451725
+selfplay 307
+index 744128
+policy loss:  0.07063702744742234 value loss:  0.6282278136412303 left moves loss:  1.2971746170520781
+update 0:14:22.492002
+arena
+model is updated  94
+win:  5 loss:  3 draw:  32
+0:15:55.448869
+selfplay 308
+index 857136
+policy loss:  0.07068560237685839 value loss:  0.6273584391673406 left moves loss:  1.2976220615704854
+update 0:15:07.885302
+arena
+win:  3 loss:  5 draw:  32
+0:16:41.742563
+selfplay 309
+index 969904
+policy loss:  0.07082938107351462 value loss:  0.6320747731129328 left moves loss:  1.3061719771226248
+update 0:14:52.203005
+arena
+win:  4 loss:  8 draw:  28
+0:16:26.264610
+selfplay 310
+index 85904
+policy loss:  0.07087445405622324 value loss:  0.6339414723714193 left moves loss:  1.30658216714859
+update 0:16:08.527509
+arena
+model is updated  95
+win:  8 loss:  4 draw:  28
+0:17:42.976350
+selfplay 311
+index 197816
+policy loss:  0.07107040325800577 value loss:  0.6395043446620305 left moves loss:  1.3279728972911835
+update 0:14:39.015608
+arena
+model is updated  96
+win:  8 loss:  5 draw:  27
+0:16:10.668821
+selfplay 312
+index 313424
+policy loss:  0.07093632586300373 value loss:  0.6350704528888067 left moves loss:  1.313910481929779
+update 0:15:13.170885
+arena
+win:  2 loss:  5 draw:  33
+0:16:47.303496
+selfplay 313
+index 429488
+policy loss:  0.07088082194328309 value loss:  0.634760125875473 left moves loss:  1.3152048516273498
+update 0:15:56.668392
+arena
+win:  4 loss:  5 draw:  31
+0:17:31.564680
+selfplay 314
+index 546336
+policy loss:  0.07076997801661492 value loss:  0.6301866662502289 left moves loss:  1.299916448990504
+update 0:16:20.897876
+arena
+win:  1 loss:  6 draw:  33
+0:17:55.848740
+selfplay 315
+index 664984
+policy loss:  0.0707350301494201 value loss:  0.6270566612482071 left moves loss:  1.2921765371163687
+update 0:16:45.697732
+arena
+win:  3 loss:  5 draw:  32
+0:18:17.513064
+selfplay 316
+index 779392
+policy loss:  0.07055511832237243 value loss:  0.6280843969186147 left moves loss:  1.2947732655207316
+update 0:15:55.000833
+arena
+win:  2 loss:  5 draw:  33
+0:17:27.560164
+selfplay 317
+index 896360
+policy loss:  0.0704755067328612 value loss:  0.6246511002381643 left moves loss:  1.2869638578097025
+update 0:16:27.229594
+arena
+model is updated  97
+win:  4 loss:  3 draw:  33
+0:18:01.961213
+selfplay 318
+index 13272
+policy loss:  0.07031642320255438 value loss:  0.6226395148038865 left moves loss:  1.2742441884676616
+update 0:16:07.251967
+arena
+win:  3 loss:  9 draw:  28
+0:17:38.041427
+selfplay 319
+index 125968
+policy loss:  0.070341790219148 value loss:  0.6251845576365789 left moves loss:  1.288413610458374
+update 0:15:15.358157
+arena
+win:  5 loss:  5 draw:  30
+0:16:48.378409
+selfplay 320
+index 239416
+policy loss:  0.07033756422499815 value loss:  0.6231426817178726 left moves loss:  1.2864022012551626
+update 0:15:52.118566
+arena
+model is updated  98
+win:  8 loss:  3 draw:  29
+0:17:24.807838
+selfplay 321
+index 355024
+policy loss:  0.07051404617726803 value loss:  0.6221926148732503 left moves loss:  1.2909118394056955
+update 0:16:17.352909
+arena
+win:  3 loss:  12 draw:  25
+0:17:46.547386
+selfplay 322
+index 472352
+policy loss:  0.0705809911340475 value loss:  0.6230787593126297 left moves loss:  1.2919767959912618
+update 0:16:34.039670
+arena
+win:  2 loss:  4 draw:  34
+0:18:07.484102
+selfplay 323
+index 585568
+policy loss:  0.07062909079094727 value loss:  0.6287449570496877 left moves loss:  1.3102973608175914
+update 0:14:23.338444
+arena
+model is updated  99
+win:  6 loss:  4 draw:  30
+0:15:57.395955
+selfplay 324
+index 697712
+policy loss:  0.07076343186199666 value loss:  0.6321876311302185 left moves loss:  1.3193922253449757
+update 0:16:05.235670
+arena
+win:  0 loss:  5 draw:  35
+0:17:42.719846
+selfplay 325
+index 812488
+policy loss:  0.07080116478105386 value loss:  0.634011291662852 left moves loss:  1.3227312036355336
+update 0:16:16.158632
+arena
+model is updated  100
+win:  7 loss:  4 draw:  29
+0:17:49.968154
+selfplay 326
+index 925720
+policy loss:  0.07090986631810665 value loss:  0.6417077875137329 left moves loss:  1.3469593981901804
+update 0:16:06.770325
+arena
+model is updated  101
+win:  6 loss:  3 draw:  31
+0:17:40.988257
+selfplay 327
+index 38920
+policy loss:  0.07099192644159 value loss:  0.6466635227203369 left moves loss:  1.3618433749675751
+update 0:16:19.080069
+arena
+model is updated  102
+win:  5 loss:  3 draw:  32
+0:17:52.098962
+selfplay 328
+index 158472
+policy loss:  0.07075923437873523 value loss:  0.637982160449028 left moves loss:  1.327129179239273
+update 0:16:45.478668
+arena
+model is updated  103
+win:  3 loss:  2 draw:  35
+0:18:21.205003
+selfplay 329
+index 270856
+policy loss:  0.07069151319563388 value loss:  0.6403043667475382 left moves loss:  1.3328992787996927
+update 0:15:04.121414
+arena
+model is updated  104
+win:  8 loss:  1 draw:  31
+0:16:37.531634
+selfplay 330
+index 382672
+policy loss:  0.07082757932444414 value loss:  0.6457462259133657 left moves loss:  1.3512139983971914
+update 0:15:23.083934
+arena
+win:  3 loss:  5 draw:  32
+0:16:56.000646
+selfplay 331
+index 492536
+policy loss:  0.07092918420831362 value loss:  0.6488535531361898 left moves loss:  1.3653468954563142
+update 0:15:56.114300
+arena
+win:  4 loss:  12 draw:  24
+0:17:27.526807
+selfplay 332
+index 603360
+policy loss:  0.07096900912622611 value loss:  0.6549054298798244 left moves loss:  1.3769529561201732
+update 0:14:56.160530
+arena
+model is updated  105
+win:  6 loss:  2 draw:  32
+0:16:29.164761
+selfplay 333
+index 715448
+policy loss:  0.07094812996685505 value loss:  0.6541835258404414 left moves loss:  1.3758314605553945
+update 0:16:05.396286
+arena
+win:  2 loss:  8 draw:  30
+0:17:37.406731
+selfplay 334
+index 828152
+policy loss:  0.0709694900115331 value loss:  0.6543572731812795 left moves loss:  1.3817284707228343
+update 0:16:05.345140
+arena
+win:  4 loss:  8 draw:  28
+0:17:35.442258
+selfplay 335
+index 942088
+policy loss:  0.07096317095061143 value loss:  0.6558002614974976 left moves loss:  1.3824121673901877
+update 0:16:06.958603
+arena
+win:  3 loss:  5 draw:  32
+0:17:42.396497
+selfplay 336
+index 57056
+policy loss:  0.07099783932169279 value loss:  0.6535048963626225 left moves loss:  1.3785922543207805
+update 0:15:57.044972
+arena
+win:  5 loss:  6 draw:  29
+0:17:28.956899
+selfplay 337
+index 168944
+policy loss:  0.07120757212241491 value loss:  0.6594381417830785 left moves loss:  1.4009578931331634
+update 0:15:54.207054
+arena
+model is updated  106
+win:  10 loss:  2 draw:  28
+0:17:29.635350
+selfplay 338
+index 282544
+policy loss:  0.0711626881857713 value loss:  0.6634227770566941 left moves loss:  1.406735323270162
+update 0:15:54.042199
+arena
+model is updated  107
+win:  5 loss:  2 draw:  33
+0:17:26.044426
+selfplay 339
+index 396872
+policy loss:  0.07098354284962018 value loss:  0.6594520294666291 left moves loss:  1.3862234087785086
+update 0:16:20.868410
+arena
+win:  2 loss:  5 draw:  33
+0:17:53.709054
+selfplay 340
+index 514224
+policy loss:  0.07075417781869571 value loss:  0.6451124801238378 left moves loss:  1.3436064986387888
+update 0:15:49.522299
+arena
+win:  2 loss:  6 draw:  32
+0:17:23.205310
+selfplay 341
+index 630312
+policy loss:  0.07064470253884793 value loss:  0.6415656942129135 left moves loss:  1.3358795130252838
+update 0:16:23.979297
+arena
+win:  3 loss:  5 draw:  32
+0:17:56.574865
+selfplay 342
+index 747288
+policy loss:  0.07053093048433463 value loss:  0.6354145443439484 left moves loss:  1.320481992562612
+update 0:16:32.330764
+arena
+model is updated  108
+win:  6 loss:  2 draw:  32
+0:18:05.612924
+selfplay 343
+index 864144
+policy loss:  0.07055612000326315 value loss:  0.6294795477390289 left moves loss:  1.303760327498118
+update 0:16:46.141995
+arena
+win:  4 loss:  6 draw:  30
+0:18:16.520933
+selfplay 344
+index 979848
+policy loss:  0.07048336803913116 value loss:  0.6254770149787267 left moves loss:  1.2927837920188905
+update 0:16:21.076319
+arena
+win:  5 loss:  7 draw:  28
+0:17:52.231316
+selfplay 345
+index 95400
+policy loss:  0.07043441067139308 value loss:  0.6194158629576365 left moves loss:  1.2770490996042887
+update 0:16:14.078572
+arena
+win:  3 loss:  7 draw:  30
+0:17:45.618023
+selfplay 346
+index 210664
+policy loss:  0.07033576553066571 value loss:  0.6081925203402837 left moves loss:  1.2571758361657461
+update 0:15:53.675621
+arena
+win:  5 loss:  6 draw:  29
+0:17:27.777786
+selfplay 347
+index 325768
+policy loss:  0.07053899762531121 value loss:  0.6080500566959381 left moves loss:  1.2602954578399659
+update 0:15:28.137858
+arena
+win:  8 loss:  7 draw:  25
+0:16:58.300616
+selfplay 348
+index 442568
+policy loss:  0.07052285430332025 value loss:  0.608491390744845 left moves loss:  1.2690688677628834
+update 0:16:38.144462
+arena
+win:  2 loss:  3 draw:  35
+0:18:13.293682
+selfplay 349
+index 556968
+policy loss:  0.07065292025605838 value loss:  0.6109389501810074 left moves loss:  1.2772496823469799
+update 0:16:35.391387
+arena
+win:  2 loss:  7 draw:  31
+0:18:06.837697
+selfplay 350
+index 669768
+policy loss:  0.07071500490109126 value loss:  0.6164604449272155 left moves loss:  1.2888775877157848
+update 0:15:54.139258
+arena
+win:  5 loss:  8 draw:  27
+0:17:26.082857
+selfplay 351
+index 787504
+policy loss:  0.07061445973813534 value loss:  0.6173004670937856 left moves loss:  1.2878729089101155
+update 0:15:45.082409
+arena
+win:  2 loss:  8 draw:  30
+0:17:18.412132
+selfplay 352
+index 901816
+policy loss:  0.07068103219072024 value loss:  0.6200123822689056 left moves loss:  1.2992352271080017
+update 0:16:08.487681
+arena
+win:  5 loss:  6 draw:  29
+0:17:40.825279
+selfplay 353
+index 20184
+policy loss:  0.07070938629408677 value loss:  0.6172766935825348 left moves loss:  1.2953777436415355
+update 0:16:26.942261
+arena
+win:  6 loss:  6 draw:  28
+0:17:59.443392
+selfplay 354
+index 134880
+policy loss:  0.0706977237512668 value loss:  0.6170651859045029 left moves loss:  1.2956080754597983
+update 0:15:42.462364
+arena
+win:  3 loss:  5 draw:  32
+0:17:14.921253
+selfplay 355
+index 246720
+policy loss:  0.07065414632360141 value loss:  0.6192759863535563 left moves loss:  1.2982206273078918
+update 0:16:08.058991
+arena
+win:  4 loss:  7 draw:  29
+0:17:44.142925
+selfplay 356
+index 363744
+policy loss:  0.07073224805295468 value loss:  0.6209297460317612 left moves loss:  1.2991035946210225
+update 0:16:23.295593
+arena
+win:  5 loss:  6 draw:  29
+0:17:55.265865
+selfplay 357
+index 478328
+policy loss:  0.0706508593261242 value loss:  0.6140158434708913 left moves loss:  1.2834210896492004
+update 0:16:09.086384
+arena
+win:  3 loss:  7 draw:  30
+0:17:41.476649
+selfplay 358
+index 592904
+policy loss:  0.07063818295796712 value loss:  0.6140679146846135 left moves loss:  1.2843687125047047
+update 0:15:53.509898
+arena
+win:  3 loss:  5 draw:  32
+0:17:26.494645
+selfplay 359
+index 709056
+policy loss:  0.07067219756543636 value loss:  0.6118161390225093 left moves loss:  1.281634151538213
+update 0:16:18.337344
+arena
+model is updated  109
+win:  2 loss:  1 draw:  37
+0:17:53.478901
+selfplay 360
+index 824032
+policy loss:  0.07074414536356927 value loss:  0.6144163386027018 left moves loss:  1.2881203027566275
+update 0:16:15.781640
+arena
+win:  2 loss:  4 draw:  34
+0:17:47.712452
+selfplay 361
+index 939552
+policy loss:  0.07076455496251582 value loss:  0.6164437888065973 left moves loss:  1.2874023334185283
+update 0:16:21.902765
+arena
+win:  4 loss:  5 draw:  31
+0:17:58.073542
+selfplay 362
+index 54872
+policy loss:  0.07083775465687116 value loss:  0.6192076939344406 left moves loss:  1.2976525064309439
+update 0:15:56.186013
+arena
+win:  4 loss:  5 draw:  31
+0:17:29.584103
+selfplay 363
+index 170376
+policy loss:  0.0709296410282453 value loss:  0.6213207948207855 left moves loss:  1.3031381364663441
+update 0:16:35.039516
+arena
+win:  6 loss:  5 draw:  29
+0:18:07.639960
+selfplay 364
+index 285408
+policy loss:  0.07091732223828634 value loss:  0.6222256185611089 left moves loss:  1.304769093990326
+update 0:16:03.252617
+arena
+win:  6 loss:  5 draw:  29
+0:17:33.792947
+selfplay 365
+index 396352
+policy loss:  0.07099619256953399 value loss:  0.622955955862999 left moves loss:  1.3104213591416676
+update 0:15:35.934991
+arena
+model is updated  110
+win:  8 loss:  4 draw:  28
+0:17:11.436557
+selfplay 366
+index 512640
+policy loss:  0.07090067811310291 value loss:  0.6202773410081863 left moves loss:  1.304161212046941
+update 0:15:07.254161
+arena
+win:  2 loss:  5 draw:  33
+0:16:43.058998
+selfplay 367
+index 629248
+policy loss:  0.07094771924118201 value loss:  0.6212958673636119 left moves loss:  1.30105220079422
+update 0:15:44.867729
+arena
+model is updated  111
+win:  4 loss:  2 draw:  34
+0:17:19.400956
+selfplay 368
+index 744064
+policy loss:  0.07093486612041791 value loss:  0.6202849382162094 left moves loss:  1.2987779462337494
+update 0:15:32.359271
+arena
+win:  4 loss:  5 draw:  31
+0:17:06.501019
+selfplay 369
+index 860648
+policy loss:  0.0708986899505059 value loss:  0.616942064166069 left moves loss:  1.2915538044770558
+update 0:16:11.677692
+arena
+model is updated  112
+win:  4 loss:  2 draw:  34
+0:17:44.998431
+selfplay 370
+index 975664
+policy loss:  0.07093030050396919 value loss:  0.6175859014193217 left moves loss:  1.2961333338419596
+update 0:15:22.190790
+arena
+win:  1 loss:  4 draw:  35
+0:16:55.922515
+selfplay 371
+index 92552
+policy loss:  0.07082252115011216 value loss:  0.6138450278838475 left moves loss:  1.2869557491938273
+update 0:16:23.770901
+arena
+win:  2 loss:  5 draw:  33
+0:18:00.316877
+selfplay 372
+index 207152
+policy loss:  0.07085923803349337 value loss:  0.6115113488833109 left moves loss:  1.2832062923908234
+update 0:16:03.747284
+arena
+win:  2 loss:  2 draw:  36
+0:17:37.661320
+selfplay 373
+index 324208
+policy loss:  0.07076302155852318 value loss:  0.6085228314002354 left moves loss:  1.2702936875820159
+update 0:16:12.390709
+arena
+win:  3 loss:  3 draw:  34
+0:17:49.460331
+selfplay 374
+index 439568
+policy loss:  0.0707633405427138 value loss:  0.6128679968913396 left moves loss:  1.2752168786525726
+update 0:16:17.946498
+arena
+model is updated  113
+win:  7 loss:  4 draw:  29
+0:17:52.392652
+selfplay 375
+index 552616
+policy loss:  0.07087462447583676 value loss:  0.6147299081087112 left moves loss:  1.2818174862861633
+update 0:15:34.792657
+arena
+model is updated  114
+win:  7 loss:  5 draw:  28
+0:17:06.271571
+selfplay 376
+index 668008
+policy loss:  0.07087312748034795 value loss:  0.617350945075353 left moves loss:  1.2921634483337403
+update 0:15:14.421800
+arena
+win:  3 loss:  4 draw:  33
+0:16:50.822855
+selfplay 377
+index 782016
+policy loss:  0.07092763207852841 value loss:  0.6170758908987045 left moves loss:  1.2950500384966532
+update 0:16:02.398140
+arena
+win:  5 loss:  5 draw:  30
+0:17:36.209651
+selfplay 378
+index 896584
+policy loss:  0.07096748987833659 value loss:  0.6170704621076584 left moves loss:  1.2969871731599172
+update 0:16:01.900687
+arena
+win:  3 loss:  8 draw:  29
+0:17:31.169070
+selfplay 379
+index 10032
+policy loss:  0.07092125326395035 value loss:  0.6205821597576141 left moves loss:  1.3005481954415639
+update 0:16:03.427147
+arena
+win:  3 loss:  4 draw:  33
+0:17:36.645318
+selfplay 380
+index 125240
+policy loss:  0.07099320809046428 value loss:  0.6236992331345876 left moves loss:  1.3095541310310364
+update 0:15:44.112585
+arena
+win:  6 loss:  6 draw:  28
+0:17:17.616994
+selfplay 381
+index 240520
+policy loss:  0.07088915382822354 value loss:  0.6284181559085846 left moves loss:  1.3131506621837616
+update 0:16:11.910911
+arena
+model is updated  115
+win:  7 loss:  3 draw:  30
+0:17:42.407291
+selfplay 382
+index 358608
+policy loss:  0.07095470120509466 value loss:  0.6250810110569001 left moves loss:  1.3099537829558054
+update 0:16:17.618781
+arena
+win:  0 loss:  5 draw:  35
+0:17:53.048734
+selfplay 383
+index 474576
+policy loss:  0.07084540791809558 value loss:  0.623266188899676 left moves loss:  1.299018875360489
+update 0:16:09.133271
+arena
+win:  3 loss:  7 draw:  30
+0:17:42.936150
+selfplay 384
+index 589640
+policy loss:  0.07086490156749885 value loss:  0.6214835894107819 left moves loss:  1.2937001053492228
+update 0:16:31.599176
+arena
+win:  3 loss:  7 draw:  30
+0:18:07.264151
+selfplay 385
+index 705464
+policy loss:  0.07087104628483454 value loss:  0.623388992746671 left moves loss:  1.2894697527090708
+update 0:16:01.810599
+arena
+win:  1 loss:  5 draw:  34
+0:17:37.104535
+selfplay 386
+index 822920
+policy loss:  0.07072587214410304 value loss:  0.6220849027236303 left moves loss:  1.2825455152988434
+update 0:16:13.548701
+arena
+win:  1 loss:  5 draw:  34
+0:17:47.127781
+selfplay 387
+index 939696
+policy loss:  0.07053802795708179 value loss:  0.6168370987971624 left moves loss:  1.2622471952438354
+update 0:16:26.158501
+arena
+win:  4 loss:  7 draw:  29
+0:18:00.423205
+selfplay 388
+index 57472
+policy loss:  0.0704439519594113 value loss:  0.6115945969025294 left moves loss:  1.2457945839564006
+update 0:15:53.475037
+arena
+win:  1 loss:  4 draw:  35
+0:17:27.858211
+selfplay 389
+index 173048
+policy loss:  0.07033756524324417 value loss:  0.605171281894048 left moves loss:  1.2349234330654144
+update 0:14:06.830243
+arena
+win:  2 loss:  3 draw:  35
+0:15:39.698786
+selfplay 390
+index 288216
+policy loss:  0.07012828004856904 value loss:  0.6058563719193141 left moves loss:  1.2371945484479268
+update 0:12:59.120660
+arena
+win:  3 loss:  12 draw:  25
+0:14:30.580534
+selfplay 391
+index 402696
+policy loss:  0.0703108175098896 value loss:  0.6127033088604609 left moves loss:  1.2602049314975738
+update 0:15:24.260390
+arena
+win:  3 loss:  8 draw:  29
+0:16:59.354045
+selfplay 392
+index 516256
+policy loss:  0.07026158270736535 value loss:  0.6143413521846135 left moves loss:  1.2678422550360362
+update 0:16:04.642307
+arena
+win:  1 loss:  5 draw:  34
+0:17:40.572614
+selfplay 393
+index 634120
+policy loss:  0.07027648046612739 value loss:  0.6137008307377497 left moves loss:  1.2635226714611054
+update 0:14:55.409611
+arena
+win:  2 loss:  6 draw:  32
+0:16:28.464199
+selfplay 394
+index 752144
+policy loss:  0.07020678550004959 value loss:  0.6117458782593409 left moves loss:  1.2566963418324788
+update 0:16:13.256022
+arena
+win:  2 loss:  4 draw:  34
+0:17:48.505637
+selfplay 395
+index 866456
+policy loss:  0.07015267002085844 value loss:  0.6152235279480617 left moves loss:  1.267913514773051
+update 0:16:11.490641
+arena
+win:  3 loss:  10 draw:  27
+0:17:45.558307
+selfplay 396
+index 984192
+policy loss:  0.07007622768481572 value loss:  0.6156780908505122 left moves loss:  1.2752067577838897
+update 0:16:29.472719
+arena
+win:  6 loss:  7 draw:  27
+0:18:03.005035
+selfplay 397
+index 99160
+policy loss:  0.07016750584046046 value loss:  0.6149617254734039 left moves loss:  1.2763820215066275
+update 0:15:48.215608
+arena
+win:  1 loss:  7 draw:  32
+0:17:23.580573
+selfplay 398
+index 214832
+policy loss:  0.0702219554533561 value loss:  0.6171222430467606 left moves loss:  1.2778455531597137
+update 0:15:47.399617
+arena
+win:  1 loss:  3 draw:  36
+0:17:22.767380
+selfplay 399
+index 329480
+policy loss:  0.07020577890177568 value loss:  0.6112053569157918 left moves loss:  1.2652875765164693
+update 0:16:01.149096
+arena
+win:  2 loss:  6 draw:  32
+0:17:35.324775
+selfplay 400
+index 446264
+policy loss:  0.07001679430405298 value loss:  0.6068219153086344 left moves loss:  1.245245442390442
+update 0:16:45.234898
+arena
+win:  0 loss:  5 draw:  35
+0:18:19.367482
+selfplay 401
+index 560960
+policy loss:  0.07001341834664344 value loss:  0.6053178668022156 left moves loss:  1.2446146059036254
+update 0:15:45.239505
+arena
+model is updated  116
+win:  2 loss:  1 draw:  37
+0:17:20.506978
+selfplay 402
+index 677536
+policy loss:  0.07015702068805695 value loss:  0.6042452804247538 left moves loss:  1.2480665238698323
+update 0:16:30.384326
+arena
+win:  4 loss:  9 draw:  27
+0:18:01.353572
+selfplay 403
+index 792704
+policy loss:  0.07023197936515013 value loss:  0.6003942678372065 left moves loss:  1.2431897020339966
+update 0:15:25.882804
+arena
+win:  2 loss:  5 draw:  33
+0:17:00.949087
+selfplay 404
+index 908392
+policy loss:  0.07033069265385469 value loss:  0.6029744338989258 left moves loss:  1.24654034892718
+update 0:16:04.520743
+arena
+win:  1 loss:  5 draw:  34
+0:17:37.657191
+selfplay 405
+index 24568
+policy loss:  0.07030736319720746 value loss:  0.6048743130763372 left moves loss:  1.2529855207602183
+update 0:16:24.001678
+arena
+model is updated  117
+win:  4 loss:  3 draw:  33
+0:17:58.614652
+selfplay 406
+index 136672
+policy loss:  0.07048250985642274 value loss:  0.6067350337902705 left moves loss:  1.259446495771408
+update 0:16:11.616283
+arena
+win:  3 loss:  5 draw:  32
+0:17:43.650308
+selfplay 407
+index 251504
+policy loss:  0.07058382938305537 value loss:  0.6086204995711645 left moves loss:  1.2654101955890655
+update 0:16:24.190306
+arena
+model is updated  118
+win:  5 loss:  2 draw:  33
+0:17:59.272452
+selfplay 408
+index 366552
+policy loss:  0.07059722316761811 value loss:  0.6089988021055858 left moves loss:  1.273603074947993
+update 0:15:57.926349
+arena
+win:  1 loss:  3 draw:  36
+0:17:32.501023
+selfplay 409
+index 479552
+policy loss:  0.07079122888545196 value loss:  0.615796669125557 left moves loss:  1.2923718456427256
+update 0:14:29.582221
+arena
+win:  2 loss:  3 draw:  35
+0:16:02.757407
+selfplay 410
+index 595272
+policy loss:  0.07083858087658883 value loss:  0.6204925833145777 left moves loss:  1.2979970745245615
+update 0:16:18.679747
+arena
+win:  2 loss:  3 draw:  35
+0:17:54.420178
+selfplay 411
+index 710552
+policy loss:  0.07080145965019861 value loss:  0.6234397763013839 left moves loss:  1.3042095156510671
+update 0:15:52.091587
+arena
+win:  4 loss:  5 draw:  31
+0:17:24.447812
+selfplay 412
+index 827984
+policy loss:  0.07070545745392641 value loss:  0.6234468891223272 left moves loss:  1.300025115807851
+update 0:16:22.447212
+arena
+model is updated  119
+win:  5 loss:  4 draw:  31
+0:17:55.664901
+selfplay 413
+index 944456
+policy loss:  0.0707739604016145 value loss:  0.6251308586200078 left moves loss:  1.3037607431411744
+update 0:16:05.245409
+arena
+win:  3 loss:  4 draw:  33
+0:17:38.801355
+selfplay 414
+index 60160
+policy loss:  0.07071070815126101 value loss:  0.6304248702526093 left moves loss:  1.3094277087847392
+update 0:16:12.470489
+arena
+win:  2 loss:  4 draw:  34
+0:17:46.916638
+selfplay 415
+index 175800
+policy loss:  0.07055807689825694 value loss:  0.6274393457174301 left moves loss:  1.2994250380992889
+update 0:15:59.617982
+arena
+win:  3 loss:  4 draw:  33
+0:17:33.028924
+selfplay 416
+index 291592
+policy loss:  0.07047818596164386 value loss:  0.6240833433469136 left moves loss:  1.2875309387842815
+update 0:16:23.212714
+arena
+win:  2 loss:  5 draw:  33
+0:17:54.880463
+selfplay 417
+index 403752
+policy loss:  0.0704004592448473 value loss:  0.6289936314026515 left moves loss:  1.294555504322052
+update 0:15:59.256126
+arena
+win:  6 loss:  6 draw:  28
+0:17:30.157645
+selfplay 418
+index 520080
+policy loss:  0.07035471114019552 value loss:  0.6230244813362757 left moves loss:  1.2819754513104757
+update 0:16:16.561541
+arena
+model is updated  120
+win:  8 loss:  1 draw:  31
+0:17:49.307985
+selfplay 419
+index 634808
+policy loss:  0.07045888784031074 value loss:  0.6263698710997899 left moves loss:  1.2920746544996897
+update 0:16:04.519941
+arena
+win:  1 loss:  5 draw:  34
+0:17:40.915207
+selfplay 420
+index 752504
+policy loss:  0.07034417808055878 value loss:  0.6276388267676035 left moves loss:  1.2914707684516906
+update 0:15:16.519522
+arena
+model is updated  121
+win:  7 loss:  2 draw:  31
+0:16:48.379098
+selfplay 421
+index 869496
+policy loss:  0.07044625468552113 value loss:  0.630571199854215 left moves loss:  1.2973981813589732
+update 0:15:58.533564
+arena
+win:  3 loss:  6 draw:  31
+0:17:34.489931
+selfplay 422
+index 988432
+policy loss:  0.07052577649553617 value loss:  0.6275547266006469 left moves loss:  1.2846703457832336
+update 0:16:28.543163
+arena
+model is updated  122
+win:  4 loss:  3 draw:  33
+0:18:04.234595
+selfplay 423
+index 105056
+policy loss:  0.07055247137943904 value loss:  0.6255139756202698 left moves loss:  1.27851637562116
+update 0:16:00.851105
+arena
+win:  2 loss:  4 draw:  34
+0:17:34.275190
+selfplay 424
+index 221008
+policy loss:  0.07068712850411733 value loss:  0.6261356357733409 left moves loss:  1.285313439766566
+update 0:16:19.615885
+arena
+win:  0 loss:  3 draw:  37
+0:17:54.044072
+selfplay 425
+index 337432
+policy loss:  0.07075189806520939 value loss:  0.62371375699838 left moves loss:  1.2811170335610707
+update 0:16:23.849228
+arena
+win:  4 loss:  12 draw:  24
+0:17:53.238187
+selfplay 426
+index 452576
+policy loss:  0.07077165683110555 value loss:  0.6199883508682251 left moves loss:  1.266845539410909
+update 0:16:38.197537
+arena
+win:  5 loss:  7 draw:  28
+0:18:10.082241
+selfplay 427
+index 568040
+policy loss:  0.0708982823540767 value loss:  0.623130441904068 left moves loss:  1.2747221179803212
+update 0:16:07.679518
+arena
+win:  1 loss:  5 draw:  34
+0:17:42.229480
+selfplay 428
+index 683744
+policy loss:  0.07095153622329235 value loss:  0.6198073412974675 left moves loss:  1.2728233714898427
+update 0:16:36.782773
+arena
+win:  0 loss:  2 draw:  38
+0:18:12.717369
+selfplay 429
+index 800776
+policy loss:  0.07095955719550451 value loss:  0.6215597345431646 left moves loss:  1.2830614570776622
+update 0:16:20.756818
+arena
+win:  7 loss:  6 draw:  27
+0:17:52.940931
+selfplay 430
+index 918488
+policy loss:  0.07096323698759079 value loss:  0.6186527878046035 left moves loss:  1.278156052827835
+update 0:16:09.036891
+arena
+win:  3 loss:  4 draw:  33
+0:17:43.616290
+selfplay 431
+index 33400
+policy loss:  0.07097944242258866 value loss:  0.6233618225653966 left moves loss:  1.289714552561442
+update 0:16:16.836333
+arena
+win:  6 loss:  5 draw:  29
+0:17:52.069070
+selfplay 432
+index 151240
+policy loss:  0.07093433280785878 value loss:  0.6228573161363602 left moves loss:  1.2872144158681234
+update 0:16:42.283800
+arena
+win:  2 loss:  4 draw:  34
+0:18:16.163368
+selfplay 433
+index 268208
+policy loss:  0.07085817366838455 value loss:  0.6256170270840327 left moves loss:  1.2855234150091808
+update 0:15:50.389955
+arena
+win:  1 loss:  9 draw:  30
+0:17:23.597128
+selfplay 434
+index 383752
+policy loss:  0.07090218347807725 value loss:  0.6298350524902344 left moves loss:  1.2956934642791749
+update 0:16:05.428266
+arena
+win:  8 loss:  7 draw:  25
+0:17:38.930328
+selfplay 435
+index 498112
+policy loss:  0.07092177964746953 value loss:  0.6336122339963913 left moves loss:  1.307579597234726
+update 0:16:17.966866
+arena
+model is updated  123
+win:  4 loss:  2 draw:  34
+0:17:54.193547
+selfplay 436
+index 613648
+policy loss:  0.07089944737652938 value loss:  0.6380095843474071 left moves loss:  1.309790323972702
+update 0:16:06.225646
+arena
+win:  5 loss:  5 draw:  30
+0:17:40.316326
+selfplay 437
+index 729280
+policy loss:  0.07100465610623359 value loss:  0.6384325293699901 left moves loss:  1.3086662741502126
+update 0:16:00.843973
+arena
+win:  3 loss:  5 draw:  32
+0:17:30.601602
+selfplay 438
+index 842688
+policy loss:  0.07109774065514406 value loss:  0.6409274389346441 left moves loss:  1.319983788728714
+update 0:16:12.502646
+arena
+win:  4 loss:  4 draw:  32
+0:17:46.668111
+selfplay 439
+index 955928
+policy loss:  0.07131507980326811 value loss:  0.6467418845494588 left moves loss:  1.3408818670113882
+update 0:15:31.921113
+arena
+win:  3 loss:  4 draw:  33
+0:17:04.483521
+selfplay 440
+index 71424
+policy loss:  0.07135477808614572 value loss:  0.6487157346804937 left moves loss:  1.3469055620829264
+update 0:15:47.740927
+arena
+model is updated  124
+win:  6 loss:  4 draw:  30
+0:17:17.976624
+selfplay 441
+index 187600
+policy loss:  0.07135539139310519 value loss:  0.6429701819022496 left moves loss:  1.3379613137245179
+update 0:16:13.179812
+arena
+win:  1 loss:  5 draw:  34
+0:17:48.858413
+selfplay 442
+index 306976
+policy loss:  0.07136713976661364 value loss:  0.6428852128982544 left moves loss:  1.335960496266683
+update 0:17:03.858212
+arena
+model is updated  125
+win:  5 loss:  3 draw:  32
+0:18:37.332857
+selfplay 443
+index 423152
+policy loss:  0.07136633440852165 value loss:  0.6417720717191696 left moves loss:  1.3352147857348124
+update 0:16:29.349298
+arena
+win:  7 loss:  6 draw:  27
+0:17:58.714699
+selfplay 444
+index 538472
+policy loss:  0.07139332083364328 value loss:  0.6365996889273325 left moves loss:  1.3284495234489442
+update 0:16:11.147808
+arena
+win:  3 loss:  3 draw:  34
+0:17:43.475646
+selfplay 445
+index 654896
+policy loss:  0.07143176039059956 value loss:  0.6336329138278961 left moves loss:  1.3238490585486093
+update 0:16:08.628002
+arena
+win:  4 loss:  8 draw:  28
+0:17:42.422821
+selfplay 446
+index 768424
+policy loss:  0.07142763641973336 value loss:  0.6314367882410685 left moves loss:  1.3163949048519135
+update 0:15:24.616490
+arena
+model is updated  126
+win:  4 loss:  2 draw:  34
+0:17:00.388905
+selfplay 447
+index 883528
+policy loss:  0.07127149105072021 value loss:  0.6283907957871755 left moves loss:  1.3112825254599254
+update 0:15:47.185453
+arena
+win:  3 loss:  5 draw:  32
+0:17:20.111328
+selfplay 448
+index 998320
+policy loss:  0.0710939038793246 value loss:  0.621025513013204 left moves loss:  1.294470268090566
+update 0:15:45.301783
+arena
+model is updated  127
+win:  2 loss:  1 draw:  37
+0:17:20.916201
+selfplay 449
+index 115984
+policy loss:  0.07109574653208256 value loss:  0.6117883177598318 left moves loss:  1.2705708694458009
+update 0:16:18.158678
+arena
+win:  4 loss:  4 draw:  32
+0:17:52.882248
+selfplay 450
+index 233488
+policy loss:  0.0711220799634854 value loss:  0.6119650999704996 left moves loss:  1.2679366405804953
+update 0:16:07.329970
+arena
+win:  0 loss:  2 draw:  38
+0:17:43.084811
+selfplay 451
+index 351864
+policy loss:  0.07109409560759862 value loss:  0.6099366984764735 left moves loss:  1.260939960082372
+update 0:15:46.318198
+arena
+win:  3 loss:  7 draw:  30
+0:17:17.131105
+selfplay 452
+index 466912
+policy loss:  0.07100600106020769 value loss:  0.6121084958314895 left moves loss:  1.2649587782224019
+update 0:16:03.683350
+arena
+win:  3 loss:  7 draw:  30
+0:17:35.471476
+selfplay 453
+index 583952
+policy loss:  0.07093698859214782 value loss:  0.6082865371306737 left moves loss:  1.2551352961858113
+update 0:15:54.940084
+arena
+win:  2 loss:  5 draw:  33
+0:17:27.578487
+selfplay 454
+index 698560
+policy loss:  0.07086445820828279 value loss:  0.6063283268610636 left moves loss:  1.2536955801645915
+update 0:16:04.506152
+arena
+win:  1 loss:  4 draw:  35
+0:17:38.222174
+selfplay 455
+index 816648
+policy loss:  0.07089232010145982 value loss:  0.6029689707358679 left moves loss:  1.2457238550980885
+update 0:16:05.183680
+arena
+win:  1 loss:  4 draw:  35
+0:17:42.210586
+selfplay 456
+index 932952
+policy loss:  0.07094433292746544 value loss:  0.6042111593484879 left moves loss:  1.246115231513977
+update 0:16:19.476794
+arena
+win:  3 loss:  6 draw:  31
+0:17:51.964662
+selfplay 457
+index 49432
+policy loss:  0.0709449274589618 value loss:  0.6016579790910085 left moves loss:  1.2452878983815512
+update 0:14:29.790314
+arena
+win:  1 loss:  9 draw:  30
+0:16:04.171959
+selfplay 458
+index 166032
+policy loss:  0.07085070351759593 value loss:  0.600885727206866 left moves loss:  1.2414165941874187
+update 0:16:19.805290
+arena
+win:  3 loss:  5 draw:  32
+0:17:56.696232
+selfplay 459
+index 282776
+policy loss:  0.07080629311501979 value loss:  0.6073546373844146 left moves loss:  1.2607461675008138
+update 0:16:27.817503
+arena
+win:  2 loss:  5 draw:  33
+0:18:01.987232
+selfplay 460
+index 399064
+policy loss:  0.07088871228198211 value loss:  0.6064403971036275 left moves loss:  1.2626687892278035
+update 0:16:13.111371
+arena
+win:  4 loss:  4 draw:  32
+0:17:45.015691
+selfplay 461
+index 516144
+policy loss:  0.07083887947102388 value loss:  0.6007552121082942 left moves loss:  1.2486347166697185
+update 0:16:18.644008
+arena
+win:  0 loss:  5 draw:  35
+0:17:54.317856
+selfplay 462
+index 632160
+policy loss:  0.0709598873804013 value loss:  0.6013740756114324 left moves loss:  1.250644601980845
+update 0:16:42.275723
+arena
+model is updated  128
+win:  5 loss:  4 draw:  31
+0:18:17.405337
+selfplay 463
+index 747176
+policy loss:  0.07099903504053752 value loss:  0.6006233793497086 left moves loss:  1.2519259397188822
+update 0:16:24.746671
+arena
+model is updated  129
+win:  6 loss:  1 draw:  33
+0:17:59.258509
+selfplay 464
+index 863592
+policy loss:  0.07103624157607555 value loss:  0.6053526355822881 left moves loss:  1.259377452135086
+update 0:16:03.105869
+arena
+win:  4 loss:  6 draw:  30
+0:17:37.627375
+selfplay 465
+index 979224
+policy loss:  0.0710580171396335 value loss:  0.6120994420846303 left moves loss:  1.2758801289399464
+update 0:16:27.047106
+arena
+win:  3 loss:  4 draw:  33
+0:18:00.038514
+selfplay 466
+index 96984
+policy loss:  0.07102182378371556 value loss:  0.6128809789816538 left moves loss:  1.2715163306395212
+update 0:16:33.566454
+arena
+win:  2 loss:  2 draw:  36
+0:18:09.292742
+selfplay 467
+index 213752
+policy loss:  0.0709478808939457 value loss:  0.6138760886589686 left moves loss:  1.2721923406918842
+update 0:16:30.872985
+arena
+win:  4 loss:  4 draw:  32
+0:18:04.353826
+selfplay 468
+index 332168
+policy loss:  0.07090011445184549 value loss:  0.6102420139312744 left moves loss:  1.25822629849116
+update 0:16:18.221856
+arena
+win:  3 loss:  10 draw:  27
+0:17:47.057700
+selfplay 469
+index 451072
+policy loss:  0.07088803246617317 value loss:  0.6130057895183563 left moves loss:  1.2594455683231354
+update 0:16:27.742678
+arena
+model is updated  130
+win:  3 loss:  2 draw:  35
+0:18:02.269707
+selfplay 470
+index 564824
+policy loss:  0.07094638615846634 value loss:  0.6126096890370051 left moves loss:  1.260630288918813
+update 0:16:14.768482
+arena
+win:  2 loss:  4 draw:  34
+0:17:49.118151
+selfplay 471
+index 679496
+policy loss:  0.07094167073567709 value loss:  0.6163231509923935 left moves loss:  1.2662195408344268
+update 0:15:56.766535
+arena
+win:  2 loss:  4 draw:  34
+0:17:31.366656
+selfplay 472
+index 794712
+policy loss:  0.07094632593293984 value loss:  0.6137938062349956 left moves loss:  1.2624330012003582
+update 0:16:06.706391
+arena
+model is updated  131
+win:  3 loss:  2 draw:  35
+0:17:40.352244
+selfplay 473
+index 910528
+policy loss:  0.07101483123997847 value loss:  0.6135237091779708 left moves loss:  1.2651989181836447
+update 0:16:19.460339
+arena
+model is updated  132
+win:  3 loss:  1 draw:  36
+0:17:54.059868
+selfplay 474
+index 27688
+policy loss:  0.07096913672983646 value loss:  0.6096373585859934 left moves loss:  1.2553271492322287
+update 0:16:40.086631
+arena
+win:  3 loss:  8 draw:  29
+0:18:13.304048
+selfplay 475
+index 142792
+policy loss:  0.07095193321506182 value loss:  0.6137183250983557 left moves loss:  1.2603978741168975
+update 0:15:44.078216
+arena
+win:  5 loss:  5 draw:  30
+0:17:16.540530
+selfplay 476
+index 260632
+policy loss:  0.07091583234568437 value loss:  0.6132005582253138 left moves loss:  1.2620342075824738
+update 0:16:42.621825
+arena
+win:  2 loss:  2 draw:  36
+0:18:18.193570
+selfplay 477
+index 377912
+policy loss:  0.07096422257522741 value loss:  0.6198283296823501 left moves loss:  1.280619885524114
+update 0:16:16.044837
+arena
+win:  4 loss:  9 draw:  27
+0:17:49.264571
+selfplay 478
+index 495248
+policy loss:  0.07092285769681136 value loss:  0.618424898982048 left moves loss:  1.2773700586954753
+update 0:16:40.552186
+arena
+win:  2 loss:  4 draw:  34
+0:18:15.331060
+selfplay 479
+index 612712
+policy loss:  0.07075280984242757 value loss:  0.6151698285341263 left moves loss:  1.2646702361106872
+update 0:16:39.655771
+arena
+win:  5 loss:  6 draw:  29
+0:18:14.392942
+selfplay 480
+index 728016
+policy loss:  0.07073935424288114 value loss:  0.6187149876356125 left moves loss:  1.2692886253197988
+update 0:16:01.200264
+arena
+model is updated  133
+win:  5 loss:  4 draw:  31
+0:17:34.384683
+selfplay 481
+index 844320
+policy loss:  0.07063341674705347 value loss:  0.6189867349465689 left moves loss:  1.26101868947347
+update 0:16:16.123448
+arena
+model is updated  134
+win:  6 loss:  2 draw:  32
+0:17:52.184346
+selfplay 482
+index 961064
+policy loss:  0.07062413590649763 value loss:  0.6226164031028748 left moves loss:  1.268492785692215
+update 0:16:19.334285
+arena
+model is updated  135
+win:  9 loss:  1 draw:  30
+0:17:54.985440
+selfplay 483
+index 77768
+policy loss:  0.07073199244836967 value loss:  0.6181488253672918 left moves loss:  1.2584488451480866
+update 0:15:52.590516
+arena
+win:  2 loss:  3 draw:  35
+0:17:25.458134
+selfplay 484
+index 194008
+policy loss:  0.0708601077646017 value loss:  0.6214557886123657 left moves loss:  1.2652779094378153
+update 0:16:14.145276
+arena
+win:  3 loss:  3 draw:  34
+0:17:48.091525
+selfplay 485
+index 308824
+policy loss:  0.07086017268399397 value loss:  0.6185121337572733 left moves loss:  1.2648018542925517
+update 0:16:04.471070
+arena
+win:  1 loss:  4 draw:  35
+0:17:39.810650
+selfplay 486
+index 425560
+policy loss:  0.07098877323170504 value loss:  0.6205715167522431 left moves loss:  1.272201631863912
+update 0:16:56.447295
+arena
+win:  1 loss:  1 draw:  38
+0:18:31.652917
+selfplay 487
+index 543680
+policy loss:  0.07099454214175542 value loss:  0.6180437070131302 left moves loss:  1.264888317187627
+update 0:17:03.144948
+arena
+win:  4 loss:  4 draw:  32
+0:18:36.738389
+selfplay 488
+index 659296
+policy loss:  0.07093736805021762 value loss:  0.6143101012706756 left moves loss:  1.2605500400066376
+update 0:14:51.505873
+arena
+model is updated  136
+win:  4 loss:  3 draw:  33
+0:16:26.599634
+selfplay 489
+index 773840
+policy loss:  0.07103288126488527 value loss:  0.6189833309253057 left moves loss:  1.2773115348815918
+update 0:15:01.833136
+arena
+win:  4 loss:  5 draw:  31
+0:16:33.199234
+selfplay 490
+index 889088
+policy loss:  0.07103745127717653 value loss:  0.6247042510906855 left moves loss:  1.2969300556182861
+update 0:16:14.723722
+arena
+win:  1 loss:  9 draw:  30
+0:17:46.678708
+selfplay 491
+index 5944
+policy loss:  0.07102160759270192 value loss:  0.6254104679822922 left moves loss:  1.3008972561359406
+update 0:15:50.634559
+arena
+model is updated  137
+win:  6 loss:  4 draw:  30
+0:17:22.701706
+selfplay 492
+index 122536
+policy loss:  0.07095230604211489 value loss:  0.6262679459651311 left moves loss:  1.2996974889437358
+update 0:15:56.190345
+arena
+win:  4 loss:  7 draw:  29
+0:17:26.508056
+selfplay 493
+index 237592
+policy loss:  0.0708196916927894 value loss:  0.6236223715543747 left moves loss:  1.29521781484286
+update 0:15:36.827514
+arena
+model is updated  138
+win:  7 loss:  4 draw:  29
+0:17:06.884046
+selfplay 494
+index 354608
+policy loss:  0.07090614239374797 value loss:  0.6189921228090922 left moves loss:  1.2864128907521566
+update 0:16:22.389401
+arena
+model is updated  139
+win:  3 loss:  2 draw:  35
+0:17:57.455715
+selfplay 495
+index 472272
+policy loss:  0.07091710078219572 value loss:  0.6201484427849452 left moves loss:  1.2848896944522858
+update 0:16:18.474648
+arena
+model is updated  140
+win:  2 loss:  1 draw:  37
+0:17:53.528627
+selfplay 496
+index 589104
+policy loss:  0.07088980297247569 value loss:  0.6248307716846466 left moves loss:  1.29651549021403
+update 0:16:38.685731
+arena
+model is updated  141
+win:  3 loss:  1 draw:  36
+0:18:13.653758
+selfplay 497
+index 707872
+policy loss:  0.07074475062390169 value loss:  0.6222321607669195 left moves loss:  1.2841437379519145
+update 0:16:13.540641
+arena
+win:  1 loss:  3 draw:  36
+0:17:47.381242
+selfplay 498
+index 823520
+policy loss:  0.07071739561855793 value loss:  0.6140019712845485 left moves loss:  1.2613213260968525
+update 0:16:09.082497
+arena
+model is updated  142
+win:  3 loss:  1 draw:  36
+0:17:43.708415
+selfplay 499
+index 938552
+policy loss:  0.07075566656887532 value loss:  0.6091185480356216 left moves loss:  1.2525304253896077
+update 0:16:24.242013
+arena
+model is updated  143
+win:  4 loss:  2 draw:  34
+0:17:59.642380

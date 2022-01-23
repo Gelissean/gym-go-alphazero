@@ -14,7 +14,7 @@ import datetime
 from utils import swap_moves, change_state, encode, change_state_and_run
 
 def selfplay(agent, model, output_list, first_move = False):
-    #torch.cuda.set_device(1)
+    # torch.cuda.set_device(1)
     #mem_states = torch.zeros((agent.actions, agent.games_in_iteration, 4, agent.env.size, agent.env.size), dtype = torch.int16, device = agent.device)
     mem_states = torch.zeros((200, agent.games_in_iteration, 4, agent.env.size, agent.env.size),
                              dtype=torch.int16, device=agent.device)
@@ -26,11 +26,12 @@ def selfplay(agent, model, output_list, first_move = False):
     state = agent.env.reset()
     if first_move:
         #states, moves = agent.env.first_move_states(agent.games_in_iteration)
-        state = agent.env.step(agent.env.uniform_random_action())
+        state, a, b, c = agent.env.step(agent.env.uniform_random_action())
         mcts_actions = 1
     else:
         #states, moves = agent.env.zero_states(agent.games_in_iteration)
         mcts_actions = 0
+    print(state)
     moves = torch.FloatTensor(numpy.array([swap_moves(state[3])]))
     states = torch.FloatTensor(numpy.array([change_state(state)]))
 
@@ -61,7 +62,7 @@ def selfplay(agent, model, output_list, first_move = False):
                 #print(states[index])
                 replay_buffer.store(mem_states[0:step, index].view(-1, 4, agent.env.size, agent.env.size).float(), mem_policies[0:step, index].view(-1, agent.actions), rewards[index].item())
 
-            non_terminals = torch.where(terminals == 0, agent.t_one, agent.t_zero)
+            non_terminals = torch.where(terminals == 0, agent.t_one.cpu(), agent.t_zero.cpu())
             game_indicies = torch.nonzero(non_terminals)
             dim0, dim1 = game_indicies.shape
 
@@ -80,7 +81,7 @@ def selfplay(agent, model, output_list, first_move = False):
             states, moves = states[game_indicies], moves[game_indicies]
 
 def arena(agent, model, indices, output_list):
-    #torch.cuda.set_device(1)
+    # torch.cuda.set_device(1)
     win, loss, draw = 0, 0, 0
     model2 = copy.deepcopy(model)
     model2.to(agent.device)
@@ -119,7 +120,7 @@ def arena(agent, model, indices, output_list):
     output_list.append((win, loss, draw))
 
 def arena_training(agent, current_model, best_model, output_list, games = 5, player1 = True):
-    #torch.cuda.set_device(1)
+    # torch.cuda.set_device(1)
     win, loss, draw = 0, 0, 0
     mcts1 = [MCTS(agent.cpuct) for i in range(games)]
     mcts2 = [MCTS(agent.cpuct) for i in range(games)]
@@ -170,7 +171,7 @@ def arena_training(agent, current_model, best_model, output_list, games = 5, pla
 class AZAgent:
     def __init__(self, env, device, simulation_count = 100, cpuct = 1.25, dirichlet_alpha = 0.15, exploration_fraction = 0.25,
                  name = 'azt', games_in_iteration = 200):
-        #torch.cuda.set_device(1)
+        # torch.cuda.set_device(1)
         self.env = env
 
         self.t_one = torch.tensor([1])
@@ -200,11 +201,11 @@ class AZAgent:
         mcts_actions = torch.zeros((self.games_in_iteration, 1), device = self.device, dtype = torch.long)
         mcts_indices = torch.zeros((self.games_in_iteration), dtype = torch.long)
 
-        noise = torch.from_numpy(np.random.dirichlet(np.ones(int(moves_length.item())) * self.dirichlet_alpha, length))
-        probs, values, _ = model(states.float())
+        noise = torch.from_numpy(np.random.dirichlet(np.ones(int(moves_length.item())) * self.dirichlet_alpha, length)).cuda()
+        probs, values, _ = model(states.float().cuda())
         probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
-        values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
-        states, moves, probs, values = states.cpu(), moves.cpu(), probs.cpu(), values.cpu()
+        values = (torch.argmax(values, dim = 1) - 1).view(-1, 1).cuda()
+        # states, moves, probs, values = states.cpu(), moves.cpu(), probs.cpu(), values.cpu()
 
         index = 0
         for i in range(length):
@@ -239,10 +240,10 @@ class AZAgent:
             if index > 0:
                 #states, rewards, moves, terminals = self.env.step(mcts_actions[0:index], mcts_states[0:index])
                 states, rewards, moves, terminals = change_state_and_run(self.env, mcts_states[0:index], mcts_actions[0:index])
-                probs, values, _ = model(states.float())
+                probs, values, _ = model(states.float().cuda())
                 probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
                 values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
-                states, moves, probs, values, rewards, terminals = states.cpu(), moves.cpu(), probs.cpu(), values.cpu(), rewards.cpu(), terminals.cpu()
+                # states, moves, probs, values, rewards, terminals = states.cpu(), moves.cpu(), probs.cpu(), values.cpu(), rewards.cpu(), terminals.cpu()
 
                 for i in range(index):
                     mcts_index = mcts_indices[i]

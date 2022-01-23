@@ -5,21 +5,21 @@ class Node:
     def __init__(self, state, probs, value, moves, terminal = False):
         self.state = state
         self.moves = torch.nonzero(moves)
-        self.P = probs[self.moves].view(-1)
+        self.P = probs[self.moves].view(-1).cuda()
         self.P = self.P / self.P.sum()
         self.value = value
         length, _ = self.moves.shape
         self.length = length
 
-        self.N = torch.zeros(length, dtype = torch.int32)
-        self.Q = torch.zeros(length)
+        self.N = torch.zeros(length, dtype = torch.int32).cuda()
+        self.Q = torch.zeros(length).cuda()
         self.T = terminal
 
         self.children = {}
 
     def getProbs(self, size):
         probs = self.N.float() / self.N.sum()
-        all_probs = torch.zeros(size)
+        all_probs = torch.zeros(size).cuda()
         all_probs[self.moves.view(-1)] = probs
         return all_probs
 

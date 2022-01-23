@@ -42,6 +42,3 @@ print("E")
 e.funkcia()
 print("F")
 f.funkcia()
-
-from GymGo_main import main
-main()

@@ -27,10 +27,10 @@ def encode(state: torch.Tensor):
 
 def change_state_and_run(env, state, action):
     tempstate = state.reshape(4,6,6)
-    temp = numpy.array([0 for i in range(env.env.size*env.env.size)]).reshape(1,env.env.size, env.env.size)
-    temp = numpy.concatenate((tempstate[0:2].numpy(), temp, tempstate[2:].numpy(), temp), 0)
-    env.env.state_ = temp
-    env.env.done = False
+    temp = numpy.array([0 for i in range(env.size*env.size)]).reshape(1,env.size, env.size)
+    temp = numpy.concatenate((tempstate[0:2].cpu().numpy(), temp, tempstate[2:].cpu().numpy(), temp), 0)
+    env.state_ = temp
+    env.done = False
     states, reward, done, info = env.step(action.item())
     moves = torch.FloatTensor(numpy.array([swap_moves(states[3])]))
     states = torch.FloatTensor(numpy.array([change_state(states)]))

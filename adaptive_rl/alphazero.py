@@ -42,6 +42,8 @@ def selfplay(agent, model, output_list, first_move = False):
     while True:
         mem_states[step] = states
 
+
+        print(states)
         with torch.no_grad():
             actions, policies = agent.run_mcts(states, moves, model, mcts_list, mcts_actions, True)
         mem_policies[step] = policies

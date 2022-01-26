@@ -29,8 +29,8 @@ if __name__ == '__main__':
     cross_entropy = nn.CrossEntropyLoss()
     cross_entropy_moves = nn.CrossEntropyLoss()
 
-    batches_in_iteration = 400
-    cpus = 6
+    batches_in_iteration = 10
+    cpus = 1 #6
     name = 'azt_a6_6_7'
 
     #torch.cuda.set_device(1)
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     best_model = copy.deepcopy(current_model)
     best_model.to(device)
 
-    agent = AZAgent(env, device = device, games_in_iteration = 100, simulation_count = 200, name = name)
+    agent = AZAgent(env, device = device, games_in_iteration = 5, simulation_count = 10, name = name)
     replay_buffer = ExperienceReplay(repaly_buffer_size, height, width, batch_size)
 
     model_index = 0

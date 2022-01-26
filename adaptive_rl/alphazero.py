@@ -1,40 +1,28 @@
 import math
 import copy
-
-import numpy
 import numpy as np
 from random import randrange
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.multiprocessing as mp
-from adaptive_rl.mcts import MCTS, Node
-from adaptive_rl.replay_buffer import ExperienceReplay
+from mcts import MCTS, Node
+from replay_buffer import ExperienceReplay
 import datetime
-from utils import swap_moves, change_state, encode, change_state_and_run
 
 def selfplay(agent, model, output_list, first_move = False):
     #torch.cuda.set_device(1)
-    #mem_states = torch.zeros((agent.actions, agent.games_in_iteration, 4, agent.env.size, agent.env.size), dtype = torch.int16, device = agent.device)
-    mem_states = torch.zeros((200, agent.games_in_iteration, 4, agent.env.size, agent.env.size),
-                             dtype=torch.int16, device=agent.device)
-    #mem_policies = torch.zeros((agent.actions, agent.games_in_iteration, agent.actions), device = agent.device)
-    mem_policies = torch.zeros((200, agent.games_in_iteration, agent.actions), device=agent.device)
+    mem_states = torch.zeros((agent.actions, agent.games_in_iteration, 2, agent.env.height, agent.env.width), dtype = torch.int16, device = agent.device)
+    mem_policies = torch.zeros((agent.actions, agent.games_in_iteration, agent.actions), device = agent.device)
 
     game_indicies = torch.arange(agent.games_in_iteration)
-
-    state = agent.env.reset()
     if first_move:
-        #states, moves = agent.env.first_move_states(agent.games_in_iteration)
-        state = agent.env.step(agent.env.uniform_random_action())
+        states, moves = agent.env.first_move_states(agent.games_in_iteration)
         mcts_actions = 1
     else:
-        #states, moves = agent.env.zero_states(agent.games_in_iteration)
+        states, moves = agent.env.zero_states(agent.games_in_iteration)
         mcts_actions = 0
-    moves = torch.FloatTensor(numpy.array([swap_moves(state[3])]))
-    states = torch.FloatTensor(numpy.array([change_state(state)]))
-
-    replay_buffer = ExperienceReplay(agent.actions * agent.games_in_iteration * 8 + 1, agent.env.size, agent.env.size, 0)
+    replay_buffer = ExperienceReplay(agent.actions * agent.games_in_iteration * 8 + 1, agent.env.height, agent.env.width, 0)
 
     mcts_list = [MCTS(agent.cpuct) for i in range(agent.games_in_iteration)]
 
@@ -46,8 +34,7 @@ def selfplay(agent, model, output_list, first_move = False):
             actions, policies = agent.run_mcts(states, moves, model, mcts_list, mcts_actions, True)
         mem_policies[step] = policies
 
-        # states, rewards, moves, terminals = agent.env.step(actions, states)
-        states, rewards, moves, terminals = change_state_and_run(agent.env, states[0], actions[0])
+        states, rewards, moves, terminals = agent.env.step(actions, states)
         step += 1
         mcts_actions += 1
 
@@ -59,7 +46,7 @@ def selfplay(agent, model, output_list, first_move = False):
                 index = t_index.item()
                 mcts_list.pop(index)
                 #print(states[index])
-                replay_buffer.store(mem_states[0:step, index].view(-1, 4, agent.env.size, agent.env.size).float(), mem_policies[0:step, index].view(-1, agent.actions), rewards[index].item())
+                replay_buffer.store(mem_states[0:step, index].view(-1, 2, agent.env.height, agent.env.width).float(), mem_policies[0:step, index].view(-1, agent.actions), rewards[index].item())
 
             non_terminals = torch.where(terminals == 0, agent.t_one, agent.t_zero)
             game_indicies = torch.nonzero(non_terminals)
@@ -70,7 +57,7 @@ def selfplay(agent, model, output_list, first_move = False):
                 return
 
             game_indicies = game_indicies.view(-1)
-            new_mem_states = torch.zeros((agent.actions, dim0, 4, agent.env.size, agent.env.size), device = agent.device, dtype = torch.int16)
+            new_mem_states = torch.zeros((agent.actions, dim0, 2, agent.env.height, agent.env.width), device = agent.device, dtype = torch.int16)
             new_mem_policies = torch.zeros((agent.actions, dim0, agent.actions), device = agent.device)
 
             new_mem_states[0:step] = mem_states[0:step, game_indicies]
@@ -134,8 +121,7 @@ def arena_training(agent, current_model, best_model, output_list, games = 5, pla
             else:
                 actions, _ = agent.run_mcts(states, moves, best_model, mcts2, step, True, False)
 
-        #states, rewards, moves, terminals = agent.env.step(actions, states)
-        states, rewards, moves, terminals = change_state_and_run(agent.env, states[0], actions[0])
+        states, rewards, moves, terminals = agent.env.step(actions, states)
         step += 1
 
         end_game_indices = torch.nonzero(terminals)
@@ -176,11 +162,11 @@ class AZAgent:
         self.t_one = torch.tensor([1])
         self.t_zero = torch.tensor([0])
         self.device = device
-        #self.env.to(self.device)
+        self.env.to(self.device)
         self.t_one = self.t_one.to(self.device)
         self.t_zero = self.t_zero.to(self.device)
 
-        self.actions = self.env.action_space.n
+        self.actions = self.env.height * self.env.width
         self.simulation_count = simulation_count
         self.name = name
         self.cpuct = cpuct
@@ -193,14 +179,13 @@ class AZAgent:
 
     def run_mcts(self, states, moves, model, mcts_list, step, noise_b = True, training = True):
         length = len(mcts_list)
-        #moves_length = self.actions - step
-        moves_length = self.actions - states[0, 2].sum()
+        moves_length = self.actions - step
 
-        mcts_states = torch.zeros((self.games_in_iteration, 4, self.env.size, self.env.size), device = self.device, dtype = torch.int16)
+        mcts_states = torch.zeros((self.games_in_iteration, 2, self.env.height, self.env.width), device = self.device, dtype = torch.int16)
         mcts_actions = torch.zeros((self.games_in_iteration, 1), device = self.device, dtype = torch.long)
         mcts_indices = torch.zeros((self.games_in_iteration), dtype = torch.long)
 
-        noise = torch.from_numpy(np.random.dirichlet(np.ones(int(moves_length.item())) * self.dirichlet_alpha, length))
+        noise = torch.from_numpy(np.random.dirichlet(np.ones(moves_length) * self.dirichlet_alpha, length))
         probs, values, _ = model(states.float())
         probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
         values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
@@ -208,8 +193,7 @@ class AZAgent:
 
         index = 0
         for i in range(length):
-            #encode_state = self.env.encode(states[i])
-            encode_state = encode(states[i])
+            encode_state = self.env.encode(states[i])
             if encode_state in mcts_list[i].nodes:
                 node = mcts_list[i].nodes[encode_state]
             else:
@@ -237,8 +221,7 @@ class AZAgent:
                     index += 1
 
             if index > 0:
-                #states, rewards, moves, terminals = self.env.step(mcts_actions[0:index], mcts_states[0:index])
-                states, rewards, moves, terminals = change_state_and_run(self.env, mcts_states[0:index], mcts_actions[0:index])
+                states, rewards, moves, terminals = self.env.step(mcts_actions[0:index], mcts_states[0:index])
                 probs, values, _ = model(states.float())
                 probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
                 values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
@@ -252,7 +235,7 @@ class AZAgent:
                         node = Node(states[i], probs[i], - rewards[i], moves[i], True)
                         parent.children[action_index] = node
                     else:
-                        encode_state = encode(states[i])
+                        encode_state = self.env.encode(states[i])
                         if encode_state in mcts.nodes:
                             node = mcts.nodes[encode_state]
                         else:

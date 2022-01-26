@@ -6,9 +6,10 @@ import torch.nn.init as init
 import torch.nn.functional as F
 import torch.optim as optim
 from torch.multiprocessing import Manager, Process, set_start_method
-from adaptive_rl.alphazero import AZAgent, arena
-from adaptive_rl.replay_buffer import ExperienceReplay
-from adaptive_rl.net import Net
+from tictactoe_gpu import TicTacToe
+from alphazero import AZAgent, arena
+from replay_buffer import ExperienceReplay
+from net import Net
 import datetime
 
 if __name__ == '__main__':

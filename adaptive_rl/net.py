@@ -40,7 +40,7 @@ class Net(nn.Module):
 
         self.conv_policy = nn.Conv2d(filters, 32, 3, stride=1, padding=1)
         self.fc1_p = nn.Linear(self.features_count, 256)
-        self.fc2_p = nn.Linear(256, size+1)
+        self.fc2_p = nn.Linear(256, size)
 
         self.conv_value = nn.Conv2d(filters, 32, 3, stride=1, padding=1)
         self.fc1_v = nn.Linear(self.features_count, 128)
@@ -48,7 +48,7 @@ class Net(nn.Module):
 
         self.conv_moves_left = nn.Conv2d(filters, 32, 3, stride=1, padding=1)
         self.fc1_m = nn.Linear(self.features_count, 256)
-        self.fc2_m = nn.Linear(256, size+1)
+        self.fc2_m = nn.Linear(256, size)
 
         self.apply(weights_init_xavier)
 

@@ -25,13 +25,19 @@ def encode(state: torch.Tensor):
                 code += ' '
     return code
 
-def change_state_and_run(env, state, action, height=6, width=6):
-    tempstate = state.reshape(4, height, width)
-    temp = numpy.array([0 for i in range(env.env.size*env.env.size)]).reshape(1,env.env.size, env.env.size)
-    temp = numpy.concatenate((tempstate[0:2].numpy(), temp, tempstate[2:].numpy(), temp), 0)
-    env.env.state_ = temp
-    env.env.done = False
-    states, reward, done, info = env.step(action.item())
-    moves = torch.FloatTensor(numpy.array([swap_moves(states[3])]))
-    states = torch.FloatTensor(numpy.array([change_state(states)]))
-    return states, torch.Tensor([reward]), moves, torch.Tensor([done])
+def change_state_and_run(env, state, action, possible_moves, height=6, width=6):
+    if possible_moves[action].item() == 1:
+        tempstate = state.reshape(4, height, width)
+        temp = numpy.array([0 for i in range(env.env.size*env.env.size)]).reshape(1,env.env.size, env.env.size)
+        temp = numpy.concatenate((tempstate[0:2].numpy(), temp, tempstate[2:].numpy(), temp), 0)
+        env.env.state_ = temp
+        env.env.done = False
+        states, reward, done, info = env.step(action.item())
+        moves = torch.FloatTensor(numpy.array([swap_moves(states[3])]))
+        states = torch.FloatTensor(numpy.array([change_state(states)]))
+        return states, torch.Tensor([reward]), moves, torch.Tensor([done])
+    else:
+        state[3] = state[3] + 1
+        reward = torch.Tensor(1)
+        reward[0] = -10
+        return state, reward, possible_moves, torch.Tensor([True])

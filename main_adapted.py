@@ -7,7 +7,7 @@ import torch.nn.init as init
 import torch.nn.functional as F
 import torch.optim as optim
 from torch.multiprocessing import Manager, Process, set_start_method
-from alphazero_modded import AZAgent, selfplay, arena_training, Net_GO
+from alphazero_modded import AZAgent, selfplay, arena_training, Net_GO, Experience_buffer_GO
 from adaptive_rl.replay_buffer import ExperienceReplay
 from adaptive_rl.net import Net
 import datetime
@@ -15,7 +15,7 @@ import datetime
 from environment.Env_Go import Env_Go
 
 if __name__ == '__main__':
-    games_in_iteration = 1
+    games_in_iteration = 16
 
     board_size = 6
     komi = 0
@@ -52,8 +52,8 @@ if __name__ == '__main__':
     best_model = copy.deepcopy(current_model)
     best_model.to(device)
 
-    agent = AZAgent(env, device = device, games_in_iteration = 5, simulation_count = 10, name = name)
-    replay_buffer = ExperienceReplay(replay_buffer_size, board_size, board_size, batch_size)
+    agent = AZAgent(env, device = device, games_in_iteration = games_in_iteration, simulation_count = 10, name = name)
+    replay_buffer = Experience_buffer_GO(replay_buffer_size, board_size, board_size, batch_size)
 
     model_index = 0
     for iteration in range(iteration_count):

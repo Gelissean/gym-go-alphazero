@@ -65,14 +65,20 @@ class Env_Go(Environment, ABC):
         return torch.cat((legal_moves, pass_legality), 1)
 
     def step(self, actions, states):
+        self._init_boards(states.shape[0])
+        possible_moves = self.possible_moves(states)
         for i in range(len(self.envs)):
             states[i], self.rewards[i], moves, terminals = \
-                change_state_and_run(self.envs[i], states[i], actions[i], self.size, self.size)
+                change_state_and_run(self.envs[i],
+                                     states[i],
+                                     actions[i],
+                                     possible_moves[i],
+                                     self.size, self.size)
         moves = self.possible_moves(states)
-        terminals = torch.where(states[:, 3, 0, 0], self.t_one, self.t_zero)
-        for i in range(terminals.shape):
-            if terminals[i].item() == 1:
-                self.envs[i].reset()
+        terminals = torch.where(states[:, 3, 0, 0] == 1, self.t_one, self.t_zero)
+        # for i in range(terminals.shape[0]):
+        #     if terminals[i].item() == 1:
+        #         self.envs[i].reset()
         return states, self.rewards, moves, terminals  # states, rewards, moves, terminals
 
 

@@ -4,10 +4,81 @@ import torch
 
 class Experience_buffer_GO(ExperienceReplay):
     def __init__(self, size, height, width, batch_size):
-        super().__init__(size, height, width, batch_size)
-        self.actions = height * width + 1
-        self.states = torch.zeros((size, 4, height, width), dtype=torch.int16)
-        self.policies = torch.zeros((size, self.actions))
+        self.states = torch.zeros((size, 4, height, width), dtype = torch.int16)
+        self.policies = torch.zeros((size, height * width+1))
+        self.values = torch.zeros((size, 1), dtype = torch.long)
+        self.moves_left = torch.zeros((size, 1), dtype = torch.long)
+
+        self.max_size = size
+        self.index = 0
+        self.batch_size = batch_size
+
+        self.full_buffer = False
+
+        self.height = height
+        self.width = width
+        self.actions = height * width+1
+
+    def add(self, length, states, policies, values, moves_left):
+        states, policies = states.cpu(), policies.cpu()
+
+        new_index = self.index + length
+        if new_index <= self.max_size:
+            self.states[self.index:new_index] = states
+            self.policies[self.index:new_index] = policies
+            self.values[self.index:new_index] = values
+            self.moves_left[self.index:new_index] = moves_left
+            self.index = new_index
+            if self.index == self.max_size:
+                self.index = 0
+                self.full_buffer = True
+        else:
+            to_end = self.max_size - self.index
+            from_start = length - to_end
+            self.states[self.index:self.max_size] = states[0:to_end]
+            self.policies[self.index:self.max_size] = policies[0:to_end]
+            self.values[self.index:self.max_size] = values[0:to_end]
+            self.moves_left[self.index:self.max_size] = moves_left[0:to_end]
+            self.states[0:from_start] = states[to_end:length]
+            self.policies[0:from_start] = policies[to_end:length]
+            self.values[0:from_start] = values[to_end:length]
+            self.moves_left[0:from_start] = moves_left[to_end:length]
+            self.index = from_start
+            self.full_buffer = True
+
+    def store(self, states, policies, v): #Bx1x5x5, #Bx1x25, #Bx1x25
+        length, dim1, dim2, dim3 = states.shape
+        values = torch.ones((length, 1), dtype = torch.long)
+        moves = torch.arange(length).long().flip(0).view(-1, 1)
+        if v > 0.0:
+            indices_even = torch.arange(0, length, 2)
+            indices_odd = torch.arange(1, length, 2)
+
+            if length % 2 == 0:
+                values[indices_even, 0] = 0
+                values[indices_odd, 0] = 2
+            else:
+                values[indices_even, 0] = 2
+                values[indices_odd, 0] = 0
+
+        self.add(length, states, policies, values, moves)
+
+        policies_pass = policies[:, -1].view(-1, 1)
+        policies = policies[:, :-1].view(-1, 1, self.height, self.width)
+        self.add(length, torch.flip(states, [3]), torch.cat((torch.flip(policies, [3]).view(-1, self.actions-1), policies_pass), 1), values, moves)
+
+        for i in range(3):
+            states, policies = torch.rot90(states, 1, [2, 3]), torch.rot90(policies, 1, [2, 3])
+            self.add(length, states, torch.cat((policies.reshape(-1, self.actions - 1), policies_pass), 1), values, moves)
+            self.add(length, torch.flip(states, [3]), torch.cat((torch.flip(policies, [3]).reshape(-1, self.actions-1), policies_pass),1), values, moves)
+
+    def sample(self):
+        if self.full_buffer:
+            indices = np.random.choice(self.max_size, self.batch_size)
+        else:
+            indices = np.random.choice(self.index, self.batch_size)
+        return self.states[indices], self.policies[indices], self.values[indices], self.moves_left[indices]
+
 
 class Net_GO(Net):
     def __init__(self, input_frames, blocks, filters, size, actions):
@@ -30,7 +101,8 @@ class Net_GO(Net):
 
         self.conv_moves_left = nn.Conv2d(filters, 32, 3, stride=1, padding=1)
         self.fc1_m = nn.Linear(self.features_count, 256)
-        self.fc2_m = nn.Linear(256, self.actions)
+        # self.fc2_m = nn.Linear(256, self.actions)
+        self.fc2_m = nn.Linear(256, 200)
 
         self.apply(weights_init_xavier)
 
@@ -47,8 +119,13 @@ import datetime
 
 def selfplay(agent, model, output_list, first_move = False):
     #torch.cuda.set_device(1)
-    mem_states = torch.zeros((agent.actions, agent.games_in_iteration, 4, agent.env.height, agent.env.width), dtype=torch.int16, device = agent.device)
-    mem_policies = torch.zeros((agent.actions, agent.games_in_iteration, agent.actions), device=agent.device)
+    # mem_states = torch.zeros((agent.actions*2, agent.games_in_iteration, 4, agent.env.height, agent.env.width), dtype=torch.int16, device = agent.device)
+    # mem_policies = torch.zeros((agent.actions*2, agent.games_in_iteration, agent.actions), device=agent.device)
+
+    max_steps = 200
+    mem_states = torch.zeros((max_steps, agent.games_in_iteration, 4, agent.env.height, agent.env.width),
+                             dtype=torch.int16, device=agent.device)
+    mem_policies = torch.zeros((max_steps, agent.games_in_iteration, agent.actions), device=agent.device)
 
     game_indicies = torch.arange(agent.games_in_iteration)
     if first_move:
@@ -63,6 +140,9 @@ def selfplay(agent, model, output_list, first_move = False):
 
     step = 0
     while True:
+        if step == agent.actions*2:
+            print("ran out of steps")
+            return
         mem_states[step] = states
 
         with torch.no_grad():
@@ -81,7 +161,7 @@ def selfplay(agent, model, output_list, first_move = False):
                 index = t_index.item()
                 mcts_list.pop(index)
                 #print(states[index])
-                replay_buffer.store(mem_states[0:step, index].view(-1, 2, agent.env.height, agent.env.width).float(), mem_policies[0:step, index].view(-1, agent.actions), rewards[index].item())
+                replay_buffer.store(mem_states[0:step, index].view(-1, 4, agent.env.height, agent.env.width).float(), mem_policies[0:step, index].view(-1, agent.actions), rewards[index].item())
 
             non_terminals = torch.where(terminals == 0, agent.t_one, agent.t_zero)
             game_indicies = torch.nonzero(non_terminals)
@@ -92,8 +172,8 @@ def selfplay(agent, model, output_list, first_move = False):
                 return
 
             game_indicies = game_indicies.view(-1)
-            new_mem_states = torch.zeros((agent.actions, dim0, 2, agent.env.height, agent.env.width), device = agent.device, dtype = torch.int16)
-            new_mem_policies = torch.zeros((agent.actions, dim0, agent.actions), device = agent.device)
+            new_mem_states = torch.zeros((max_steps, dim0, 4, agent.env.height, agent.env.width), device = agent.device, dtype = torch.int16)
+            new_mem_policies = torch.zeros((max_steps, dim0, agent.actions), device = agent.device)
 
             new_mem_states[0:step] = mem_states[0:step, game_indicies]
             new_mem_policies[0:step] = mem_policies[0:step, game_indicies]
@@ -201,7 +281,7 @@ class AZAgent:
         self.t_one = self.t_one.to(self.device)
         self.t_zero = self.t_zero.to(self.device)
 
-        self.actions = self.env.height * self.env.width
+        self.actions = self.env.height * self.env.width + 1
         self.simulation_count = simulation_count
         self.name = name
         self.cpuct = cpuct
@@ -214,13 +294,16 @@ class AZAgent:
 
     def run_mcts(self, states, moves, model, mcts_list, step, noise_b = True, training = True):
         length = len(mcts_list)
-        moves_length = self.actions - step
+        # moves_length = self.actions - step
+        moves_length = -(states[:, 2].sum(2).sum(1)) + self.actions
 
-        mcts_states = torch.zeros((self.games_in_iteration, 2, self.env.height, self.env.width), device = self.device, dtype = torch.int16)
+
+        mcts_states = torch.zeros((self.games_in_iteration, 4, self.env.height, self.env.width), device = self.device, dtype = torch.int16)
         mcts_actions = torch.zeros((self.games_in_iteration, 1), device = self.device, dtype = torch.long)
         mcts_indices = torch.zeros((self.games_in_iteration), dtype = torch.long)
 
-        noise = torch.from_numpy(np.random.dirichlet(np.ones(moves_length) * self.dirichlet_alpha, length))
+
+        noise = [torch.from_numpy(np.random.dirichlet(np.ones(moves_length[i].item()) * self.dirichlet_alpha)) for i in range(moves_length.shape[0])]
         probs, values, _ = model(states.float())
         probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
         values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)

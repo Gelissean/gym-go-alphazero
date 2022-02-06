@@ -25,8 +25,8 @@ def encode(state: torch.Tensor):
                 code += ' '
     return code
 
-def change_state_and_run(env, state, action):
-    tempstate = state.reshape(4,6,6)
+def change_state_and_run(env, state, action, height=6, width=6):
+    tempstate = state.reshape(4, height, width)
     temp = numpy.array([0 for i in range(env.env.size*env.env.size)]).reshape(1,env.env.size, env.env.size)
     temp = numpy.concatenate((tempstate[0:2].numpy(), temp, tempstate[2:].numpy(), temp), 0)
     env.env.state_ = temp

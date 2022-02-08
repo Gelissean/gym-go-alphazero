@@ -19,7 +19,7 @@ class ExperienceReplay:
         self.actions = height * width
 
     def add(self, length, states, policies, values, moves_left):
-        states, policies = states.cpu(), policies.cpu()
+        # states, policies = states.cpu(), policies.cpu()
 
         new_index = self.index + length
         if new_index <= self.max_size:

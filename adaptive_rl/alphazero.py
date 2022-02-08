@@ -11,18 +11,22 @@ from replay_buffer import ExperienceReplay
 import datetime
 
 def selfplay(agent, model, output_list, first_move = False):
+
     #torch.cuda.set_device(1)
     mem_states = torch.zeros((agent.actions, agent.games_in_iteration, 2, agent.env.height, agent.env.width), dtype = torch.int16, device = agent.device)
     mem_policies = torch.zeros((agent.actions, agent.games_in_iteration, agent.actions), device = agent.device)
 
+
     game_indicies = torch.arange(agent.games_in_iteration)
     if first_move:
         states, moves = agent.env.first_move_states(agent.games_in_iteration)
+
         mcts_actions = 1
     else:
         states, moves = agent.env.zero_states(agent.games_in_iteration)
         mcts_actions = 0
     replay_buffer = ExperienceReplay(agent.actions * agent.games_in_iteration * 8 + 1, agent.env.height, agent.env.width, 0)
+
 
     mcts_list = [MCTS(agent.cpuct) for i in range(agent.games_in_iteration)]
 
@@ -30,6 +34,8 @@ def selfplay(agent, model, output_list, first_move = False):
     while True:
         mem_states[step] = states
 
+
+        print(states)
         with torch.no_grad():
             actions, policies = agent.run_mcts(states, moves, model, mcts_list, mcts_actions, True)
         mem_policies[step] = policies
@@ -48,7 +54,7 @@ def selfplay(agent, model, output_list, first_move = False):
                 #print(states[index])
                 replay_buffer.store(mem_states[0:step, index].view(-1, 2, agent.env.height, agent.env.width).float(), mem_policies[0:step, index].view(-1, agent.actions), rewards[index].item())
 
-            non_terminals = torch.where(terminals == 0, agent.t_one, agent.t_zero)
+            non_terminals = torch.where(terminals == 0, agent.t_one.cpu(), agent.t_zero.cpu())
             game_indicies = torch.nonzero(non_terminals)
             dim0, dim1 = game_indicies.shape
 
@@ -67,7 +73,7 @@ def selfplay(agent, model, output_list, first_move = False):
             states, moves = states[game_indicies], moves[game_indicies]
 
 def arena(agent, model, indices, output_list):
-    #torch.cuda.set_device(1)
+    # torch.cuda.set_device(1)
     win, loss, draw = 0, 0, 0
     model2 = copy.deepcopy(model)
     model2.to(agent.device)
@@ -106,7 +112,7 @@ def arena(agent, model, indices, output_list):
     output_list.append((win, loss, draw))
 
 def arena_training(agent, current_model, best_model, output_list, games = 5, player1 = True):
-    #torch.cuda.set_device(1)
+    # torch.cuda.set_device(1)
     win, loss, draw = 0, 0, 0
     mcts1 = [MCTS(agent.cpuct) for i in range(games)]
     mcts2 = [MCTS(agent.cpuct) for i in range(games)]
@@ -156,7 +162,7 @@ def arena_training(agent, current_model, best_model, output_list, games = 5, pla
 class AZAgent:
     def __init__(self, env, device, simulation_count = 100, cpuct = 1.25, dirichlet_alpha = 0.15, exploration_fraction = 0.25,
                  name = 'azt', games_in_iteration = 200):
-        #torch.cuda.set_device(1)
+        # torch.cuda.set_device(1)
         self.env = env
 
         self.t_one = torch.tensor([1])
@@ -186,10 +192,10 @@ class AZAgent:
         mcts_indices = torch.zeros((self.games_in_iteration), dtype = torch.long)
 
         noise = torch.from_numpy(np.random.dirichlet(np.ones(moves_length) * self.dirichlet_alpha, length))
-        probs, values, _ = model(states.float())
+
         probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
-        values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
-        states, moves, probs, values = states.cpu(), moves.cpu(), probs.cpu(), values.cpu()
+        values = (torch.argmax(values, dim = 1) - 1).view(-1, 1).cuda()
+        # states, moves, probs, values = states.cpu(), moves.cpu(), probs.cpu(), values.cpu()
 
         index = 0
         for i in range(length):
@@ -223,9 +229,10 @@ class AZAgent:
             if index > 0:
                 states, rewards, moves, terminals = self.env.step(mcts_actions[0:index], mcts_states[0:index])
                 probs, values, _ = model(states.float())
+
                 probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
                 values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
-                states, moves, probs, values, rewards, terminals = states.cpu(), moves.cpu(), probs.cpu(), values.cpu(), rewards.cpu(), terminals.cpu()
+                # states, moves, probs, values, rewards, terminals = states.cpu(), moves.cpu(), probs.cpu(), values.cpu(), rewards.cpu(), terminals.cpu()
 
                 for i in range(index):
                     mcts_index = mcts_indices[i]

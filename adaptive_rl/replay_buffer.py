@@ -3,8 +3,8 @@ import torch
 
 class ExperienceReplay:
     def __init__(self, size, height, width, batch_size):
-        self.states = torch.zeros((size, 4, height, width), dtype = torch.int16)
-        self.policies = torch.zeros((size, height * width+1))
+        self.states = torch.zeros((size, 2, height, width), dtype = torch.int16)
+        self.policies = torch.zeros((size, height * width))
         self.values = torch.zeros((size, 1), dtype = torch.long)
         self.moves_left = torch.zeros((size, 1), dtype = torch.long)
 
@@ -16,7 +16,7 @@ class ExperienceReplay:
 
         self.height = height
         self.width = width
-        self.actions = height * width + 1
+        self.actions = height * width
 
     def add(self, length, states, policies, values, moves_left):
         states, policies = states.cpu(), policies.cpu()
@@ -62,15 +62,13 @@ class ExperienceReplay:
 
         self.add(length, states, policies, values, moves)
 
-        policies = policies.view(-1, 1, self.actions) # self.height, self.width)
-        policies_temp = policies[:, :, 0:36].view(-1, 1, self.height, self.width)
-        rotated = torch.cat((torch.flip(policies_temp, [3]).view(-1, 1, self.height*self.width), policies[:, :, self.height*self.width:]), 2)
-        self.add(length, torch.flip(states, [3]), rotated.view(-1, self.actions), values, moves)
+        policies = policies.view(-1, 1, self.height, self.width)
+        self.add(length, torch.flip(states, [3]), torch.flip(policies, [3]).view(-1, self.actions), values, moves)
 
         for i in range(3):
-            states, policies_temp = torch.rot90(states, 1, [2, 3]), torch.rot90(policies_temp, 1, [2, 3])
-            self.add(length, states, torch.cat((policies_temp.reshape(-1,1, self.height * self.width), policies[:, :, self.height*self.width:]), 2).view(-1, self.actions), values, moves)
-            self.add(length, torch.flip(states, [3]), torch.cat((torch.flip(policies_temp, [3]).reshape(-1, 1, self.height * self.width), policies[:, :, self.height*self.width:]), 2).view(-1, self.actions), values, moves)
+            states, policies = torch.rot90(states, 1, [2, 3]), torch.rot90(policies, 1, [2, 3])
+            self.add(length, states, policies.reshape(-1, self.actions), values, moves)
+            self.add(length, torch.flip(states, [3]), torch.flip(policies, [3]).reshape(-1, self.actions), values, moves)
 
     def sample(self):
         if self.full_buffer:

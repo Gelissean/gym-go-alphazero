@@ -7,19 +7,21 @@ import torch.nn.init as init
 import torch.nn.functional as F
 import torch.optim as optim
 from torch.multiprocessing import Manager, Process, set_start_method
-from tictactoe_gpu import TicTacToe
-from alphazero import AZAgent, selfplay, arena_training
-from replay_buffer import ExperienceReplay
-from net import Net
+from alphazero_modded import AZAgent, selfplay, arena_training, Net_GO, Experience_buffer_GO
+from adaptive_rl.replay_buffer import ExperienceReplay
+from adaptive_rl.net import Net
 import datetime
 
+from environment.Env_Go import Env_Go
+
 if __name__ == '__main__':
-    width = 6
-    height = 6
-    win_count = 4
-    repaly_buffer_size = 1000000
+    games_in_iteration = 16
+
+    board_size = 6
+    komi = 0
+    replay_buffer_size = 1000000
     batch_size = 15000
-    actions = width * height
+    actions = board_size * board_size + 1
     iteration_count = 1000
     weight_decay = 0.0001
     lr = 0.01
@@ -30,16 +32,16 @@ if __name__ == '__main__':
     cross_entropy_moves = nn.CrossEntropyLoss()
 
     batches_in_iteration = 10
-    cpus = 1 #6
-    name = 'azt_a6_6_7'
+    cpus = 1  # 6
+    name = 'go_6_0_1'
 
     #torch.cuda.set_device(1)
 
     set_start_method('spawn')
 
-    env = TicTacToe(width = width, height = height, win_count = win_count)
+    env = Env_Go()
 
-    current_model = Net(2, 7, 64, actions)
+    current_model = Net_GO(4, 7, 64, board_size*board_size, actions)
 
     #net.share_memory()
     optimizer = optim.Adam(current_model.parameters(), lr=lrs[0], weight_decay = weight_decay)
@@ -50,8 +52,8 @@ if __name__ == '__main__':
     best_model = copy.deepcopy(current_model)
     best_model.to(device)
 
-    agent = AZAgent(env, device = device, games_in_iteration = 5, simulation_count = 10, name = name)
-    replay_buffer = ExperienceReplay(repaly_buffer_size, height, width, batch_size)
+    agent = AZAgent(env, device = device, games_in_iteration = games_in_iteration, simulation_count = 10, name = name)
+    replay_buffer = Experience_buffer_GO(replay_buffer_size, board_size, board_size, batch_size)
 
     model_index = 0
     for iteration in range(iteration_count):

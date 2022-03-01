@@ -122,6 +122,9 @@ def selfplay(agent, model, output_list, first_move = False):
     # mem_states = torch.zeros((agent.actions*2, agent.games_in_iteration, 4, agent.env.height, agent.env.width), dtype=torch.int16, device = agent.device)
     # mem_policies = torch.zeros((agent.actions*2, agent.games_in_iteration, agent.actions), device=agent.device)
 
+    agent.t_one = torch.tensor([1],device=agent.device)
+    agent.env.t_one = torch.tensor([1], device=agent.device)
+
     max_steps = 200
     mem_states = torch.zeros((max_steps, agent.games_in_iteration, 4, agent.env.height, agent.env.width),
                              dtype=torch.int16, device=agent.device)
@@ -183,11 +186,16 @@ def selfplay(agent, model, output_list, first_move = False):
 
 def arena(agent, model, indices, output_list):
     #torch.cuda.set_device(1)
+
+    agent.t_one = torch.tensor([1],device=agent.device)
+    agent.env.t_one = torch.tensor([1], device=agent.device)
+
     win, loss, draw = 0, 0, 0
     model2 = copy.deepcopy(model)
     model2.to(agent.device)
     for index in indices:
-        model2.load_state_dict(torch.load('models/' + agent.name + '_' + str(index.item()) + '.pt'))
+        # net.load_state_dict(torch.load('models/' + name + '_' + str(game) + '.pt'))
+        model2.load_state_dict(torch.load('saves/subor.state_dict'))
 
         for i in range(2):
             player1 = i % 2 == 0
@@ -208,6 +216,8 @@ def arena(agent, model, indices, output_list):
                 step += 1
 
                 if terminal[0] > 0:
+                    print("game ended in: " + str(step) + " steps")
+                    print("score: " + str(r))
                     if r > 0:
                         if player1:
                             win += 1

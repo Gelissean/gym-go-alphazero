@@ -61,24 +61,21 @@ class Env_Go(Environment, ABC):
 
     def possible_moves(self, states):
         legal_moves = torch.where(states[:, 2] == 0, self.t_one, self.t_zero).view(-1, self.max_moves - 1).long()
-        pass_legality = torch.ones(states.shape[0]).view(-1, 1)
+        pass_legality = torch.ones(states.shape[0], device=self.device).view(-1, 1)
         return torch.cat((legal_moves, pass_legality), 1)
 
     def step(self, actions, states):
         self._init_boards(states.shape[0])
         possible_moves = self.possible_moves(states)
+        terminals = torch.zeros(states.size(0))
         for i in range(len(self.envs)):
-            states[i], self.rewards[i], moves, terminals = \
+            states[i], self.rewards[i], moves, terminals[i] = \
                 change_state_and_run(self.envs[i],
                                      states[i],
                                      actions[i],
                                      possible_moves[i],
                                      self.size, self.size)
         moves = self.possible_moves(states)
-        terminals = torch.where(states[:, 3, 0, 0] == 1, self.t_one, self.t_zero)
-        # for i in range(terminals.shape[0]):
-        #     if terminals[i].item() == 1:
-        #         self.envs[i].reset()
         return states, self.rewards, moves, terminals  # states, rewards, moves, terminals
 
 

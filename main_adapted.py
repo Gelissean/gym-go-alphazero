@@ -35,7 +35,7 @@ if __name__ == '__main__':
     cpus = 1  # 6
     name = 'go_6_0_1'
 
-    #torch.cuda.set_device(1)
+    torch.cuda.set_device(0)
 
     set_start_method('spawn')
 
@@ -134,3 +134,4 @@ if __name__ == '__main__':
 
         torch.cuda.empty_cache()
         print(datetime.datetime.now() - start)
+        torch.save(best_model.state_dict(), "saves/subor.state_dict")

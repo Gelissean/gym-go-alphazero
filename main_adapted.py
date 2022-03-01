@@ -134,3 +134,4 @@ if __name__ == '__main__':
 
         torch.cuda.empty_cache()
         print(datetime.datetime.now() - start)
+        torch.save(best_model.state_dict(), "saves/subor.state_dict")

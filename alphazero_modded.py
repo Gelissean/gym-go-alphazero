@@ -122,6 +122,9 @@ def selfplay(agent, model, output_list, first_move = False):
     # mem_states = torch.zeros((agent.actions*2, agent.games_in_iteration, 4, agent.env.height, agent.env.width), dtype=torch.int16, device = agent.device)
     # mem_policies = torch.zeros((agent.actions*2, agent.games_in_iteration, agent.actions), device=agent.device)
 
+    agent.t_one = torch.tensor([1],device=agent.device)
+    agent.env.t_one = torch.tensor([1], device=agent.device)
+
     max_steps = 200
     mem_states = torch.zeros((max_steps, agent.games_in_iteration, 4, agent.env.height, agent.env.width),
                              dtype=torch.int16, device=agent.device)
@@ -183,6 +186,10 @@ def selfplay(agent, model, output_list, first_move = False):
 
 def arena(agent, model, indices, output_list):
     #torch.cuda.set_device(1)
+
+    agent.t_one = torch.tensor([1],device=agent.device)
+    agent.env.t_one = torch.tensor([1], device=agent.device)
+
     win, loss, draw = 0, 0, 0
     model2 = copy.deepcopy(model)
     model2.to(agent.device)

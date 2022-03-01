@@ -61,7 +61,7 @@ class Env_Go(Environment, ABC):
 
     def possible_moves(self, states):
         legal_moves = torch.where(states[:, 2] == 0, self.t_one, self.t_zero).view(-1, self.max_moves - 1).long()
-        pass_legality = torch.ones(states.shape[0]).view(-1, 1)
+        pass_legality = torch.ones(states.shape[0], device=self.device).view(-1, 1)
         return torch.cat((legal_moves, pass_legality), 1)
 
     def step(self, actions, states):

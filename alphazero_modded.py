@@ -194,7 +194,8 @@ def arena(agent, model, indices, output_list):
     model2 = copy.deepcopy(model)
     model2.to(agent.device)
     for index in indices:
-        model2.load_state_dict(torch.load('models/' + agent.name + '_' + str(index.item()) + '.pt'))
+        # net.load_state_dict(torch.load('models/' + name + '_' + str(game) + '.pt'))
+        model2.load_state_dict(torch.load('saves/subor.state_dict'))
 
         for i in range(2):
             player1 = i % 2 == 0
@@ -215,6 +216,8 @@ def arena(agent, model, indices, output_list):
                 step += 1
 
                 if terminal[0] > 0:
+                    print("game ended in: " + str(step) + " steps")
+                    print("score: " + str(r))
                     if r > 0:
                         if player1:
                             win += 1

@@ -313,7 +313,7 @@ class AZAgent:
         mcts_indices = torch.zeros((self.games_in_iteration), dtype = torch.long)
 
 
-        noise = [torch.from_numpy(np.random.dirichlet(np.ones(moves_length[i].item()) * self.dirichlet_alpha)) for i in range(moves_length.shape[0])]
+        noise = [torch.from_numpy(np.random.dirichlet(np.ones(moves_length[i].short().item()) * self.dirichlet_alpha)) for i in range(moves_length.shape[0])]
         probs, values, _ = model(states.float())
         probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
         values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)

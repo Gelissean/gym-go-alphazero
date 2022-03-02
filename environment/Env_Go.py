@@ -82,6 +82,7 @@ class Env_Go(Environment, ABC):
 
         moves = gogame.batch_valid_moves(batch_states)
         moves = torch.from_numpy(moves)
+        moves = moves.short()
         moves.to(self.device)
 
         terminals = torch.tensor(batch_gameover, device=self.device)

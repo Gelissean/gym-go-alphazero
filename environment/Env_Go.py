@@ -5,10 +5,12 @@ from environment.Environment import Environment
 import torch
 import gym
 from utils import change_state_and_run
+from gym_go import gogame
+import numpy
 
 
 class Env_Go(Environment, ABC):
-    def __init__(self, size=6, komi=0, reward_method="real"):
+    def __init__(self, size=6, komi=0, reward_method="real", device="cpu"):
         self.size = size
         self.width = size
         self.height = size
@@ -18,8 +20,9 @@ class Env_Go(Environment, ABC):
         self.komi = komi
         self.reward_method = reward_method
 
-        self.t_one = torch.tensor([1])
-        self.t_zero = torch.tensor([0])
+        self.device = device
+        self.t_one = torch.tensor([1], device=self.device)
+        self.t_zero = torch.tensor([0], device=self.device)
         self.envs = []
         self.rewards = []
         # self.check_kernels_length = len(possible_win)
@@ -33,13 +36,11 @@ class Env_Go(Environment, ABC):
 
     #returns state at the beginning of the game
     def zero_states(self, count):
-        self._init_boards(count)
         return torch.zeros((count, 4, self.size, self.size), dtype=torch.int16, device = self.device) ,\
                torch.ones((count, self.max_moves), device = self.device, dtype = torch.long) #Bx4x6x6, Bx37
 
     # returns groups of states as if the player was starting second
     def first_move_states(self, count):
-        self._init_boards(count)
         state_size = self.max_moves - 1
         rep = count // state_size
         mod = count % state_size
@@ -56,28 +57,37 @@ class Env_Go(Environment, ABC):
         moves_indices = order * self.max_moves + indices
         moves[moves_indices] = 0
         return torch.cat(((states.view(count, 3, self.size, self.size)),
-                          torch.ones(count, 1, self.size, self.size, device=self.device)), 1),\
+                          torch.zeros(count, 1, self.size, self.size, device=self.device)), 1),\
                moves.view(-1, self.max_moves)
 
     def possible_moves(self, states):
         legal_moves = torch.where(states[:, 2] == 0, self.t_one, self.t_zero).view(-1, self.max_moves - 1).long()
-        pass_legality = torch.ones(states.shape[0], device=self.device).view(-1, 1)
+        pass_legality = torch.ones(states.shape[0], device=self.device, dtype=torch.int16).view(-1, 1)
         return torch.cat((legal_moves, pass_legality), 1)
 
     def step(self, actions, states):
-        self._init_boards(states.shape[0])
-        possible_moves = self.possible_moves(states)
-        terminals = torch.zeros(states.size(0), device=self.device)
-        for i in range(len(self.envs)):
-            states[i], self.rewards[i], moves, terminals[i] = \
-                change_state_and_run(self.envs[i],
-                                     states[i],
-                                     actions[i],
-                                     possible_moves[i],
-                                     self.size, self.size,
-                                     device=self.device)
-        moves = self.possible_moves(states)
-        return states, self.rewards, moves, terminals  # states, rewards, moves, terminals
+
+        zeros = torch.zeros((states.shape[0]), 1, self.height, self.width, device=self.device, dtype=torch.int16)
+        temp_states = torch.cat((states[:, :3], zeros, states[:, 3:], zeros), 1)
+
+        batch_states = gogame.batch_next_states(temp_states.detach().cpu().numpy(), actions.reshape(-1).detach().cpu().numpy())
+
+        new_states = torch.from_numpy(numpy.delete(batch_states, [2,5],1))
+        new_states = new_states.to(self.device)
+        batch_gameover = gogame.batch_game_ended(batch_states)
+        batch_rewards = gogame.batch_winning(batch_states, self.komi)
+
+        rewards = batch_gameover*batch_rewards
+        rewards = torch.tensor(rewards, device=self.device)
+
+        moves = gogame.batch_valid_moves(batch_states)
+        moves = torch.from_numpy(moves)
+        moves.to(self.device)
+
+        terminals = torch.tensor(batch_gameover, device=self.device)
+
+        #moves = self.possible_moves(states)
+        return new_states, rewards, moves, terminals  # states, rewards, moves, terminals
 
 
     def show_board(self, state, cx='B', co='W'):

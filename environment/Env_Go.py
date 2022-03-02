@@ -43,14 +43,14 @@ class Env_Go(Environment, ABC):
         state_size = self.max_moves - 1
         rep = count // state_size
         mod = count % state_size
-        order = torch.arange(count)
-        indices = torch.arange(state_size).repeat(rep)
+        order = torch.arange(count, device=self.device)
+        indices = torch.arange(state_size, device=self.device).repeat(rep)
         if mod != 0:
             indices = torch.cat((indices, torch.arange(mod)), 0)
         states_indices = order * (3 * state_size) + indices + state_size
         states_indices2 = order * (3 * state_size) + indices + state_size*2
-        states = torch.zeros((count, 3, self.size, self.size), dtype=torch.int16).view(-1) # Bx1xHxW
-        moves = torch.ones((count, self.max_moves), dtype=torch.long).view(-1)  # Bx(WxH+1)
+        states = torch.zeros((count, 3, self.size, self.size), dtype=torch.int16, device=self.device).view(-1) # Bx1xHxW
+        moves = torch.ones((count, self.max_moves), dtype=torch.long, device=self.device).view(-1)  # Bx(WxH+1)
         states[states_indices] = 1
         states[states_indices2] = 1
         moves_indices = order * self.max_moves + indices
@@ -67,14 +67,15 @@ class Env_Go(Environment, ABC):
     def step(self, actions, states):
         self._init_boards(states.shape[0])
         possible_moves = self.possible_moves(states)
-        terminals = torch.zeros(states.size(0))
+        terminals = torch.zeros(states.size(0), device=self.device)
         for i in range(len(self.envs)):
             states[i], self.rewards[i], moves, terminals[i] = \
                 change_state_and_run(self.envs[i],
                                      states[i],
                                      actions[i],
                                      possible_moves[i],
-                                     self.size, self.size)
+                                     self.size, self.size,
+                                     device=self.device)
         moves = self.possible_moves(states)
         return states, self.rewards, moves, terminals  # states, rewards, moves, terminals
 

@@ -8,7 +8,7 @@ from utils import change_state_and_run
 
 
 class Env_Go(Environment, ABC):
-    def __init__(self, size=6, komi=0, reward_method="heuristic"):
+    def __init__(self, size=6, komi=0, reward_method="real"):
         self.size = size
         self.width = size
         self.height = size

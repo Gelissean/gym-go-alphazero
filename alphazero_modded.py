@@ -143,7 +143,7 @@ def selfplay(agent, model, output_list, first_move = False):
 
     step = 0
     while True:
-        if step == agent.actions*2:
+        if step == max_steps:
             print("ran out of steps")
             return
         mem_states[step] = states

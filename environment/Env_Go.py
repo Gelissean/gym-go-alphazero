@@ -46,7 +46,7 @@ class Env_Go(Environment, ABC):
         order = torch.arange(count, device=self.device)
         indices = torch.arange(state_size, device=self.device).repeat(rep)
         if mod != 0:
-            indices = torch.cat((indices, torch.arange(mod)), 0)
+            indices = torch.cat((indices, torch.arange(mod, device=self.device)), 0)
         states_indices = order * (3 * state_size) + indices + state_size
         states_indices2 = order * (3 * state_size) + indices + state_size*2
         states = torch.zeros((count, 3, self.size, self.size), dtype=torch.int16, device=self.device).view(-1) # Bx1xHxW
@@ -56,7 +56,7 @@ class Env_Go(Environment, ABC):
         moves_indices = order * self.max_moves + indices
         moves[moves_indices] = 0
         return torch.cat(((states.view(count, 3, self.size, self.size)),
-                          torch.ones(count, 1, self.size, self.size)), 1),\
+                          torch.ones(count, 1, self.size, self.size, device=self.device)), 1),\
                moves.view(-1, self.max_moves)
 
     def possible_moves(self, states):

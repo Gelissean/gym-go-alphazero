@@ -6,8 +6,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.multiprocessing as mp
-from mcts import MCTS, Node
-from replay_buffer import ExperienceReplay
+from adaptive_rl.mcts import MCTS, Node
+from adaptive_rl.replay_buffer import ExperienceReplay
 import datetime
 
 def selfplay(agent, model, output_list, first_move = False):

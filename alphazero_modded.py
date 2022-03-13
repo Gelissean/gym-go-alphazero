@@ -195,7 +195,7 @@ def arena(agent, model, indices, output_list):
     model2.to(agent.device)
     for index in indices:
         # net.load_state_dict(torch.load('models/' + name + '_' + str(game) + '.pt'))
-        model2.load_state_dict(torch.load('saves/subor.state_dict'))
+        model2.load_state_dict(torch.load('models/go_6_0_1_6.pt'))
 
         for i in range(2):
             player1 = i % 2 == 0
@@ -218,13 +218,18 @@ def arena(agent, model, indices, output_list):
                 if terminal[0] > 0:
                     print("game ended in: " + str(step) + " steps")
                     print("score: " + str(r))
-                    if r > 0:
-                        if player1:
-                            win += 1
-                        else:
-                            loss += 1
+                if r > 0:
+                    if player1:
+                        win += 1
                     else:
-                        draw += 1
+                        loss += 1
+                elif r < 0:
+                    if player1:
+                        loss += 1
+                    else:
+                        win += 1
+                else:
+                    draw += 1
                     break
 
                 player1 = not player1
@@ -238,6 +243,8 @@ def arena_training(agent, current_model, best_model, output_list, games = 5, pla
 
     states, moves = agent.env.zero_states(games)
     step = 0
+
+    starting_player1 = player1
 
     while True:
         with torch.no_grad():
@@ -262,6 +269,11 @@ def arena_training(agent, current_model, best_model, output_list, games = 5, pla
                         win += 1
                     else:
                         loss += 1
+                elif rewards[index] < 0:
+                    if player1:
+                        loss += 1
+                    else:
+                        win += 1
                 else:
                     draw += 1
 
@@ -313,7 +325,7 @@ class AZAgent:
         mcts_indices = torch.zeros((self.games_in_iteration), dtype = torch.long)
 
 
-        noise = [torch.from_numpy(np.random.dirichlet(np.ones(moves_length[i].item()) * self.dirichlet_alpha)) for i in range(moves_length.shape[0])]
+        noise = [torch.from_numpy(np.random.dirichlet(np.ones(moves_length[i].short().item()) * self.dirichlet_alpha)) for i in range(moves_length.shape[0])]
         probs, values, _ = model(states.float())
         probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
         values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)

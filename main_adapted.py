@@ -15,7 +15,7 @@ import datetime
 from environment.Env_Go import Env_Go
 
 if __name__ == '__main__':
-    games_in_iteration = 16
+    games_in_iteration = 128
 
     board_size = 6
     komi = 0
@@ -32,8 +32,8 @@ if __name__ == '__main__':
     cross_entropy_moves = nn.CrossEntropyLoss()
 
     batches_in_iteration = 10
-    cpus = 1  # 6
-    name = 'go_6_0_1'
+    cpus = 2  # 6
+    name = 'go_6_0_4'
 
     torch.cuda.set_device(0)
 
@@ -42,6 +42,14 @@ if __name__ == '__main__':
     env = Env_Go()
 
     current_model = Net_GO(4, 7, 64, board_size*board_size, actions)
+
+    load = True
+
+    if load:
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        print('device: ', device)
+        current_model.load_state_dict(torch.load("saves/subor.state_dict"))
+        current_model.eval()
 
     #net.share_memory()
     optimizer = optim.Adam(current_model.parameters(), lr=lrs[0], weight_decay = weight_decay)
@@ -52,8 +60,10 @@ if __name__ == '__main__':
     best_model = copy.deepcopy(current_model)
     best_model.to(device)
 
-    agent = AZAgent(env, device = device, games_in_iteration = games_in_iteration, simulation_count = 10, name = name)
+    agent = AZAgent(env, device = device, games_in_iteration = games_in_iteration, simulation_count = 200, name = name)
     replay_buffer = Experience_buffer_GO(replay_buffer_size, board_size, board_size, batch_size)
+
+    #torch.load(best_model.state_dict(), "saves/subor.state_dict")
 
     model_index = 0
     for iteration in range(iteration_count):
@@ -108,7 +118,7 @@ if __name__ == '__main__':
         with Manager() as manager:
             output_list = manager.list()
             processes = []
-            for i in range(cpus // 2):
+            for i in range(cpus):  # // 2):
                 p = Process(target=arena_training, args=(agent, current_model, best_model, output_list, 10, i % 2 == 0))
                 p.start()
                 processes.append(p)

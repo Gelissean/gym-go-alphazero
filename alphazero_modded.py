@@ -80,6 +80,13 @@ class Experience_buffer_GO(ExperienceReplay):
         return self.states[indices], self.policies[indices], self.values[indices], self.moves_left[indices]
 
 
+import torch.nn.init as init
+
+def weights_init_orthogonal(m):
+    classname = m.__class__.__name__
+    if classname.find('Conv') != -1 or classname.find('Linear') != -1:
+        init.orthogonal_(m.weight)
+
 class Net_GO(Net):
     def __init__(self, input_frames, blocks, filters, size, actions):
         super(Net, self).__init__()
@@ -104,7 +111,7 @@ class Net_GO(Net):
         # self.fc2_m = nn.Linear(256, self.actions)
         self.fc2_m = nn.Linear(256, 200)
 
-        self.apply(weights_init_xavier)
+        self.apply(weights_init_orthogonal)
 
 import math
 import copy

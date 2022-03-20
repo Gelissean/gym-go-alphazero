@@ -81,6 +81,11 @@ class Env_Go(Environment, ABC):
         rewards = torch.tensor(rewards, device=self.device)
 
         moves = gogame.batch_valid_moves(batch_states)
+
+        invalid_move_count = numpy.sum(numpy.sum(batch_states[:, 3], 2), 1)
+        pass_legality = numpy.where(invalid_move_count > 22, 1, 0)
+        moves[:, -1] = pass_legality
+
         moves = torch.from_numpy(moves)
         moves.to(self.device)
 

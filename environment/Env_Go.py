@@ -72,7 +72,7 @@ class Env_Go(Environment, ABC):
 
         batch_states = gogame.batch_next_states(temp_states.detach().cpu().numpy(), actions.reshape(-1).detach().cpu().numpy())
 
-        new_states = torch.from_numpy(numpy.delete(batch_states, [2,5],1))
+        new_states = torch.from_numpy(numpy.delete(batch_states, [2, 3, 5],1))
         new_states = new_states.to(self.device)
         batch_gameover = gogame.batch_game_ended(batch_states)
         batch_rewards = gogame.batch_winning(batch_states, self.komi)

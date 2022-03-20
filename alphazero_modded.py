@@ -317,7 +317,8 @@ class AZAgent:
     def run_mcts(self, states, moves, model, mcts_list, step, noise_b = True, training = True):
         length = len(mcts_list)
         # moves_length = self.actions - step
-        moves_length = -(states[:, 2].sum(2).sum(1)) + self.actions
+        # moves_length = -(states[:, 2].sum(2).sum(1)) + self.actions
+        moves_length = moves.sum(1)
 
 
         mcts_states = torch.zeros((self.games_in_iteration, 4, self.env.height, self.env.width), device = self.device, dtype = torch.int16)

@@ -41,14 +41,14 @@ if __name__ == '__main__':
 
     env = Env_Go()
 
-    current_model = Net_GO(4, 7, 64, board_size*board_size, actions)
+    current_model = Net_GO(3, 7, 64, board_size*board_size, actions)
 
     load = True
 
     if load:
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print('device: ', device)
-        current_model.load_state_dict(torch.load("saves/subor.state_dict"))
+        current_model.load_state_dict(torch.load("saves/subor_3_vrstvy.state_dict"))
         current_model.eval()
 
     #net.share_memory()
@@ -119,7 +119,7 @@ if __name__ == '__main__':
             output_list = manager.list()
             processes = []
             for i in range(cpus):  # // 2):
-                p = Process(target=arena_training, args=(agent, current_model, best_model, output_list, 10, i % 2 == 0))
+                p = Process(target=arena_training, args=(agent, current_model, best_model, output_list, min(10, games_in_iteration), i % 2 == 0))
                 p.start()
                 processes.append(p)
             for p in processes:
@@ -144,4 +144,4 @@ if __name__ == '__main__':
 
         torch.cuda.empty_cache()
         print(datetime.datetime.now() - start)
-        torch.save(best_model.state_dict(), "saves/subor.state_dict")
+        torch.save(best_model.state_dict(), "saves/subor_3_vrstvy.state_dict")

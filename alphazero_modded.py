@@ -80,6 +80,13 @@ class Experience_buffer_GO(ExperienceReplay):
         return self.states[indices], self.policies[indices], self.values[indices], self.moves_left[indices]
 
 
+import torch.nn.init as init
+
+def weights_init_orthogonal(m):
+    classname = m.__class__.__name__
+    if classname.find('Conv') != -1 or classname.find('Linear') != -1:
+        init.orthogonal_(m.weight)
+
 class Net_GO(Net):
     def __init__(self, input_frames, blocks, filters, size, actions):
         super(Net, self).__init__()
@@ -104,7 +111,7 @@ class Net_GO(Net):
         # self.fc2_m = nn.Linear(256, self.actions)
         self.fc2_m = nn.Linear(256, 200)
 
-        self.apply(weights_init_xavier)
+        self.apply(weights_init_orthogonal)
 
 import math
 import copy
@@ -195,7 +202,7 @@ def arena(agent, model, indices, output_list):
     model2.to(agent.device)
     for index in indices:
         # net.load_state_dict(torch.load('models/' + name + '_' + str(game) + '.pt'))
-        model2.load_state_dict(torch.load('saves/subor.state_dict'))
+        model2.load_state_dict(torch.load('models/go_6_0_1_6.pt'))
 
         for i in range(2):
             player1 = i % 2 == 0
@@ -218,13 +225,18 @@ def arena(agent, model, indices, output_list):
                 if terminal[0] > 0:
                     print("game ended in: " + str(step) + " steps")
                     print("score: " + str(r))
-                    if r > 0:
-                        if player1:
-                            win += 1
-                        else:
-                            loss += 1
+                if r > 0:
+                    if player1:
+                        win += 1
                     else:
-                        draw += 1
+                        loss += 1
+                elif r < 0:
+                    if player1:
+                        loss += 1
+                    else:
+                        win += 1
+                else:
+                    draw += 1
                     break
 
                 player1 = not player1
@@ -238,6 +250,8 @@ def arena_training(agent, current_model, best_model, output_list, games = 5, pla
 
     states, moves = agent.env.zero_states(games)
     step = 0
+
+    starting_player1 = player1
 
     while True:
         with torch.no_grad():
@@ -262,6 +276,11 @@ def arena_training(agent, current_model, best_model, output_list, games = 5, pla
                         win += 1
                     else:
                         loss += 1
+                elif rewards[index] < 0:
+                    if player1:
+                        loss += 1
+                    else:
+                        win += 1
                 else:
                     draw += 1
 
@@ -305,7 +324,8 @@ class AZAgent:
     def run_mcts(self, states, moves, model, mcts_list, step, noise_b = True, training = True):
         length = len(mcts_list)
         # moves_length = self.actions - step
-        moves_length = -(states[:, 2].sum(2).sum(1)) + self.actions
+        # moves_length = -(states[:, 2].sum(2).sum(1)) + self.actions
+        moves_length = moves.sum(1)
 
 
         mcts_states = torch.zeros((self.games_in_iteration, 4, self.env.height, self.env.width), device = self.device, dtype = torch.int16)
@@ -350,7 +370,7 @@ class AZAgent:
 
             if index > 0:
                 states, rewards, moves, terminals = self.env.step(mcts_actions[0:index], mcts_states[0:index])
-                probs, values, _ = model(states.float())
+                probs, values, _ = model(states[:,[0,1,3]].float())
                 probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
                 values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
                 states, moves, probs, values, rewards, terminals = states.cpu(), moves.cpu(), probs.cpu(), values.cpu(), rewards.cpu(), terminals.cpu()

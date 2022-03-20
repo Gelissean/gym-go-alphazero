@@ -15,7 +15,7 @@ import datetime
 from environment.Env_Go import Env_Go
 
 if __name__ == '__main__':
-    games_in_iteration = 16
+    games_in_iteration = 128
 
     board_size = 6
     komi = 0
@@ -32,8 +32,8 @@ if __name__ == '__main__':
     cross_entropy_moves = nn.CrossEntropyLoss()
 
     batches_in_iteration = 10
-    cpus = 1  # 6
-    name = 'go_6_0_1'
+    cpus = 2  # 6
+    name = 'go_6_0_4'
 
     torch.cuda.set_device(0)
 
@@ -41,7 +41,15 @@ if __name__ == '__main__':
 
     env = Env_Go()
 
-    current_model = Net_GO(4, 7, 64, board_size*board_size, actions)
+    current_model = Net_GO(3, 7, 64, board_size*board_size, actions)
+
+    load = True
+
+    if load:
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        print('device: ', device)
+        current_model.load_state_dict(torch.load("saves/subor_3_vrstvy.state_dict"))
+        current_model.eval()
 
     #net.share_memory()
     optimizer = optim.Adam(current_model.parameters(), lr=lrs[0], weight_decay = weight_decay)
@@ -52,8 +60,10 @@ if __name__ == '__main__':
     best_model = copy.deepcopy(current_model)
     best_model.to(device)
 
-    agent = AZAgent(env, device = device, games_in_iteration = games_in_iteration, simulation_count = 10, name = name)
+    agent = AZAgent(env, device = device, games_in_iteration = games_in_iteration, simulation_count = 200, name = name)
     replay_buffer = Experience_buffer_GO(replay_buffer_size, board_size, board_size, batch_size)
+
+    #torch.load(best_model.state_dict(), "saves/subor.state_dict")
 
     model_index = 0
     for iteration in range(iteration_count):
@@ -87,7 +97,7 @@ if __name__ == '__main__':
         for b in range(batches_in_iteration):
             optimizer.zero_grad()
             states, target_policies, target_values, target_moves = replay_buffer.sample()
-            model_policies, model_values, model_left_moves = current_model(states.to(device).float())
+            model_policies, model_values, model_left_moves = current_model(states[:,[0,1,3]].to(device).float())
             loss_policy = - (target_policies.to(device) * F.log_softmax(model_policies, 1)).mean()
             loss_value = cross_entropy(model_values, target_values.view(-1).to(device))
             loss_left_moves = cross_entropy_moves(model_left_moves, target_moves.view(-1).to(device) )
@@ -108,8 +118,8 @@ if __name__ == '__main__':
         with Manager() as manager:
             output_list = manager.list()
             processes = []
-            for i in range(cpus // 2):
-                p = Process(target=arena_training, args=(agent, current_model, best_model, output_list, 10, i % 2 == 0))
+            for i in range(cpus):  # // 2):
+                p = Process(target=arena_training, args=(agent, current_model, best_model, output_list, min(10, games_in_iteration), i % 2 == 0))
                 p.start()
                 processes.append(p)
             for p in processes:
@@ -134,4 +144,4 @@ if __name__ == '__main__':
 
         torch.cuda.empty_cache()
         print(datetime.datetime.now() - start)
-        torch.save(best_model.state_dict(), "saves/subor.state_dict")
+        torch.save(best_model.state_dict(), "saves/subor_3_vrstvy.state_dict")

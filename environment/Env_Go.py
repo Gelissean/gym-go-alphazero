@@ -72,7 +72,7 @@ class Env_Go(Environment, ABC):
 
         batch_states = gogame.batch_next_states(temp_states.detach().cpu().numpy(), actions.reshape(-1).detach().cpu().numpy())
 
-        new_states = torch.from_numpy(numpy.delete(batch_states, [2,5],1))
+        new_states = torch.from_numpy(numpy.delete(batch_states, [2, 5],1))
         new_states = new_states.to(self.device)
         batch_gameover = gogame.batch_game_ended(batch_states)
         batch_rewards = gogame.batch_winning(batch_states, self.komi)
@@ -81,11 +81,21 @@ class Env_Go(Environment, ABC):
         rewards = torch.tensor(rewards, device=self.device)
 
         moves = gogame.batch_valid_moves(batch_states)
+
+        invalid_move_count = numpy.sum(numpy.sum(batch_states[:, 3], 2), 1)
+        pass_legality = numpy.where(invalid_move_count > 22, 1, 0)
+        moves[:, -1] = pass_legality
+
         moves = torch.from_numpy(moves)
         moves = moves.short()
         moves.to(self.device)
 
         terminals = torch.tensor(batch_gameover, device=self.device)
+
+        mask = numpy.where(batch_states[:, 2, 0, 0] == 1, 1, 0)
+        if mask.sum() > 0:
+            new_states = self._flip_states(new_states, numpy.where(mask==1))
+            #new_states = torch.cat((new_states[:, 1].reshape(-1, 1, self.size, self.size), new_states[:, [0, 2]]), 1)
 
         #moves = self.possible_moves(states)
         return new_states, rewards, moves, terminals  # states, rewards, moves, terminals
@@ -109,16 +119,27 @@ class Env_Go(Environment, ABC):
         super().check_win()
 
     def encode(self, state):
-        code = ''
+        code = []
         for y in range(self.size):
             for x in range(self.size):
                 if state[0, y, x] == 1:
-                    code += 'B'
+                    code.append('B')
                 elif state[1, y, x] == 1:
-                    code += 'W'
+                    code.append('W')
                 else:
-                    code += ' '
-        return code
+                    code.append(' ')
+
+        for y in range(self.size):
+            for x in range(self.size):
+                if state[2, y, x] == 1:
+                    code.append('l')
+                else:
+                    code.append(' ')
+        if state[3,0,0]:
+            code.append('x')
+        else:
+            code.append(' ')
+        return ''.join(code)
 
     def _init_boards(self, count):
         self.envs = []
@@ -127,3 +148,11 @@ class Env_Go(Environment, ABC):
             env = gym.make('gym_go:go-v0', size=self.size, komi=self.komi, reward_method=self.reward_method)
             env.reset()
             self.envs.append(env)
+
+    def _flip_states(self, states, mask):
+        c = states[mask[0], 0].detach().clone()
+        d = states[mask[0], 1].detach().clone()
+        e = states
+        e[mask[0], 0] = d
+        e[mask[0], 1] = c
+        return states

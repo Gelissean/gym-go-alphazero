@@ -370,7 +370,7 @@ class AZAgent:
 
             if index > 0:
                 states, rewards, moves, terminals = self.env.step(mcts_actions[0:index], mcts_states[0:index])
-                probs, values, _ = model(states.float())
+                probs, values, _ = model(states[:,[0,1,3]].float())
                 probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
                 values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
                 states, moves, probs, values, rewards, terminals = states.cpu(), moves.cpu(), probs.cpu(), values.cpu(), rewards.cpu(), terminals.cpu()

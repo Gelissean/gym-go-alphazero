@@ -334,7 +334,7 @@ class AZAgent:
 
 
         noise = [torch.from_numpy(np.random.dirichlet(np.ones(moves_length[i].short().item()) * self.dirichlet_alpha)) for i in range(moves_length.shape[0])]
-        probs, values, _ = model(states.float())
+        probs, values, _ = model(states[:,[0,1,3]].float())
         probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
         values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
         states, moves, probs, values = states.cpu(), moves.cpu(), probs.cpu(), values.cpu()

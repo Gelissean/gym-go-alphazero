@@ -128,6 +128,10 @@ def selfplay(agent, model, output_list, first_move = False):
     #torch.cuda.set_device(1)
     # mem_states = torch.zeros((agent.actions*2, agent.games_in_iteration, 4, agent.env.height, agent.env.width), dtype=torch.int16, device = agent.device)
     # mem_policies = torch.zeros((agent.actions*2, agent.games_in_iteration, agent.actions), device=agent.device)
+    agent.to()
+    model.to(agent.device)
+    #agent.t_one = torch.tensor([1],device=agent.device)
+    #agent.env.t_one = torch.tensor([1], device=agent.device)
 
     agent.t_one = torch.tensor([1],device=agent.device)
     agent.env.t_one = torch.tensor([1], device=agent.device)
@@ -194,8 +198,11 @@ def selfplay(agent, model, output_list, first_move = False):
 def arena(agent, model, indices, output_list):
     #torch.cuda.set_device(1)
 
-    agent.t_one = torch.tensor([1],device=agent.device)
-    agent.env.t_one = torch.tensor([1], device=agent.device)
+    #agent.t_one = torch.tensor([1],device=agent.device)
+    #agent.env.t_one = torch.tensor([1], device=agent.device)
+
+    agent.to()
+    model.to(agent.device)
 
     win, loss, draw = 0, 0, 0
     model2 = copy.deepcopy(model)
@@ -244,6 +251,11 @@ def arena(agent, model, indices, output_list):
 
 def arena_training(agent, current_model, best_model, output_list, games = 5, player1 = True):
     #torch.cuda.set_device(1)
+
+    agent.to()
+    current_model.to(agent.device)
+    best_model.to(agent.device)
+
     win, loss, draw = 0, 0, 0
     mcts1 = [MCTS(agent.cpuct) for i in range(games)]
     mcts2 = [MCTS(agent.cpuct) for i in range(games)]
@@ -320,6 +332,19 @@ class AZAgent:
 
         self.exploration_fraction = exploration_fraction
         self.exploration_fraction_inv = 1 - exploration_fraction
+
+    def to(self, device=None):
+        if device == None:
+            device = self.device
+        self.device = device
+        self.t_one = self.t_one.to(device)
+        self.t_zero = self.t_zero.to(device)
+        self.env.to(self.device)
+
+    def cpu(self):
+        self.t_one = self.t_one.to(device="cpu")
+        self.t_zero = self.t_zero.to(device="cpu")
+        self.env.to(device="cpu")
 
     def run_mcts(self, states, moves, model, mcts_list, step, noise_b = True, training = True):
         length = len(mcts_list)

@@ -80,6 +80,8 @@ if __name__ == '__main__':
         with Manager() as manager:
             output_list = manager.list()
             processes = []
+            agent.cpu()
+            best_model.to("cpu")
             for i in range(cpus):
                 p = Process(target=selfplay, args=(agent, best_model, output_list, i % 2 == 1))
                 p.start()
@@ -90,6 +92,8 @@ if __name__ == '__main__':
             for i in range(len(output_list)):
                 length, states, policies, values, moves_left = output_list[i]
                 replay_buffer.add(length, states, policies, values, moves_left)
+            agent.to(device)
+            best_model.to(device)
 
         print('index', replay_buffer.index)
 
@@ -118,6 +122,9 @@ if __name__ == '__main__':
         with Manager() as manager:
             output_list = manager.list()
             processes = []
+            agent.cpu()
+            best_model.to("cpu")
+            current_model.to("cpu")
             for i in range(cpus):  # // 2):
                 p = Process(target=arena_training, args=(agent, current_model, best_model, output_list, min(10, games_in_iteration), i % 2 == 0))
                 p.start()
@@ -130,6 +137,9 @@ if __name__ == '__main__':
                 win += w
                 loss += l
                 draw += d
+            agent.to(device)
+            best_model.to(device)
+            current_model.to(device)
 
         a_sum = win + loss
         if a_sum > 0 and win / float(a_sum) > 0.55:

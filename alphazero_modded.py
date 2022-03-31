@@ -1,10 +1,11 @@
 from adaptive_rl.net import Net, ResidualBlock, weights_init_xavier
 from adaptive_rl.replay_buffer import ExperienceReplay
 import torch
+from gym_go import govars
 
 class Experience_buffer_GO(ExperienceReplay):
     def __init__(self, size, height, width, batch_size):
-        self.states = torch.zeros((size, 4, height, width), dtype = torch.int16)
+        self.states = torch.zeros((size, govars.NUM_CHNLS, height, width), dtype = torch.int16)
         self.policies = torch.zeros((size, height * width+1))
         self.values = torch.zeros((size, 1), dtype = torch.long)
         self.moves_left = torch.zeros((size, 1), dtype = torch.long)
@@ -60,6 +61,16 @@ class Experience_buffer_GO(ExperienceReplay):
             else:
                 values[indices_even, 0] = 2
                 values[indices_odd, 0] = 0
+        elif v < 0.0:
+            indices_even = torch.arange(0, length, 2)
+            indices_odd = torch.arange(1, length, 2)
+
+            if length % 2 == 0:
+                values[indices_even, 0] = 2
+                values[indices_odd, 0] = 0
+            else:
+                values[indices_even, 0] = 0
+                values[indices_odd, 0] = 2
 
         self.add(length, states, policies, values, moves)
 
@@ -175,7 +186,7 @@ def selfplay(agent, model, output_list, first_move = False):
                 index = t_index.item()
                 mcts_list.pop(index)
                 #print(states[index])
-                replay_buffer.store(mem_states[0:step, index].view(-1, 4, agent.env.height, agent.env.width).float(), mem_policies[0:step, index].view(-1, agent.actions), rewards[index].item())
+                replay_buffer.store(mem_states[0:step, index].view(-1, govars.NUM_CHNLS, agent.env.height, agent.env.width).float(), mem_policies[0:step, index].view(-1, agent.actions), rewards[index].item())
 
             non_terminals = torch.where(terminals == 0, agent.t_one, agent.t_zero)
             game_indicies = torch.nonzero(non_terminals)
@@ -186,7 +197,7 @@ def selfplay(agent, model, output_list, first_move = False):
                 return
 
             game_indicies = game_indicies.view(-1)
-            new_mem_states = torch.zeros((max_steps, dim0, 4, agent.env.height, agent.env.width), device = agent.device, dtype = torch.int16)
+            new_mem_states = torch.zeros((max_steps, dim0, govars.NUM_CHNLS, agent.env.height, agent.env.width), device = agent.device, dtype = torch.int16)
             new_mem_policies = torch.zeros((max_steps, dim0, agent.actions), device = agent.device)
 
             new_mem_states[0:step] = mem_states[0:step, game_indicies]
@@ -232,19 +243,20 @@ def arena(agent, model, indices, output_list):
                 if terminal[0] > 0:
                     print("game ended in: " + str(step) + " steps")
                     print("score: " + str(r))
-                if r > 0:
-                    if player1:
-                        win += 1
+                    if r > 0:
+                        if player1:
+                            win += 1
+                        else:
+                            loss += 1
+                    elif r < 0:
+                        if player1:
+                            loss += 1
+                        else:
+                            win += 1
                     else:
-                        loss += 1
-                elif r < 0:
-                    if player1:
-                        loss += 1
-                    else:
-                        win += 1
-                else:
-                    draw += 1
-                    break
+                        draw += 1
+                        break
+                    print(state)
 
                 player1 = not player1
     output_list.append((win, loss, draw))
@@ -266,6 +278,9 @@ def arena_training(agent, current_model, best_model, output_list, games = 5, pla
     starting_player1 = player1
 
     while True:
+        if step > 300:
+            print("arena ran over 300 steps")
+            return
         with torch.no_grad():
             if player1:
                 actions, _ = agent.run_mcts(states, moves, current_model, mcts1, step, True, False)
@@ -353,7 +368,7 @@ class AZAgent:
         moves_length = moves.sum(1)
 
 
-        mcts_states = torch.zeros((self.games_in_iteration, 4, self.env.height, self.env.width), device = self.device, dtype = torch.int16)
+        mcts_states = torch.zeros((self.games_in_iteration, 6, self.env.height, self.env.width), device = self.device, dtype = torch.int16)
         mcts_actions = torch.zeros((self.games_in_iteration, 1), device = self.device, dtype = torch.long)
         mcts_indices = torch.zeros((self.games_in_iteration), dtype = torch.long)
 
@@ -395,7 +410,7 @@ class AZAgent:
 
             if index > 0:
                 states, rewards, moves, terminals = self.env.step(mcts_actions[0:index], mcts_states[0:index])
-                probs, values, _ = model(states[:,[0,1,3]].float())
+                probs, values, _ = model(states[:, [govars.BLACK, govars.WHITE, govars.PASS_CHNL]].float())
                 probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
                 values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
                 states, moves, probs, values, rewards, terminals = states.cpu(), moves.cpu(), probs.cpu(), values.cpu(), rewards.cpu(), terminals.cpu()
@@ -421,6 +436,7 @@ class AZAgent:
         for i in range(length):
             policy_list.append(mcts_list[i].root.getProbs(self.actions))
         policies = torch.stack(policy_list)
+        #(policies)
         if training:
             actions = policies.multinomial(num_samples = 1)
         else:

@@ -5,7 +5,7 @@ from environment.Environment import Environment
 import torch
 import gym
 from utils import change_state_and_run
-from gym_go import gogame
+from gym_go import gogame, govars
 import numpy
 
 
@@ -15,7 +15,7 @@ class Env_Go(Environment, ABC):
         self.width = size
         self.height = size
         self.max_moves = size * size + 1
-        self.state_size = 4 * (size * size)
+        self.state_size = govars.NUM_CHNLS * (size * size)
 
         self.komi = komi
         self.reward_method = reward_method
@@ -36,44 +36,27 @@ class Env_Go(Environment, ABC):
 
     #returns state at the beginning of the game
     def zero_states(self, count):
-        return torch.zeros((count, 4, self.size, self.size), dtype=torch.int16, device = self.device) ,\
-               torch.ones((count, self.max_moves), device = self.device, dtype = torch.long) #Bx4x6x6, Bx37
+        moves = torch.ones((count, self.max_moves), device = self.device, dtype = torch.long)
+        moves[:, -1] = 0
+        return torch.zeros((count, govars.NUM_CHNLS, self.size, self.size), dtype=torch.int16, device = self.device) ,\
+               moves #Bx4x6x6, Bx37
 
     # returns groups of states as if the player was starting second
     def first_move_states(self, count):
-        state_size = self.max_moves - 1
-        rep = count // state_size
-        mod = count % state_size
-        order = torch.arange(count, device=self.device)
-        indices = torch.arange(state_size, device=self.device).repeat(rep)
-        if mod != 0:
-            indices = torch.cat((indices, torch.arange(mod, device=self.device)), 0)
-        states_indices = order * (3 * state_size) + indices + state_size
-        states_indices2 = order * (3 * state_size) + indices + state_size*2
-        states = torch.zeros((count, 3, self.size, self.size), dtype=torch.int16, device=self.device).view(-1) # Bx1xHxW
-        moves = torch.ones((count, self.max_moves), dtype=torch.long, device=self.device).view(-1)  # Bx(WxH+1)
-        states[states_indices] = 1
-        states[states_indices2] = 1
-        moves_indices = order * self.max_moves + indices
-        moves[moves_indices] = 0
-        return torch.cat(((states.view(count, 3, self.size, self.size)),
-                          torch.zeros(count, 1, self.size, self.size, device=self.device)), 1),\
-               moves.view(-1, self.max_moves)
+        states, moves = self.zero_states(count)
+        states = gogame.batch_next_states(states.detach().cpu().numpy(), numpy.arange(count)%(self.size*self.size))
+        return torch.tensor(states, device=self.device, dtype=torch.int16).reshape(-1, govars.NUM_CHNLS, self.size, self.size),\
+               torch.tensor(gogame.batch_valid_moves(states), device=self.device, dtype=torch.int16)
 
     def possible_moves(self, states):
-        legal_moves = torch.where(states[:, 2] == 0, self.t_one, self.t_zero).view(-1, self.max_moves - 1).long()
+        legal_moves = torch.where(states[:, govars.INVD_CHNL] == 0, self.t_one, self.t_zero).view(-1, self.max_moves - 1).long()
         pass_legality = torch.ones(states.shape[0], device=self.device, dtype=torch.int16).view(-1, 1)
         return torch.cat((legal_moves, pass_legality), 1)
 
     def step(self, actions, states):
+        batch_states = gogame.batch_next_states(states.detach().cpu().numpy(), actions.reshape(-1).detach().cpu().numpy())
 
-        zeros = torch.zeros((states.shape[0]), 1, self.height, self.width, device=self.device, dtype=torch.int16)
-        temp_states = torch.cat((states[:, :3], zeros, states[:, 3:], zeros), 1)
-
-        batch_states = gogame.batch_next_states(temp_states.detach().cpu().numpy(), actions.reshape(-1).detach().cpu().numpy())
-
-        new_states = torch.from_numpy(numpy.delete(batch_states, [2, 5],1))
-        new_states = new_states.to(self.device)
+        new_states = torch.tensor(batch_states, device=self.device, dtype=torch.int16)
         batch_gameover = gogame.batch_game_ended(batch_states)
         batch_rewards = gogame.batch_winning(batch_states, self.komi)
 
@@ -82,7 +65,7 @@ class Env_Go(Environment, ABC):
 
         moves = gogame.batch_valid_moves(batch_states)
 
-        invalid_move_count = numpy.sum(numpy.sum(batch_states[:, 3], 2), 1)
+        invalid_move_count = numpy.sum(numpy.sum(batch_states[:, govars.INVD_CHNL], 2), 1)
         pass_legality = numpy.where(invalid_move_count > 22, 1, 0)
         moves[:, -1] = pass_legality
 
@@ -91,7 +74,7 @@ class Env_Go(Environment, ABC):
 
         terminals = torch.tensor(batch_gameover, device=self.device)
 
-        mask = numpy.where(batch_states[:, 2, 0, 0] == 1, 1, 0)
+        mask = numpy.where(batch_states[:, govars.TURN_CHNL, 0, 0] == 1, 1, 0)
         if mask.sum() > 0:
             new_states = self._flip_states(new_states, numpy.where(mask==1))
             #new_states = torch.cat((new_states[:, 1].reshape(-1, 1, self.size, self.size), new_states[:, [0, 2]]), 1)
@@ -104,9 +87,9 @@ class Env_Go(Environment, ABC):
         s = ''
         for y in range(self.size):
             for x in range(self.size):
-                if state[0, y, x] == 1:
+                if state[govars.BLACK, y, x] == 1:
                     s += ' ' + cx + ' '
-                elif state[1, y, x] == 1:
+                elif state[govars.WHITE, y, x] == 1:
                     s += ' ' + co + ' '
                 else:
                     s += '   '
@@ -121,20 +104,20 @@ class Env_Go(Environment, ABC):
         code = []
         for y in range(self.size):
             for x in range(self.size):
-                if state[0, y, x] == 1:
+                if state[govars.BLACK, y, x] == 1:
                     code.append('B')
-                elif state[1, y, x] == 1:
+                elif state[govars.WHITE, y, x] == 1:
                     code.append('W')
                 else:
                     code.append(' ')
 
         for y in range(self.size):
             for x in range(self.size):
-                if state[2, y, x] == 1:
+                if state[govars.INVD_CHNL, y, x] == 1:
                     code.append('l')
                 else:
                     code.append(' ')
-        if state[3,0,0]:
+        if state[govars.PASS_CHNL,0,0]:
             code.append('x')
         else:
             code.append(' ')

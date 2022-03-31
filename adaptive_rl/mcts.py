@@ -38,7 +38,7 @@ class MCTS:
     def selection(self):
         game_indicies = torch.nonzero(self.root.N == 0)
         for index in game_indicies:
-            self.parents = [(self.root, index)]
+            self.parents = [(self.root, index.item())]
             self.current_node = None
             return
 

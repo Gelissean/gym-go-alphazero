@@ -148,7 +148,7 @@ def selfplay(agent, model, output_list, first_move = False):
     agent.env.t_one = torch.tensor([1], device=agent.device)
 
     max_steps = 200
-    mem_states = torch.zeros((max_steps, agent.games_in_iteration, 4, agent.env.height, agent.env.width),
+    mem_states = torch.zeros((max_steps, agent.games_in_iteration, govars.NUM_CHNLS, agent.env.height, agent.env.width),
                              dtype=torch.int16, device=agent.device)
     mem_policies = torch.zeros((max_steps, agent.games_in_iteration, agent.actions), device=agent.device)
 
@@ -374,7 +374,7 @@ class AZAgent:
 
 
         noise = [torch.from_numpy(np.random.dirichlet(np.ones(moves_length[i].short().item()) * self.dirichlet_alpha)) for i in range(moves_length.shape[0])]
-        probs, values, _ = model(states[:,[0,1,3]].float())
+        probs, values, _ = model(states[:,[govars.BLACK, govars.WHITE, govars.PASS_CHNL]].float())
         probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
         values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
         states, moves, probs, values = states.cpu(), moves.cpu(), probs.cpu(), values.cpu()

@@ -45,7 +45,11 @@ class Env_Go(Environment, ABC):
     def first_move_states(self, count):
         states, moves = self.zero_states(count)
         states = gogame.batch_next_states(states.detach().cpu().numpy(), numpy.arange(count)%(self.size*self.size))
-        return torch.tensor(states, device=self.device, dtype=torch.int16).reshape(-1, govars.NUM_CHNLS, self.size, self.size),\
+        new_states = torch.tensor(states, device=self.device, dtype=torch.int16).reshape(-1, govars.NUM_CHNLS, self.size, self.size)
+        mask = numpy.where(states[:, govars.TURN_CHNL, 0, 0] == 1, 1, 0)
+        if mask.sum() > 0:
+            new_states = self._flip_states(new_states, numpy.where(mask==1))
+        return new_states, \
                torch.tensor(gogame.batch_valid_moves(states), device=self.device, dtype=torch.int16)
 
     def possible_moves(self, states):

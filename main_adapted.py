@@ -109,7 +109,7 @@ if __name__ == '__main__':
         for b in range(batches_in_iteration):
             optimizer.zero_grad()
             states, target_policies, target_values, target_moves = replay_buffer.sample()
-            model_policies, model_values, model_left_moves = current_model(states[:,[govars.BLACK,govars.WHITE,govars.PASS_CHNL]].to(device).float())
+            model_policies, model_values, model_left_moves = current_model(states.to(device).float())
             loss_policy = - (target_policies.to(device) * F.log_softmax(model_policies, 1)).mean()
             loss_value = cross_entropy(model_values, target_values.view(-1).to(device))
             loss_left_moves = cross_entropy_moves(model_left_moves, target_moves.view(-1).to(device) )

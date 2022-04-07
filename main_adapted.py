@@ -13,14 +13,14 @@ from adaptive_rl.net import Net
 import datetime
 
 from environment.Env_Go import Env_Go
+from gym_go import govars
 
 if __name__ == '__main__':
-    games_in_iteration = 128
+    games_in_iteration = 36
 
     board_size = 6
     komi = 0
-    replay_buffer_size = 1000000
-    batch_size = 15000
+    replay_buffer_size = 50000
     actions = board_size * board_size + 1
     iteration_count = 1000
     weight_decay = 0.0001
@@ -31,9 +31,10 @@ if __name__ == '__main__':
     cross_entropy = nn.CrossEntropyLoss()
     cross_entropy_moves = nn.CrossEntropyLoss()
 
-    batches_in_iteration = 10
     cpus = 2  # 6
-    name = 'go_6_0_4'
+    batch_size = 50*games_in_iteration #50*cpus*games_in_iteration
+    batches_in_iteration = 10 #games_in_iteration*cpus
+    name = 'go_6_3vrstvy_high_LR_6_batches_exp'
 
     torch.cuda.set_device(0)
 
@@ -45,22 +46,29 @@ if __name__ == '__main__':
 
     load = True
 
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print('device: ', device)
     if load:
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        print('device: ', device)
-        current_model.load_state_dict(torch.load("saves/subor_3_vrstvy.state_dict"))
+        current_model.load_state_dict(torch.load("saves/subor_3_vrstvy_go_6_3vrstvy_high_LR_3_13.state_dict"))
         current_model.eval()
+
+        best_model = copy.deepcopy(current_model)
+        #best_model.load_state_dict(torch.load("models/go_6_3vrstvy_restart_from_kaggle_2_5.pt"))
+        best_model.load_state_dict(torch.load("saves/subor_3_vrstvy_go_6_3vrstvy_high_LR_3_13.state_dict"))
+        best_model.eval()
+
+    else:
+        best_model = copy.deepcopy(current_model)
+    current_model.to(device)
+    best_model.to(device)
 
     #net.share_memory()
     optimizer = optim.Adam(current_model.parameters(), lr=lrs[0], weight_decay = weight_decay)
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print('device: ', device)
-    current_model.to(device)
-    best_model = copy.deepcopy(current_model)
-    best_model.to(device)
 
-    agent = AZAgent(env, device = device, games_in_iteration = games_in_iteration, simulation_count = 200, name = name)
+
+
+    agent = AZAgent(env, device = device, games_in_iteration = games_in_iteration, simulation_count = 400, name = name)
     replay_buffer = Experience_buffer_GO(replay_buffer_size, board_size, board_size, batch_size)
 
     #torch.load(best_model.state_dict(), "saves/subor.state_dict")
@@ -74,7 +82,7 @@ if __name__ == '__main__':
                 for g in optimizer.param_groups:
                     g['lr'] = lrs[i]
                 agent.dirichlet_alpha = dirichlet_alphas[i]
-
+        print(start)
         print('selfplay', iteration)
 
         with Manager() as manager:
@@ -101,7 +109,7 @@ if __name__ == '__main__':
         for b in range(batches_in_iteration):
             optimizer.zero_grad()
             states, target_policies, target_values, target_moves = replay_buffer.sample()
-            model_policies, model_values, model_left_moves = current_model(states[:,[0,1,3]].to(device).float())
+            model_policies, model_values, model_left_moves = current_model(states[:,[govars.BLACK,govars.WHITE,govars.PASS_CHNL]].to(device).float())
             loss_policy = - (target_policies.to(device) * F.log_softmax(model_policies, 1)).mean()
             loss_value = cross_entropy(model_values, target_values.view(-1).to(device))
             loss_left_moves = cross_entropy_moves(model_left_moves, target_moves.view(-1).to(device) )
@@ -115,6 +123,15 @@ if __name__ == '__main__':
         print('policy loss: ', (avg_loss_policy / batches_in_iteration), 'value loss: ', (avg_loss_value / batches_in_iteration), 'left moves loss: ', (avg_loss_moves / batches_in_iteration))
         print('update', (datetime.datetime.now() - start))
 
+
+
+        #torch.cuda.empty_cache()
+        #print(datetime.datetime.now() - start)
+        #torch.save(best_model.state_dict(), "saves/subor_3_vrstvy_high_lr.state_dict")
+        #torch.save(current_model.state_dict(), "saves/subor_3_vrstvy_"+ name + "_" + str(iteration) + ".state_dict")
+        #continue
+
+
         torch.cuda.empty_cache()
 
         print('arena')
@@ -124,9 +141,9 @@ if __name__ == '__main__':
             processes = []
             agent.cpu()
             best_model.to("cpu")
-            current_model.to("cpu")
+            #current_model.to("cpu")
             for i in range(cpus):  # // 2):
-                p = Process(target=arena_training, args=(agent, current_model, best_model, output_list, min(10, games_in_iteration), i % 2 == 0))
+                p = Process(target=arena_training, args=(agent, copy.deepcopy(current_model).to("cpu"), best_model, output_list, min(10, games_in_iteration), i % 2 == 0))
                 p.start()
                 processes.append(p)
             for p in processes:
@@ -139,7 +156,7 @@ if __name__ == '__main__':
                 draw += d
             agent.to(device)
             best_model.to(device)
-            current_model.to(device)
+            #current_model.to(device)
 
         a_sum = win + loss
         if a_sum > 0 and win / float(a_sum) > 0.55:
@@ -154,4 +171,5 @@ if __name__ == '__main__':
 
         torch.cuda.empty_cache()
         print(datetime.datetime.now() - start)
-        torch.save(best_model.state_dict(), "saves/subor_3_vrstvy.state_dict")
+        torch.save(best_model.state_dict(), "saves/subor_3_vrstvy_high_lr.state_dict")
+        torch.save(current_model.state_dict(), "saves/subor_3_vrstvy_"+ name + "_" + str(iteration) + ".state_dict")

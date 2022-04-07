@@ -144,9 +144,6 @@ def selfplay(agent, model, output_list, first_move = False):
     #agent.t_one = torch.tensor([1],device=agent.device)
     #agent.env.t_one = torch.tensor([1], device=agent.device)
 
-    agent.t_one = torch.tensor([1],device=agent.device)
-    agent.env.t_one = torch.tensor([1], device=agent.device)
-
     max_steps = 200
     mem_states = torch.zeros((max_steps, agent.games_in_iteration, govars.NUM_CHNLS, agent.env.height, agent.env.width),
                              dtype=torch.int16, device=agent.device)
@@ -172,6 +169,76 @@ def selfplay(agent, model, output_list, first_move = False):
 
         with torch.no_grad():
             actions, policies = agent.run_mcts(states, moves, model, mcts_list, mcts_actions, True)
+        mem_policies[step] = policies
+
+        states, rewards, moves, terminals = agent.env.step(actions, states)
+        step += 1
+        mcts_actions += 1
+
+        end_game_indices = torch.nonzero(terminals)
+        dim0, dim1 = end_game_indices.shape
+
+        if dim0 != 0:
+            for t_index in torch.flip(end_game_indices, [0]):
+                index = t_index.item()
+                mcts_list.pop(index)
+                #print(states[index])
+                replay_buffer.store(mem_states[0:step, index].view(-1, govars.NUM_CHNLS, agent.env.height, agent.env.width).float(), mem_policies[0:step, index].view(-1, agent.actions), rewards[index].item())
+
+            non_terminals = torch.where(terminals == 0, agent.t_one, agent.t_zero)
+            game_indicies = torch.nonzero(non_terminals)
+            dim0, dim1 = game_indicies.shape
+
+            if dim0 == 0:
+                output_list.append((replay_buffer.index, replay_buffer.states[0:replay_buffer.index], replay_buffer.policies[0:replay_buffer.index], replay_buffer.values[0:replay_buffer.index], replay_buffer.moves_left[0:replay_buffer.index]))
+                # print(actions)
+                # print(policies)
+                return
+
+            game_indicies = game_indicies.view(-1)
+            new_mem_states = torch.zeros((max_steps, dim0, govars.NUM_CHNLS, agent.env.height, agent.env.width), device = agent.device, dtype = torch.int16)
+            new_mem_policies = torch.zeros((max_steps, dim0, agent.actions), device = agent.device)
+
+            new_mem_states[0:step] = mem_states[0:step, game_indicies]
+            new_mem_policies[0:step] = mem_policies[0:step, game_indicies]
+
+            mem_states, mem_policies = new_mem_states, new_mem_policies
+            states, moves = states[game_indicies], moves[game_indicies]
+
+def arena_learning(agent, current_model, best_model, output_list, first_move = False):
+    #torch.cuda.set_device(1)
+    # mem_states = torch.zeros((agent.actions*2, agent.games_in_iteration, 4, agent.env.height, agent.env.width), dtype=torch.int16, device = agent.device)
+    # mem_policies = torch.zeros((agent.actions*2, agent.games_in_iteration, agent.actions), device=agent.device)
+
+    agent.to()
+    current_model.to(agent.device)
+    best_model.to(agent.device)
+
+    max_steps = 200
+    mem_states = torch.zeros((max_steps, agent.games_in_iteration, govars.NUM_CHNLS, agent.env.height, agent.env.width),
+                             dtype=torch.int16, device=agent.device)
+    mem_policies = torch.zeros((max_steps, agent.games_in_iteration, agent.actions), device=agent.device)
+
+    game_indicies = torch.arange(agent.games_in_iteration)
+    if first_move:
+        states, moves = agent.env.first_move_states(agent.games_in_iteration)
+        mcts_actions = 1
+    else:
+        states, moves = agent.env.zero_states(agent.games_in_iteration)
+        mcts_actions = 0
+    replay_buffer = Experience_buffer_GO(agent.actions * agent.games_in_iteration * 8 + 1, agent.env.height, agent.env.width, 0)
+
+    mcts_list = [MCTS(agent.cpuct) for i in range(agent.games_in_iteration)]
+
+    step = 0
+    while True:
+        if step == max_steps:
+            print("ran out of steps")
+            return
+        mem_states[step] = states
+
+        with torch.no_grad():
+            actions, policies = agent.run_mcts(states, moves, current_model, mcts_list, mcts_actions, True)
         mem_policies[step] = policies
 
         states, rewards, moves, terminals = agent.env.step(actions, states)
@@ -220,7 +287,7 @@ def arena(agent, model, indices, output_list):
     model2.to(agent.device)
     for index in indices:
         # net.load_state_dict(torch.load('models/' + name + '_' + str(game) + '.pt'))
-        model2.load_state_dict(torch.load('models/go_6_0_1_6.pt'))
+        model2.load_state_dict(torch.load('models/best_kaggle_model.pt'))
 
         for i in range(2):
             player1 = i % 2 == 0
@@ -373,11 +440,17 @@ class AZAgent:
         mcts_indices = torch.zeros((self.games_in_iteration), dtype = torch.long)
 
 
+
         noise = [torch.from_numpy(np.random.dirichlet(np.ones(moves_length[i].short().item()) * self.dirichlet_alpha)) for i in range(moves_length.shape[0])]
         probs, values, _ = model(states[:,[govars.BLACK, govars.WHITE, govars.PASS_CHNL]].float())
         probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
+        #print(probs)
+        #print("------------")
         values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
         states, moves, probs, values = states.cpu(), moves.cpu(), probs.cpu(), values.cpu()
+        #print(self.env.encode(states[0]))
+        #print(probs)
+        #print(values)
 
         index = 0
         for i in range(length):

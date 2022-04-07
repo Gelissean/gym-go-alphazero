@@ -62,8 +62,6 @@ class Env_Go(Environment, ABC):
         batch_rewards = gogame.batch_winning(new_states, self.komi)
         rewards = terminals*batch_rewards
         moves = self.possible_moves(new_states)
-
-        moves = moves.short()
         return new_states, rewards, moves, terminals  # states, rewards, moves, terminals
 
 

@@ -266,7 +266,7 @@ def arena_learning(agent, current_model, best_model, output_list, first_move = F
         step += 1
         mcts_actions += 1
 
-        terminals = torch.tensor(terminals)
+        terminals = torch.tensor(terminals, device=agent.device)
         end_game_indices = torch.nonzero(terminals)
         dim0, dim1 = end_game_indices.shape
 
@@ -382,7 +382,7 @@ def arena_training(agent, current_model, best_model, output_list, games = 5, pla
         states, rewards, moves, terminals = agent.env.step(actions.detach().cpu().numpy().reshape(-1), states)
         step += 1
 
-        terminals = torch.tensor(terminals)
+        terminals = torch.tensor(terminals, device=agent.device)
         end_game_indices = torch.nonzero(terminals)
         dim0, dim1 = end_game_indices.shape
 

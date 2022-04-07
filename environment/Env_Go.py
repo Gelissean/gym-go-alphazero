@@ -17,6 +17,8 @@ class Env_Go(Environment, ABC):
         self.max_moves = size * size + 1
         self.state_size = govars.NUM_CHNLS * (size * size)
 
+        self.moves_before_pass = 22
+
         self.komi = komi
         self.reward_method = reward_method
 
@@ -36,28 +38,26 @@ class Env_Go(Environment, ABC):
 
     #returns state at the beginning of the game
     def zero_states(self, count):
-        moves = torch.ones((count, self.max_moves), device = self.device, dtype = torch.long)
-        moves[:, -1] = 0
-        return torch.zeros((count, govars.NUM_CHNLS, self.size, self.size), dtype=torch.int16, device = self.device) ,\
-               moves #Bx4x6x6, Bx37
+        states = gogame.batch_init_state(count, self.size)
+        moves = gogame.batch_valid_moves(states)
+        moves[:, -1] = 0 # cant pass on start
+        return states, moves
 
     # returns groups of states as if the player was starting second
     def first_move_states(self, count):
         states, moves = self.zero_states(count)
-        states = gogame.batch_next_states(states.detach().cpu().numpy(), numpy.arange(count)%(self.size*self.size))
-        new_states = torch.tensor(states, device=self.device, dtype=torch.int16).reshape(-1, govars.NUM_CHNLS, self.size, self.size)
-        mask = numpy.where(states[:, govars.TURN_CHNL, 0, 0] == 1, 1, 0)
-        if mask.sum() > 0:
-            new_states = self._flip_states(new_states, numpy.where(mask==1))
-        return new_states, \
-               torch.tensor(gogame.batch_valid_moves(states), device=self.device, dtype=torch.int16)
+        states = gogame.batch_next_states(states, numpy.arange(count)%(self.size*self.size))
+        moves = gogame.batch_valid_moves(states)
+        moves[:, -1] = 0 # cant pass on second turn
+        return states, moves
 
     def possible_moves(self, states):
-        legal_moves = torch.where(states[:, govars.INVD_CHNL] == 0, self.t_one, self.t_zero).view(-1, self.max_moves - 1).long()
-        pass_legality = torch.ones(states.shape[0], device=self.device, dtype=torch.int16).view(-1, 1)
-        return torch.cat((legal_moves, pass_legality), 1)
+        moves = gogame.batch_valid_moves(states)
+        moves[:,-1] = numpy.where((numpy.sum(moves,1))<(self.max_moves - self.moves_before_pass), 1, 0)
+        return moves
 
     def step(self, actions, states):
+<<<<<<< HEAD
         batch_states = gogame.batch_next_states(states.detach().cpu().numpy(), actions.reshape(-1).detach().cpu().numpy())
 
         new_states = torch.tensor(batch_states, device=self.device, dtype=torch.int16)
@@ -76,15 +76,14 @@ class Env_Go(Environment, ABC):
         moves = torch.from_numpy(moves)
         moves = moves.short()
         moves.to(self.device)
+=======
+        new_states = gogame.batch_next_states(states, actions)
+        terminals = gogame.batch_game_ended(new_states)
+        batch_rewards = gogame.batch_winning(new_states, self.komi)
+        rewards = terminals*batch_rewards
+        moves = self.possible_moves(new_states)
+>>>>>>> 722950e24ed6fb89e9bb44ed2a009ef58a73b22f
 
-        terminals = torch.tensor(batch_gameover, device=self.device)
-
-        mask = numpy.where(batch_states[:, govars.TURN_CHNL, 0, 0] == 1, 1, 0)
-        if mask.sum() > 0:
-            new_states = self._flip_states(new_states, numpy.where(mask==1))
-            #new_states = torch.cat((new_states[:, 1].reshape(-1, 1, self.size, self.size), new_states[:, [0, 2]]), 1)
-
-        #moves = self.possible_moves(states)
         return new_states, rewards, moves, terminals  # states, rewards, moves, terminals
 
 
@@ -128,18 +127,15 @@ class Env_Go(Environment, ABC):
             code.append(' ')
         return ''.join(code)
 
-    def _init_boards(self, count):
-        self.envs = []
-        self.rewards = torch.zeros(count)
-        for i in range(count):
-            env = gym.make('gym_go:go-v0', size=self.size, komi=self.komi, reward_method=self.reward_method)
-            env.reset()
-            self.envs.append(env)
-
     def _flip_states(self, states, mask):
-        c = states[mask[0], 0].detach().clone()
-        d = states[mask[0], 1].detach().clone()
-        e = states
-        e[mask[0], 0] = d
-        e[mask[0], 1] = c
+        temp = states[mask]
+        temp[:, [0, 1, 2]] = temp[:, [1, 0, 2]]
+        states[mask] = temp
         return states
+
+    def process_states(self, states):
+        processed_states = torch.tensor(states[:, [govars.BLACK, govars.WHITE, govars.PASS_CHNL]], device=self.device,dtype=torch.int16)
+
+        mask = numpy.argwhere(states[:, govars.TURN_CHNL, 0, 0]==govars.WHITE).reshape(-1)
+        processed_states = self._flip_states(processed_states, mask)
+        return processed_states

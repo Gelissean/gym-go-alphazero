@@ -222,6 +222,9 @@ def selfplay(agent, model, output_list, first_move = False):
 
             mem_states, mem_policies = new_mem_states, new_mem_policies
             states, moves = states[game_indicies.cpu()], moves[game_indicies.cpu()]
+            if states.ndim < 4:
+                states = states.reshape(-1, govars.NUM_CHNLS, agent.env.size, agent.env.size)
+                moves = moves.reshape(-1, agent.actions)
 
 def arena_learning(agent, current_model, best_model, output_list, first_move = False):
     #torch.cuda.set_device(1)
@@ -290,7 +293,10 @@ def arena_learning(agent, current_model, best_model, output_list, first_move = F
             new_mem_policies[0:step] = mem_policies[0:step, game_indicies]
 
             mem_states, mem_policies = new_mem_states, new_mem_policies
-            states, moves = states[game_indicies], moves[game_indicies]
+            states, moves = states[game_indicies.cpu()], moves[game_indicies.cpu()]
+            if states.ndim < 4:
+                states = states.reshape(-1, govars.NUM_CHNLS, agent.env.size, agent.env.size)
+                moves = moves.reshape(-1, agent.actions)
 
 def arena(agent, model, indices, output_list):
     #torch.cuda.set_device(1)
@@ -407,8 +413,10 @@ def arena_training(agent, current_model, best_model, output_list, games = 5, pla
                 return
 
             game_indicies = game_indicies.view(-1)
-            states, moves = states[game_indicies], moves[game_indicies]
-
+            states, moves = states[game_indicies.cpu()], moves[game_indicies.cpu()]
+            if states.ndim < 4:
+                states = states.reshape(-1, govars.NUM_CHNLS, agent.env.size, agent.env.size)
+                moves = moves.reshape(-1, agent.actions)
         player1 = not player1
 
 class AZAgent:

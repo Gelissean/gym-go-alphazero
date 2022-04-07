@@ -1,3 +1,5 @@
+import numpy
+
 from adaptive_rl.net import Net, ResidualBlock, weights_init_xavier
 from adaptive_rl.replay_buffer import ExperienceReplay
 import torch
@@ -5,7 +7,7 @@ from gym_go import govars
 
 class Experience_buffer_GO(ExperienceReplay):
     def __init__(self, size, height, width, batch_size):
-        self.states = torch.zeros((size, govars.NUM_CHNLS, height, width), dtype = torch.int16)
+        self.states = torch.zeros((size, 3, height, width), dtype = torch.int16)
         self.policies = torch.zeros((size, height * width+1))
         self.values = torch.zeros((size, 1), dtype = torch.long)
         self.moves_left = torch.zeros((size, 1), dtype = torch.long)
@@ -47,31 +49,46 @@ class Experience_buffer_GO(ExperienceReplay):
             self.index = from_start
             self.full_buffer = True
 
-    def store(self, states, policies, v): #Bx1x5x5, #Bx1x25, #Bx1x25
+    def store(self, states, policies, v, final_player): #Bx3x6x6, #Bx37, #B, B
         length, dim1, dim2, dim3 = states.shape
         values = torch.ones((length, 1), dtype = torch.long)
+        values_odd = 1
+        values_even = 1
         moves = torch.arange(length).long().flip(0).view(-1, 1)
-        if v > 0.0:
-            indices_even = torch.arange(0, length, 2)
-            indices_odd = torch.arange(1, length, 2)
-
-            if length % 2 == 0:
-                values[indices_even, 0] = 0
-                values[indices_odd, 0] = 2
-            else:
-                values[indices_even, 0] = 2
-                values[indices_odd, 0] = 0
-        elif v < 0.0:
-            indices_even = torch.arange(0, length, 2)
-            indices_odd = torch.arange(1, length, 2)
-
-            if length % 2 == 0:
-                values[indices_even, 0] = 2
-                values[indices_odd, 0] = 0
-            else:
-                values[indices_even, 0] = 0
-                values[indices_odd, 0] = 2
-
+        indices_even = torch.arange(0, length, 2)
+        indices_odd = torch.arange(1, length, 2)
+        if final_player == govars.BLACK: # black player finished the game
+            if length % 2 == 1: # odd number of steps, starting player same as finishing
+                if v > 0.0: #black won
+                    values_odd = 0 #black indices are even: 0,2,4 (5 steps)
+                    values_even = 2
+                elif v < 0.0:
+                    values_odd = 2
+                    values_even = 0
+            else: #even number of steps, starting player different to finishing
+                if v > 0.0:
+                    values_odd = 2
+                    values_even = 0
+                elif v < 0.0:
+                    values_odd = 0
+                    values_even = 2
+        else: # white player finished the game
+            if length % 2 == 1: #odd number of steps, starting player same as finishing
+                if v > 0.0: #black won
+                    values_odd = 2
+                    values_even = 0
+                elif v < 0.0: # white won
+                    values_odd = 0
+                    values_even = 2
+            else: # even number of steps, starting p different
+                if v > 0.0:
+                    values_odd = 0
+                    values_even = 2
+                elif v < 0.0:
+                    values_odd = 2
+                    values_even = 0
+        values[indices_odd] = values_odd
+        values[indices_even] = values_even
         self.add(length, states, policies, values, moves)
 
         policies_pass = policies[:, -1].view(-1, 1)
@@ -145,7 +162,7 @@ def selfplay(agent, model, output_list, first_move = False):
     #agent.env.t_one = torch.tensor([1], device=agent.device)
 
     max_steps = 200
-    mem_states = torch.zeros((max_steps, agent.games_in_iteration, govars.NUM_CHNLS, agent.env.height, agent.env.width),
+    mem_states = torch.zeros((max_steps, agent.games_in_iteration, 3, agent.env.height, agent.env.width),
                              dtype=torch.int16, device=agent.device)
     mem_policies = torch.zeros((max_steps, agent.games_in_iteration, agent.actions), device=agent.device)
 
@@ -165,16 +182,17 @@ def selfplay(agent, model, output_list, first_move = False):
         if step == max_steps:
             print("ran out of steps")
             return
-        mem_states[step] = states
+        mem_states[step] = agent.env.process_states(states)
 
         with torch.no_grad():
             actions, policies = agent.run_mcts(states, moves, model, mcts_list, mcts_actions, True)
         mem_policies[step] = policies
 
-        states, rewards, moves, terminals = agent.env.step(actions, states)
+        states, rewards, moves, terminals = agent.env.step(actions.detach().cpu().numpy().reshape(-1), states)
         step += 1
         mcts_actions += 1
 
+        terminals = torch.tensor(terminals, device=agent.device)
         end_game_indices = torch.nonzero(terminals)
         dim0, dim1 = end_game_indices.shape
 
@@ -183,7 +201,7 @@ def selfplay(agent, model, output_list, first_move = False):
                 index = t_index.item()
                 mcts_list.pop(index)
                 #print(states[index])
-                replay_buffer.store(mem_states[0:step, index].view(-1, govars.NUM_CHNLS, agent.env.height, agent.env.width).float(), mem_policies[0:step, index].view(-1, agent.actions), rewards[index].item())
+                replay_buffer.store(mem_states[0:step, index].view(-1, 3, agent.env.height, agent.env.width).float(), mem_policies[0:step, index].view(-1, agent.actions), rewards[index].item(), (states[index, govars.TURN_CHNL, 0, 0]+1)%2)
 
             non_terminals = torch.where(terminals == 0, agent.t_one, agent.t_zero)
             game_indicies = torch.nonzero(non_terminals)
@@ -196,7 +214,7 @@ def selfplay(agent, model, output_list, first_move = False):
                 return
 
             game_indicies = game_indicies.view(-1)
-            new_mem_states = torch.zeros((max_steps, dim0, govars.NUM_CHNLS, agent.env.height, agent.env.width), device = agent.device, dtype = torch.int16)
+            new_mem_states = torch.zeros((max_steps, dim0, 3, agent.env.height, agent.env.width), device = agent.device, dtype = torch.int16)
             new_mem_policies = torch.zeros((max_steps, dim0, agent.actions), device = agent.device)
 
             new_mem_states[0:step] = mem_states[0:step, game_indicies]
@@ -215,7 +233,7 @@ def arena_learning(agent, current_model, best_model, output_list, first_move = F
     best_model.to(agent.device)
 
     max_steps = 200
-    mem_states = torch.zeros((max_steps, agent.games_in_iteration, govars.NUM_CHNLS, agent.env.height, agent.env.width),
+    mem_states = torch.zeros((max_steps, agent.games_in_iteration, 3, agent.env.height, agent.env.width),
                              dtype=torch.int16, device=agent.device)
     mem_policies = torch.zeros((max_steps, agent.games_in_iteration, agent.actions), device=agent.device)
 
@@ -235,16 +253,17 @@ def arena_learning(agent, current_model, best_model, output_list, first_move = F
         if step == max_steps:
             print("ran out of steps")
             return
-        mem_states[step] = states
+        mem_states[step] = torch.tensor(states[:, [govars.BLACK, govars.WHITE, govars.PASS_CHNL]], device=agent.device, dtype=torch.int16)
 
         with torch.no_grad():
             actions, policies = agent.run_mcts(states, moves, current_model, mcts_list, mcts_actions, True)
         mem_policies[step] = policies
 
-        states, rewards, moves, terminals = agent.env.step(actions, states)
+        states, rewards, moves, terminals = agent.env.step(actions.detach().cpu().numpy().reshape(-1), states)
         step += 1
         mcts_actions += 1
 
+        terminals = torch.tensor(terminals)
         end_game_indices = torch.nonzero(terminals)
         dim0, dim1 = end_game_indices.shape
 
@@ -253,7 +272,7 @@ def arena_learning(agent, current_model, best_model, output_list, first_move = F
                 index = t_index.item()
                 mcts_list.pop(index)
                 #print(states[index])
-                replay_buffer.store(mem_states[0:step, index].view(-1, govars.NUM_CHNLS, agent.env.height, agent.env.width).float(), mem_policies[0:step, index].view(-1, agent.actions), rewards[index].item())
+                replay_buffer.store(mem_states[0:step, index].view(-1, 3, agent.env.height, agent.env.width).float(), mem_policies[0:step, index].view(-1, agent.actions), rewards[index].item())
 
             non_terminals = torch.where(terminals == 0, agent.t_one, agent.t_zero)
             game_indicies = torch.nonzero(non_terminals)
@@ -264,7 +283,7 @@ def arena_learning(agent, current_model, best_model, output_list, first_move = F
                 return
 
             game_indicies = game_indicies.view(-1)
-            new_mem_states = torch.zeros((max_steps, dim0, govars.NUM_CHNLS, agent.env.height, agent.env.width), device = agent.device, dtype = torch.int16)
+            new_mem_states = torch.zeros((max_steps, dim0, 3, agent.env.height, agent.env.width), device = agent.device, dtype = torch.int16)
             new_mem_policies = torch.zeros((max_steps, dim0, agent.actions), device = agent.device)
 
             new_mem_states[0:step] = mem_states[0:step, game_indicies]
@@ -304,7 +323,7 @@ def arena(agent, model, indices, output_list):
                     else:
                         action, _ = agent.run_mcts(state, move, model2, [mcts2], step, False, False)
 
-                state, r, move, terminal = agent.env.step(action, state)
+                state, r, move, terminal = agent.env.step(action.detach().cpu().numpy().reshape(-1), state)
                 step += 1
 
                 if terminal[0] > 0:
@@ -354,9 +373,10 @@ def arena_training(agent, current_model, best_model, output_list, games = 5, pla
             else:
                 actions, _ = agent.run_mcts(states, moves, best_model, mcts2, step, True, False)
 
-        states, rewards, moves, terminals = agent.env.step(actions, states)
+        states, rewards, moves, terminals = agent.env.step(actions.detach().cpu().numpy().reshape(-1), states)
         step += 1
 
+        terminals = torch.tensor(terminals)
         end_game_indices = torch.nonzero(terminals)
         dim0, dim1 = end_game_indices.shape
 
@@ -432,22 +452,25 @@ class AZAgent:
         length = len(mcts_list)
         # moves_length = self.actions - step
         # moves_length = -(states[:, 2].sum(2).sum(1)) + self.actions
+        moves = torch.tensor(moves, dtype=torch.int16)
         moves_length = moves.sum(1)
 
 
-        mcts_states = torch.zeros((self.games_in_iteration, 6, self.env.height, self.env.width), device = self.device, dtype = torch.int16)
+        #mcts_states = torch.zeros((self.games_in_iteration, 6, self.env.height, self.env.width), device = self.device, dtype = torch.int16)
+        mcts_states = numpy.zeros((self.games_in_iteration, 6, self.env.height, self.env.width))
         mcts_actions = torch.zeros((self.games_in_iteration, 1), device = self.device, dtype = torch.long)
         mcts_indices = torch.zeros((self.games_in_iteration), dtype = torch.long)
 
 
 
         noise = [torch.from_numpy(np.random.dirichlet(np.ones(moves_length[i].short().item()) * self.dirichlet_alpha)) for i in range(moves_length.shape[0])]
-        probs, values, _ = model(states[:,[govars.BLACK, govars.WHITE, govars.PASS_CHNL]].float())
+        probs, values, _ = model(self.env.process_states(states).float())
         probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
         #print(probs)
         #print("------------")
         values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
-        states, moves, probs, values = states.cpu(), moves.cpu(), probs.cpu(), values.cpu()
+        #states, moves, probs, values = states.cpu(), moves.cpu(), probs.cpu(), values.cpu()
+        probs, values = probs.cpu(), values.cpu()
         #print(self.env.encode(states[0]))
         #print(probs)
         #print(values)
@@ -482,11 +505,12 @@ class AZAgent:
                     index += 1
 
             if index > 0:
-                states, rewards, moves, terminals = self.env.step(mcts_actions[0:index], mcts_states[0:index])
-                probs, values, _ = model(states[:, [govars.BLACK, govars.WHITE, govars.PASS_CHNL]].float())
+                states, rewards, moves, terminals = self.env.step(mcts_actions[0:index].detach().cpu().numpy().reshape(-1), mcts_states[0:index])
+                probs, values, _ = model(self.env.process_states(states).float())
                 probs, values = F.softmax(probs, dim = 1), F.softmax(values, dim = 1)
                 values = (torch.argmax(values, dim = 1) - 1).view(-1, 1)
-                states, moves, probs, values, rewards, terminals = states.cpu(), moves.cpu(), probs.cpu(), values.cpu(), rewards.cpu(), terminals.cpu()
+                #moves, probs, values, rewards, terminals = torch.tensor(moves, dtype=torch.int16), probs.cpu(), values.cpu(), rewards.cpu(), terminals.cpu()
+                moves, probs, values = torch.tensor(moves, dtype=torch.int16), probs.cpu(), values.cpu()
 
                 for i in range(index):
                     mcts_index = mcts_indices[i]

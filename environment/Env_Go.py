@@ -51,7 +51,7 @@ class Env_Go(Environment, ABC):
 
     def possible_moves(self, states):
         moves = gogame.batch_valid_moves(states)
-        moves[:,-1] = numpy.where((numpy.sum(moves,1))<(self.max_moves - self.moves_before_pass), 1, 0)
+        #moves[:,-1] = numpy.where((numpy.sum(moves,1))<(self.max_moves - self.moves_before_pass), 1, 0)
         return moves
 
     def step(self, actions, states):

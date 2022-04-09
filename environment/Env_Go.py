@@ -39,16 +39,14 @@ class Env_Go(Environment, ABC):
     #returns state at the beginning of the game
     def zero_states(self, count):
         states = gogame.batch_init_state(count, self.size)
-        moves = gogame.batch_valid_moves(states)
-        moves[:, -1] = 0 # cant pass on start
+        moves = self.possible_moves(states)
         return states, moves
 
     # returns groups of states as if the player was starting second
     def first_move_states(self, count):
         states, moves = self.zero_states(count)
         states = gogame.batch_next_states(states, numpy.arange(count)%(self.size*self.size))
-        moves = gogame.batch_valid_moves(states)
-        moves[:, -1] = 0 # cant pass on second turn
+        moves = self.possible_moves(states)
         return states, moves
 
     def possible_moves(self, states):

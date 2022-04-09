@@ -214,7 +214,7 @@ def selfplay(agent, model, output_list, first_move = False):
                 return
 
             game_indicies = game_indicies.view(-1)
-            new_mem_states = torch.zeros((max_steps, dim0, govars.NUM_CHNLS, agent.env.height, agent.env.width), device = agent.device, dtype = torch.int16)
+            new_mem_states = torch.zeros((max_steps, dim0, 3, agent.env.height, agent.env.width), device = agent.device, dtype = torch.int16)
             new_mem_policies = torch.zeros((max_steps, dim0, agent.actions), device = agent.device)
 
             new_mem_states[0:step] = mem_states[0:step, game_indicies]

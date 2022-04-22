@@ -5,7 +5,7 @@ from environment.Environment import Environment
 import torch
 import gym
 from utils import change_state_and_run
-from gym_go import gogame, govars
+from gym_go import gogame, govars, state_utils
 import numpy
 
 
@@ -118,3 +118,9 @@ class Env_Go(Environment, ABC):
         mask = numpy.argwhere(states[:, govars.TURN_CHNL, 0, 0]==govars.WHITE).reshape(-1)
         processed_states = self._flip_states(processed_states, mask)
         return processed_states
+
+
+    def get_expected_moves(self, state):
+        bmoves = 1 - state_utils.compute_invalid_moves(state, 0)
+        wmoves = 1 - state_utils.compute_invalid_moves(state, 1)
+        return numpy.logical_and(bmoves, wmoves).sum() + int(1-state[govars.PASS_CHNL, 0, 0])

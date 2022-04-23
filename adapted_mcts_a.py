@@ -2,7 +2,7 @@ import torch
 import math
 
 class Node:
-    def __init__(self, state, probs, value, length, moves, max_steps, terminal = False):
+    def __init__(self, state, probs, value, length, moves, terminal = False):
         self.state = state
         self.moves = torch.nonzero(moves)
         self.P = probs[self.moves].view(-1)
@@ -16,7 +16,7 @@ class Node:
         self.Q = torch.zeros(size)
         self.L = torch.zeros(size)
         self.T = terminal
-        self.max_steps = max_steps
+        #self.max_steps = max_steps
 
         self.children = {}
 
@@ -27,7 +27,7 @@ class Node:
         return all_probs
 
 class MCTS:
-    def __init__(self, cpuct, beta):
+    def __init__(self, cpuct, beta, max_steps):
         self.cpuct = cpuct
         self.beta = beta
         self.nodes = {}
@@ -35,6 +35,7 @@ class MCTS:
         self.root = None
         self.current_node = None
         self.parents = []
+        self.max_steps = max_steps
 
     def set_parents(self, parents):
         self.parents = parents
@@ -61,7 +62,7 @@ class MCTS:
             sq = math.sqrt(float(N_sum))
 
             if best_player:
-                alpha = step / node.max_steps
+                alpha = step / max(self.max_steps, step)
                 if N_sum > 0:
                     b = node.Q + self.cpuct * node.P * sq / (1.0 + node.N)
                     c = node.Q + self.beta * node.L 

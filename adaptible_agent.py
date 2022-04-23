@@ -11,7 +11,7 @@ import datetime
 
 class AZAgent_Adaptible:
     def __init__(self, env, device, simulation_count = 100, cpuct = 1.25, dirichlet_alpha = 0.15, exploration_fraction = 0.25,
-                 name = 'azt', games_in_iteration = 200):
+                 name = 'azt', games_in_iteration = 200, max_steps = None):
         #torch.cuda.set_device(1)
         self.env = env
 
@@ -32,6 +32,8 @@ class AZAgent_Adaptible:
 
         self.exploration_fraction = exploration_fraction
         self.exploration_fraction_inv = 1 - exploration_fraction
+
+        self.max_steps = max_steps
 
     def to(self, device=None):
         if device == None:
@@ -80,7 +82,8 @@ class AZAgent_Adaptible:
             if encode_state in mcts_list[i].nodes:
                 node = mcts_list[i].nodes[encode_state]
             else:
-                node = Node(states[i], probs[i], values[i], expected_length[i], moves[i], step + self.env.get_expected_moves(states[i]), False)
+                #node = Node(states[i], probs[i], values[i], expected_length[i], moves[i], step + self.env.get_expected_moves(states[i]), False)
+                node = Node(states[i], probs[i], values[i], expected_length[i], moves[i], False)
                 mcts_list[i].nodes[encode_state] = node
 
             if noise_b:
@@ -116,14 +119,16 @@ class AZAgent_Adaptible:
                     mcts = mcts_list[mcts_index]
                     parent, action_index = mcts.parents[0]
                     if terminals[i] > 0:
-                        node = Node(states[i], probs[i], - rewards[i], expected_length[i], moves[i], step + self.env.get_expected_moves(states[i]), True)
+                        #node = Node(states[i], probs[i], - rewards[i], expected_length[i], moves[i], step + self.env.get_expected_moves(states[i]), True)
+                        node = Node(states[i], probs[i], - rewards[i], expected_length[i], moves[i], True)
                         parent.children[action_index] = node
                     else:
                         encode_state = self.env.encode(states[i])
                         if encode_state in mcts.nodes:
                             node = mcts.nodes[encode_state]
                         else:
-                            node = Node(states[i], probs[i], values[i], expected_length[i], moves[i], step + self.env.get_expected_moves(states[i]), False)
+                            #node = Node(states[i], probs[i], values[i], expected_length[i], moves[i], step + self.env.get_expected_moves(states[i]), False)
+                            node = Node(states[i], probs[i], values[i], expected_length[i], moves[i], False)
                             mcts.nodes[encode_state] = node
                             parent.children[action_index] = node
                     mcts.backup(node, mcts.parents)

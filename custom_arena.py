@@ -19,9 +19,10 @@ import copy
 import csv
 
 #first_model = "models/go_6_3vrstvy_high_LR_7_batches_exp_15.pt"
-first_model = "models/experiments-unsorted/go_6_3vrstvy_high_LR_9_batches_exp_33.pt"
-second_model = 'models/experiments-unsorted/go_6_3vrstvy_high_LR_7_batches_exp_5.pt'
+first_model = "models/most_trained_best.pt"
+second_model = 'models/go_6_3vrstvy_high_LR_7_batches_exp_5.pt'
 use_noise = False
+max_steps = 86
 
 
 def arena(model_A, agent_A, model_B, agent_B):
@@ -49,9 +50,9 @@ def arena(model_A, agent_A, model_B, agent_B):
         while not terminal:
             with torch.no_grad():
                 if player1 == govars.WHITE:
-                    action, _ = agent_B.run_mcts(state, move, model_B, [mcts], step, use_noise, False)
+                    action, _ = agent_B.run_mcts(state, move, model_B, [mcts2], step, use_noise, False)
                 else:
-                    action, _ = agent_A.run_mcts(state, move, model_A, [mcts2], step, use_noise, False)
+                    action, _ = agent_A.run_mcts(state, move, model_A, [mcts], step, use_noise, False)
 
             state, r, move, terminal = agent_A.env.step(action.detach().cpu().numpy().reshape(-1), state)
             step += 1
@@ -80,7 +81,6 @@ def arena(model_A, agent_A, model_B, agent_B):
                     loss += 1
                 else:
                     draw += 1
-                    break
                 if starting_p == govars.BLACK:
                     x = 'A'
                     o = 'B'
@@ -102,11 +102,11 @@ def single_arena(model_A_path, model_B_path):
     agent_B = AZAgent(env, device=device, games_in_iteration=1, simulation_count=400, name="AlphaZero_GO_other")
 
     model_A = Net_GO(3, 7, 64, 6 * 6, 37)
-    model_A.load_state_dict(torch.load(model_A_path))
+    model_A.load_state_dict(torch.load(model_A_path, map_location=device))
     model_A.to(agent_A.device)
 
     model_B = copy.deepcopy(model_A)
-    model_A.load_state_dict(torch.load(model_B_path))
+    model_A.load_state_dict(torch.load(model_B_path, map_location=device))
     model_B.to(agent_B.device)
 
     start_time = time()
@@ -157,7 +157,7 @@ def arena_adaptible(model_A, agent_A, model_B, agent_B, beta):
         starting_p = player1
         terminal = False
 
-        mcts, mcts2 = MCTS_adaptible(agent_A.cpuct, beta), MCTS(agent_B.cpuct)
+        mcts, mcts2 = MCTS_adaptible(agent_A.cpuct, beta, max_steps), MCTS(agent_B.cpuct)
         state, move = agent_A.env.zero_states(1)
         step = 0
 
@@ -213,53 +213,51 @@ def single_arena_adapt(model_A_path, model_B_path, beta, writer):
     env = Env_Go()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    agent_A = AZAgent_Adaptible(env, device=device, games_in_iteration=1, simulation_count=1000,
-                                name="AlphaZero_GO_adaptible")
+    agent_A = AZAgent_Adaptible(env, device=device, games_in_iteration=1, simulation_count=400,
+                                name="AlphaZero_GO_adaptible", max_steps=max_steps)
     agent_B = AZAgent(env, device=device, games_in_iteration=1, simulation_count=400, name="AlphaZero_GO_other")
 
     model_A = Net_GO(3, 7, 64, 6 * 6, 37)
-    model_A.load_state_dict(torch.load(model_A_path))
+    model_A.load_state_dict(torch.load(model_A_path, map_location=device))
     model_A.to(agent_A.device)
 
     model_B = copy.deepcopy(model_A)
-    model_A.load_state_dict(torch.load(model_B_path))
+    model_A.load_state_dict(torch.load(model_B_path, map_location=device))
     model_B.to(agent_B.device)
 
     start_time = time()
     results = arena_adaptible(model_A, agent_A, model_B, agent_B, beta)
     print(results, time() - start_time)
     if writer is not None:
+        i = 0
         for result in results:
             w, l, d, s = result
-            if w == 1:
-                r = 1
-            elif l == 1:
-                r = -1
-            else:
-                r = 0
-            writer.write([str(beta), str(r), str(s)])
+            writer.write([str(i), str(beta), str(s), str(w), str(l), str(d), model_B_path])
+            i = i + 1
     return
 
 
 def folder_arena_adapt(folder_path, beta_vals, result_path_name):
     files = os.listdir(folder_path)
-    with data_exporter("experiment_results/" + result_path_name) as writer:
+    with data_exporter(result_path_name) as writer:
         for beta in beta_vals:
-            i = 0
+            print("starting with beta:", beta)
+            #i = 0
             for file in files:
-                i = i + 1
-                if i > 9:
-                    break
+                #i = i + 1
+                #if i > 9:
+                    #break
                 file_path = folder_path + file
                 print(file_path)
+                writer.write(["starting player", "beta", "steps", "win", "loss", "draw", "model_name"])
                 single_arena_adapt(first_model, file_path, beta, writer)
 
 def main():
     #single_arena(first_model, second_model)
-    with data_exporter("data.csv") as exporter:
-        folder_arena("models/experiments-unsorted/", exporter)
-    #beta_values = [0, 1, 2, 5, 10]
-    #folder_arena_adapt("models/experiments-sorted/hard/", beta_values, "easy.csv")
+    #with data_exporter("data.csv") as exporter:
+        #folder_arena("models/experiments-unsorted/", exporter)
+    beta_values = [0, 1, 2, 3, 4, 5, 7.5, 10]
+    folder_arena_adapt("results/easy/", beta_values, "results/easy_adaptible.csv")
     #single_arena_adapt(first_model, second_model, 0, None)
     #single_arena_adapt(first_model, second_model, 5, None)
 

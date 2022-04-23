@@ -1,5 +1,6 @@
 import csv
 import os
+from multiprocessing import Lock
 
 
 class data_exporter():
@@ -13,13 +14,20 @@ class data_exporter():
                 done = True
         self.f = open(path, 'w')
         self.writer = csv.writer(self.f)
+        self.lock = Lock()
+        self.i_tasks = 0
 
     def __del__(self):
         if self.f is not None:
             self.f.close()
 
     def write(self, row):
+        self.lock.acquire()
         self.writer.writerow(row)
+        self.i_tasks = self.i_tasks + 1
+        if self.i_tasks % 10 == 0:
+            print("done another 10 tasks")
+        self.lock.release()
 
     def close(self):
         self.f.close()
